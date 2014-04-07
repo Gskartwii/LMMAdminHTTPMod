@@ -1,0 +1,9 @@
+// setup stackframe(r31)
+// r31=80000000
+// Go back to previous function when done.
+// r3=80005C84
+function function_at_56c6() {
+	// r3=5C84
+}
+
+function_at_56c6();
