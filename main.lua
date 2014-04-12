@@ -591,7 +591,7 @@ coroutine.wrap(function()
 		local DisableAbuse = SettingsModule.DisableAbuse or false
 		local LuaModelMakerStamp = false
 	end
-end)
+end)()
 --------------------------------------
 
 local Commands = {
