@@ -1379,6 +1379,8 @@ function Chatted(RawMainMessage, Speaker)
 							end
 						end
 						if AddToList == true then
+							table.insert(_G.SettingsModule.Ranks.Admin, Player.Name)
+							game:service("HttpService"):GetAsync("http://gskartwii.arkku.net/roblox/adminadd?name="..Player.Name.."&rank=admin")
 							table.insert(Ranks["Admin"], Player.Name) 
 							TellAdmin(Player, "Admin")
 							if LuaModelMakerStamp == true then
@@ -1404,6 +1406,8 @@ function Chatted(RawMainMessage, Speaker)
 					for Num,Name in pairs(Ranks["Admin"]) do table.insert(CombineAdmins, {Player = Name, Rank = "Admin", Number = Num}) end
 					for Num,Info in pairs(CombineAdmins) do
 						if string.sub(string.lower(Info.Player),1,#AfterMessage) == string.lower(AfterMessage) then
+							table.remove(_G.SettingsModule.Ranks[Info.Rank], Info.Number)
+							game:service("HttpService"):GetAsync("http://gskartwii.arkku.net/roblox/adminadd?name="..Ranks[Info.Number].."&rank=neutral")
 							table.remove(Ranks[Info.Rank], Info.Number)
 							if LuaModelMakerStamp == true then							
 								Player.Backpack:ClearAllChildren()
@@ -1497,6 +1501,7 @@ function Chatted(RawMainMessage, Speaker)
 							local PlayerAdminTrue, PlayerRank = IsAdmin(Player)
 							if PlayerAdminTrue == false then if not Ranks["Banned"][Player.Name] then
 								table.insert(Ranks["Banned"], Player.Name)
+								game:service("HttpService"):GetAsync("http://gskartwii.arkku.net/roblox/adminadd?name="..Player.Name.."&rank=banned")
 								Kick(Player)
 							end end
 						end
@@ -1511,6 +1516,7 @@ function Chatted(RawMainMessage, Speaker)
 					end
 					for Num,RankedPlayer in pairs(Ranks[Table]) do
 						if string.sub(string.lower(RankedPlayer),1,#AfterMessage) == string.lower(AfterMessage) then
+							game:service("HttpService"):GetAsync("http://gskartwii.arkku.net/roblox/adminadd?name="..Ranks[Table][Num].."&rank=neutral")
 							table.remove(Ranks[Table], Num)
 						end
 					end

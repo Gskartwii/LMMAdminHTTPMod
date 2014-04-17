@@ -1,5 +1,4 @@
 -- Isn't this code easy to read? ;3
--- Put this inside a regular script
 Elements					= {}
 Elements["Ranks"]			= {}
 
@@ -36,3 +35,4 @@ Elements["BadgeID"]			= 0						-- Leave 0 if you don't want people to have admin
 
 -- DO NOT TOUCH
 _G.SettingsModule=Elements
+workspace.CanContinue.Value=1
