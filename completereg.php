@@ -2,8 +2,7 @@
 	$un=$_POST["un"];
 	$pw=md5($_POST["pw"]);
 	$em=$_POST["em"];
-	// mysql_connect() here, not shown :P
-	mysql_select_db("3591_other");
+	require("mysqlconn.php");
 	$r=mysql_query("SELECT * FROM roblox_lmm_regs WHERE un='$un'");
 	echo mysql_error();
 	if (mysql_fetch_array($r))

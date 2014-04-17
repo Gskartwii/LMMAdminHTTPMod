@@ -1,6 +1,5 @@
 <?php
-// mysql_connect() here, not shown :P
-mysql_select_db("3591_other");
+require("mysqlconn.php");
 $act=$_GET["action"];
 $usr=$_GET["username"];
 $msg=$_GET["msg"];

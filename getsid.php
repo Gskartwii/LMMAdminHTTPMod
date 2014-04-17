@@ -1,6 +1,5 @@
 <?php
-// mysql_connect() here, not shown :P
-mysql_select_db("3591_other");
+require("mysqlconn.php");
 $r=mysql_query("SELECT * FROM roblox_log_sid ORDER BY sid DESC");
 while ($row=mysql_fetch_assoc($r)) {
 	if ($row['status']=="dead") {

@@ -4,7 +4,8 @@
  }
  else {
   // mysql_connect() here, not shown :P
-  mysql_select_db("3591_other");
+  //mysql_select_db("3591_other");
+  require("mysqlconn.php");
   $r=mysql_query("SELECT * FROM roblox_adminlist WHERE name='{$_GET['name']}' AND rank='{$_GET['rank']}'");
   if (!$r) die("\&#331;Database error: ".mysql_error());
   else {

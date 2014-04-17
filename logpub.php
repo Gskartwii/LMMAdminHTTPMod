@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <?php
-// mysql_connect() here, not shown :P
-mysql_select_db("3591_other");
+require("mysqlconn.php");
 $r=mysql_query("SELECT * FROM roblox_log ORDER BY id DESC");
 ?>
 <title>Public log for ~ Adventure ~</title>
