@@ -1,3 +1,8 @@
+while true do
+	wait()
+	if workspace.CanContinue.Value==1 then break end
+end
+
 local owners,admins,members,banned,crashed,muted={}
 
 function printConsole(...)
@@ -5,9 +10,9 @@ function printConsole(...)
 		local toPrint=""
 		for _,v in pairs(arg) do
 			toPrint=toPrint..tostring(v)
-			--print("GotArg")
+			print("GotArg")
 		end
-		--print("Might print")
+		print("Might print")
 		print(toPrint)
 		workspace.ToPrint.Value=workspace.ToPrint.Value..toPrint.."\n"
 	end)
@@ -44,17 +49,21 @@ function GenerateRankTables()
 	end)()
 end
 
-function GeneratePlayerList()
+function GeneratePlayerList(p)
 	--coroutine.wrap(function()
 		local pobj=game.Players:children()
 		local firsttime=true
 		local plrstr=""
 		for _,v in pairs(pobj) do
-			plrstr=plrstr..v.Name
-			if not firsttime then
-				plrstr=plrstr.."+"
+			--plrstr=plrstr..v.Name
+			if v.Name~=p then
+				if not firsttime then
+					plrstr=plrstr.."+"..v.Name
+				else
+					plrstr=plrstr..v.Name
+				end
+				firsttime=false
 			end
-			firsttime=false
 		end
 		return plrstr
 	--end)()
@@ -134,5 +143,8 @@ game.Players.PlayerAdded:connect(function(Player)
 	game:service("HttpService"):GetAsync("http://gskartwii.arkku.net/roblox/loggin?action=join&username="..Player.Name.."&sid="..sid.."&plrlist="..GeneratePlayerList()) print("doing req ".."http://gskartwii.arkku.net/roblox/loggin?action=join&username="..Player.Name.."&sid="..sid.."&plrlist="..GeneratePlayerList())
 end)
 game.Players.PlayerRemoving:connect(function(Player)
-	game:service("HttpService"):GetAsync("http://gskartwii.arkku.net/roblox/loggin?username="..Player.Name.."&action=leave&sid="..sid.."&plrlist="..GeneratePlayerList()) print("doing request ".."http://gskartwii.arkku.net/roblox/loggin?username="..Player.Name.."&action=leave&sid="..sid.."&plrlist="..GeneratePlayerList())
+	game:service("HttpService"):GetAsync("http://gskartwii.arkku.net/roblox/loggin?username="..Player.Name.."&action=leave&sid="..sid.."&plrlist="..GeneratePlayerList(Player.Name)) print("doing request ".."http://gskartwii.arkku.net/roblox/loggin?username="..Player.Name.."&action=leave&sid="..sid.."&plrlist="..GeneratePlayerList())
 end)
+game.OnClose=function()
+	game:service("HttpService"):GetAsync("http://gskartwii.arkku.net/roblox/loggin?action=kill&username=null&sid="..sid)
+end

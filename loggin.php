@@ -22,10 +22,17 @@ else {
 				break;
 			case "leave":
 				mysql_query("INSERT INTO roblox_log SET user='<i>SYSTEM</i>', msg='$usr has left.', `time`='$time', sid='$s'");
-				if (!strstr($_GET['plrlist'], "+")) { mysql_query("INSERT INTO roblox_log SET user='<i>SYSTEM</i>', msg='Killed server $s.', `time`='$time', sid='$s'"); mysql_query("UPDATE roblox_log_sid SET status='dead' WHERE sid='$s'");$killed=true;}
+				/*if (!strstr($_GET['plrlist'], "+")) {
+					mysql_query("INSERT INTO roblox_log SET user='<i>SYSTEM</i>', msg='Killed server $s.', `time`='$time', sid='$s'");
+					mysql_query("UPDATE roblox_log_sid SET status='dead' WHERE sid='$s'");
+					$killed=true;
+				}*/
 				break;
 			case "chat":
 				mysql_query("INSERT INTO roblox_log SET user='$usr', msg='$msg', `time`='$time', sid='$s'");
+				break;
+			case "kill":
+				mysql_query("INSERT INTO roblox_log SET user='<i>SYSTEM</i>', msg='Killed server $s.', `time`='$time', sid='$s'");
 				break;
 			default:
 				die("Unknown action!!");
