@@ -1,10 +1,10 @@
 <?php
 require("mysqlconn.php");
-$act=$_GET["action"];
-$usr=$_GET["username"];
-$msg=$_GET["msg"];
-$s=$_GET["sid"];
-$pid=$_GET["pid"];
+$act=mysql_real_escape_string($_GET["action"]);
+$usr=mysql_real_escape_string($_GET["username"]);
+$msg=mysql_real_escape_string($_GET["msg"]);
+$s=mysql_real_escape_string($_GET["sid"]);
+$pid=mysql_real_escape_string($_GET["pid"]);
 $killed=false;
 $time=gmdate("U");
 //echo $usr;
@@ -42,7 +42,8 @@ else {
 		}
 		echo mysql_error();
 		if (isset($_GET['plrlist']) && !$killed) {
-			mysql_query("INSERT INTO roblox_log_$pid SET user='<i>SYSTEM</i>', msg='Current player list: {$_GET['plrlist']}', `time`='$time', sid='$s'");
+			$list=mysql_real_escape_string($_GET['plrlist'])
+			mysql_query("INSERT INTO roblox_log_$pid SET user='<i>SYSTEM</i>', msg='Current player list: $list', `time`='$time', sid='$s'");
 			echo mysql_error();
 		}
 	}

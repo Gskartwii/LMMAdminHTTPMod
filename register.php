@@ -1,5 +1,7 @@
 <?php
+	session_start();
 	if ($_GET['al']) echo "<script>alert('".$_GET['al']."');</script>";
+	if (isset($_SESSION['un'])) die();
 ?>
 <html>
 	<head>
@@ -25,11 +27,12 @@
 		</script>
 		<h1>Register to LMM Admin HTTP Mod</h1>
 		Please fill in this form to register your admin to modify the settings and such where ever you are.<br />
+		Please enter a valid email; if the admins try to contact you and you don't reply within 72 hours, your account will be deleted!<br />
 		<form method="post" action="completereg.php" onsubmit="return checkform();">
 			Desired username: <input type="text" name="un" id="un" /><br />
 			Password (can be any password you want): <input type="password" name="pw" id="pw" /><br />
 			Confirm the password: <input type="password" name="pw2" id="pw2" /><br />
-			Email: <input type="email" name="em" id="em"<br />
+			Email: <input type="email" name="em" id="em" /><br />
 			<button type="submit">Submit</button><br />
 		</form>
 	</body>

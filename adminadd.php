@@ -7,7 +7,7 @@
         //mysql_select_db("3591_other");
         require("mysqlconn.php");
         $pid=$_GET['pid'];
-        if ($pid==-1) die("Warning: cannot add modify rank table for placeid -1! Ignoring...");
+        if ($pid==0) die("Warning: cannot add modify rank table for placeid 0! Ignoring...");
         mysql_query("CREATE TABLE IF NOT EXISTS roblox_adminlist_$pid (id int(11) NOT NULL AUTO_INCREMENT, name VARCHAR(255) NOT NULL, rank VARCHAR(255) NOT NULL, PRIMARY KEY(id), KEY id (id))");
         $r=mysql_query("SELECT * FROM roblox_adminlist_$pid WHERE name='{$_GET['name']}' AND rank='{$_GET['rank']}'");
         if (!$r) die("\&#331;Database error: ".mysql_error());
