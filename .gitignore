@@ -1,1 +1,3 @@
 mysqlconn.php
+# The "include" directory is ignored because it has so many files. Basically it consists of the phpQuery library.
+include

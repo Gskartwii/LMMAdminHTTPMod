@@ -13,6 +13,7 @@
 		<h3>Will I need to change anything in Studio?</h3>
 		Yes. It will be explained after you register.
 		<h3>Is this the end of the FAQ?</h3>
-		Yes, why not?
+		Yes, why not?<br />
+		<a href="./">Index page</a>
 	</body>
 </html>

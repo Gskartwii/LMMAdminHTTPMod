@@ -85,6 +85,20 @@ CREATE TABLE IF NOT EXISTS `roblox_placeids_template` (
   `placename` varchar(255) NOT NULL,
   `placedesc` text NOT NULL,
   `placecreator` varchar(100) NOT NULL,
+  `verified` smallint NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `roblox_verified_accs_template`
+--
+CREATE TABLE IF NOT EXISTS `roblox_verified_accs_template` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `accid` int(11) NOT NULL,
+  `accname` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;

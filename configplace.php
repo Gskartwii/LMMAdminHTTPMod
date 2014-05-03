@@ -16,13 +16,26 @@
 				echo "Error while fetching places: ".mysql_error();
 			else {
 				while ($row=mysql_fetch_assoc($r)) {
-					echo "<a href='#' onclick='return false;' onmouseover='showinfo({$row['placeid']});' onmouseout='hideinfo();' id='{$row['placeid']}'>{$row['placeid']}</a><br />\n";
-					echo "<script>infos[{$row['placeid']}]={name: '{$row['placename']}', creator: '{$row['placecreator']}', desc: '{$row['placedesc']}'};</script>";
+					$desc=nl2br($row['placedesc']);
+					$desc=str_replace(array("\r", "\n"), '<br />', $desc); 
+					echo "<a href='#' onclick='return false;' onmouseover='showinfo({$row['placeid']});' onmouseout='hideinfo();' id='{$row['placeid']}'>{$row['placeid']}</a> ";
+					if ($row['verified'])
+						echo "<span title='Verified place' style='color: green;'>&#x2713;</span>";
+					else
+						echo "<span title='Place not verified' style='color: red;'>&#x2717;</span>";
+					echo" <a href='updateplace.php?pid={$row['placeid']}'>Update information</a> <a href='deleteplace.php?pid={$row['placeid']}'>Delete place</a><br />\n";
+					echo "<script>infos[{$row['placeid']}]={name: '{$row['placename']}', creator: '{$row['placecreator']}', desc: '$desc', verified: ";
+					if ($row['verified'])
+						echo "true";
+					else
+						echo "false";
+					echo "};</script>";
 				}
 			}
 		?>
 		<br />
 		<br />
+		<a href="./">Go back to the front page</a><br />
 		<a href="placeadd.php">Add a place</a>
 		<script>
 			var elem=null;
@@ -32,11 +45,11 @@
 				elem.style.position="absolute";
 				elem.style.left=document.getElementById(id).getBoundingClientRect.left+"px";
 				elem.style.top=document.getElementById(id).getBoundingClientRect.top+"px";
-				elem.style.width="100px";
-				elem.style.height="100px";
+				elem.style.width="300px";
+				elem.style.height="300px";
 				elem.style.backgroundColor="white";
-				elem.style.border="solid thin black";
-				elem.innerHTML=infos[id].name+" by "+infos[id].creator;
+				elem.style.border="solid thin white";
+				elem.innerHTML="\""+infos[id].name+"\" by "+infos[id].creator;
 				document.body.appendChild(elem);
 			}
 			function hideinfo() {

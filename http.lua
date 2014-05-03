@@ -5,23 +5,30 @@ end
 local pid=game.PlaceId
 local owners,admins,members,banned,crashed,muted={}
 
---[[function printConsole(...)
-	coroutine.wrap(function()
-		local toPrint=""
-		for _,v in pairs(arg) do
-			toPrint=toPrint..tostring(v)
-			print("GotArg")
-		end
-		print("Might print")
-		print(toPrint)
-		workspace.ToPrint.Value=workspace.ToPrint.Value..toPrint.."\n"
-	end)
-end]]--
+function createNewPrintType(name, r, g, b)
+	local f=Instance.new("Model", workspace.Prints)
+	f.Name=name
+	local c=Instance.new("BrickColorValue", workspace.Prints[name])
+	c.Name="Color"
+	c.Value=BrickColor.new(r/255,g/255,b/255)
+end
 
-function printConsole(str)
+function printConsole(type, ...)
+    local arg = {...}
+    local toPrint=""
+    print(arg)
+    for _,v in pairs(arg) do
+        toPrint=toPrint..tostring(v).." "
+    end
+    print(toPrint)
+	local p=Instance.new("StringValue", workspace.Prints[type])
+    p.Value=toPrint.."\n"
+end
+printConsole("Hi", "there!")
+--[[function printConsole(str)
 	print(str)
 	workspace.ToPrint.Value=workspace.ToPrint.Value..str.."\n"
-end
+end]]
 
 function printErrorConsole(msg,stack,scr)
 	printConsole("Error in "..scr:GetFullName())
