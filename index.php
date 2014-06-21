@@ -13,7 +13,7 @@
 	</head>
 	<body>
 		<h1>LuaModelMaker's Admin HTTP Mod</h1>
-		<h3>Menu</h5>
+		<h3>Menu</h3>
 		<a href="configplace.php">Configure your places</a><br />
 		<a href="verifyrblxname.php">Verify your ROBLOX account(s)</a><br />
 		<a href="sessdes.php">Log out</a>

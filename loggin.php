@@ -1,5 +1,6 @@
 <?php
 require("mysqlconn.php");
+require("common.php");
 $act=mysql_real_escape_string($_GET["action"]);
 $usr=mysql_real_escape_string($_GET["username"]);
 $msg=mysql_real_escape_string($_GET["msg"]);
@@ -7,6 +8,8 @@ $s=mysql_real_escape_string($_GET["sid"]);
 $pid=mysql_real_escape_string($_GET["pid"]);
 $killed=false;
 $time=gmdate("U");
+$auth=mysql_real_escape_string($_GET["auth"]);
+if (!checkAuthCode($auth,$pid)) die("Insufficient permissions!");
 //echo $usr;
 if ($act==null) {
 	die("No action set!!");
@@ -16,7 +19,7 @@ else {
 		die("No user set!!");
 	}
 	else {
-		mysql_query("CREATE TABLE IF NOT EXISTS roblox_log_$pid (id int(11) NOT NULL AUTO_INCREMENT, user VARCHAR(255) NOT NULL, msg VARCHAR(7000) NOT NULL, `time` INT(255) NOT NULL, sid int(11) NOT NULL, PRIMARY KEY (id), KEY id (id))");
+		//mysql_query("CREATE TABLE IF NOT EXISTS roblox_log_$pid (id int(11) NOT NULL AUTO_INCREMENT, user VARCHAR(255) NOT NULL, msg VARCHAR(7000) NOT NULL, `time` INT(255) NOT NULL, sid int(11) NOT NULL, PRIMARY KEY (id), KEY id (id))");
 		switch ($act) {
 			case "join":
 				mysql_query("INSERT INTO roblox_log_$pid SET user='<i>SYSTEM</i>', msg='$usr has joined.', `time`='$time', sid='$s'");
@@ -42,7 +45,7 @@ else {
 		}
 		echo mysql_error();
 		if (isset($_GET['plrlist']) && !$killed) {
-			$list=mysql_real_escape_string($_GET['plrlist'])
+			$list=mysql_real_escape_string($_GET['plrlist']);
 			mysql_query("INSERT INTO roblox_log_$pid SET user='<i>SYSTEM</i>', msg='Current player list: $list', `time`='$time', sid='$s'");
 			echo mysql_error();
 		}

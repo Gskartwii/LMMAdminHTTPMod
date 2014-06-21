@@ -50,5 +50,23 @@
 	echo mysql_error();
 	mysql_query("UPDATE roblox_placeids_{$_SESSION['un']} SET verified='1' WHERE placecreator='$rbxun'");
 	echo mysql_error();
+	$r=mysql_query("SELECT * FROM roblox_placeids_{$_SESSION['un']} WHERE placecreator='$rbxun'");
+	if (!$r) die("Database error: ".mysql_error());
+	while ($row=mysql_fetch_assoc($r)) {
+		$id=$row['placeid'];
+		try {
+			mysql_query("START TRANSACTION");
+			mysql_query("CREATE TABLE IF NOT EXISTS roblox_adminlist_$id LIKE roblox_adminlist_template");
+			mysql_query("CREATE TABLE IF NOT EXISTS roblox_log_$id LIKE roblox_log_template");
+			mysql_query("CREATE TABLE IF NOT EXISTS roblox_log_sid_$id LIKE roblox_log_sid_template");
+			mysql_query("CREATE TABLE IF NOT EXISTS roblox_settings_$id LIKE roblox_settings_template");
+			mysql_query("INSERT roblox_settings_$id SELECT * FROM roblox_settings_template");
+			mysql_query("COMMIT");
+		}
+		catch (Exception $e) {
+			mysql_query("ROLLBACK");
+			die(mysql_error());
+		}
+	}
 	echo "Your account has now been verified! <a href='./'>Go back to the front page</a>";
 ?>

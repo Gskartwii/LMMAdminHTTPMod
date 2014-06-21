@@ -20,10 +20,10 @@
 					$desc=str_replace(array("\r", "\n"), '<br />', $desc); 
 					echo "<a href='#' onclick='return false;' onmouseover='showinfo({$row['placeid']});' onmouseout='hideinfo();' id='{$row['placeid']}'>{$row['placeid']}</a> ";
 					if ($row['verified'])
-						echo "<span title='Verified place' style='color: green;'>&#x2713;</span>";
+						echo "<span title='Verified place' style='color: green;'>&#x2713;</span> <a href='configsingplace.php?pid={$row['placeid']}'>Configure this place</a> ";
 					else
 						echo "<span title='Place not verified' style='color: red;'>&#x2717;</span>";
-					echo" <a href='updateplace.php?pid={$row['placeid']}'>Update information</a> <a href='deleteplace.php?pid={$row['placeid']}'>Delete place</a><br />\n";
+					echo "<a href='updateplace.php?pid={$row['placeid']}'>Update information</a> <a href='deleteplace.php?pid={$row['placeid']}'>Delete place</a><br />\n";
 					echo "<script>infos[{$row['placeid']}]={name: '{$row['placename']}', creator: '{$row['placecreator']}', desc: '$desc', verified: ";
 					if ($row['verified'])
 						echo "true";
@@ -32,6 +32,7 @@
 					echo "};</script>";
 				}
 			}
+			$r=mysql_query("SELECT * FROM roblox_auth_codes WHERE un='{$_SESSION['un']}'");
 		?>
 		<br />
 		<br />
