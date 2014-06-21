@@ -214,7 +214,6 @@
 			else if ($row['rank']=='banned') $ret["Ranks"]["Banned"][] = $row['name'];
 			else if ($row['rank']=='crashed') $ret["Ranks"]["Crashed"][] = $row['name'];
 			else if ($row['rank']=='muted') $ret["Ranks"]["Muted"][] = $row['name'];
-			else die("ERROR");
 		}
 		return $ret;
 	}
