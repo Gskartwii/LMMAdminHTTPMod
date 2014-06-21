@@ -1,3 +1,4 @@
+print("LMMA HTTP Mod loading...")
 local DEBUG 	= true
 local verbose 	= true
 local url		= "gskartwii.arkku.net/roblox"
@@ -178,6 +179,6 @@ _G.SettingsModule.GroupOwnerRank	= tonumber(HttpReq(			"http://"..url.."/getsett
 _G.SettingsModule.RankBan			= tonumber(HttpReq(			"http://"..url.."/getsettings.php?setting=rankban&pid="..pid))
 _G.SettingsModule.BadgeID			= tonumber(HttpReq(			"http://"..url.."/getsettings.php?setting=bdgid&pid="..pid))]]
 --printConsole("Log", game.HttpService:JSONEncode(_G.SettingsModule))
-HttpPost("http://" .. url .. "/setsettingsmodule.php", game.HttpService:JSONEncode(_G.SettingsModule))
+_G.SettingsModule = game.HttpService:JSONDecode(HttpReq("http://" .. url .. "/getsettingsmodule.php?pid=" .. pid))
 workspace.CanLMMStart.Value=true
-print("Setmodule")
+print("LMMA HTTP Mod loaded!")

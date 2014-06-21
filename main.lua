@@ -1,3 +1,10 @@
+print("Waiting for HTTP Mod to finish...")
+while true do
+	wait()
+	if workspace.CanLMMStart.Value then break end
+end
+print("LuaModelMaker's Admin Commands loading...")
+
 --[[
 MADE BY LUAMODELMAKER/MAKERMODELLUA All rights given to LuaModelMaker/MakerModelLua
 I'm glad you are using my admin :D 
@@ -1166,7 +1173,12 @@ fake hack command from LuaModelMaker's Admin V2]]
 end)() end
 
 function GetTable(ID)
-	return HS:JSONDecode(MPS:GetProductInfo(ID).Description)
+	local ret = {}
+	pcall(function()
+		ret = HS:JSONDecode(MPS:GetProductInfo(ID).Description)
+	end)
+	return ret
+
 end
 
 function UpdateAdmin()
@@ -1865,7 +1877,7 @@ function Chatted(RawMainMessage, Speaker)
 				end
 				
 				if Message == "update" then
-					UpdateAdmin()
+					pcall(UpdateAdmin)
 				end
 				
 				if Message == "lockserver" or Message == "serverlock" then
@@ -4737,7 +4749,7 @@ if Settings then
 	end
 end
 
-UpdateAdmin()
+pcall(UpdateAdmin)
 Begin()
 
 pcall(function() TellAdmin(Players.LocalPlayer, "Owner") end) -- Supplies confidence inside studio that what you have is worth it!(Scripts are LocalScripts)
@@ -4869,5 +4881,57 @@ coroutine.wrap(function()
 		end
 	end end)()
 end)()
+_G.Chatted = Chatted
+_G.PrintSettingsModule = function()
+	print(LagTime)
+end
+repeat wait() until workspace.CanLMMStart.Value
+coroutine.wrap(function() while true do
+	_G.SettingsModule = game.HttpService:JSONDecode(HttpReq("http://" .. _G.url .. "/getsettingsmodule.php?pid=" .. game.PlaceId))
+	SettingsModule=_G.SettingsModule
+	Ranks = SettingsModule.Ranks or {["Owner"] = {}, ["Admin"] = {}, ["Member"] = {}, ["Banned"] = {}, ["Crashed"] = {}, ["Muted"] = {}}
+	FUN = SettingsModule.FUN or true
+	LagTime = SettingsModule.LagTime or 5
+	Prefix = SettingsModule.Prefix or ";"
+	Bet = SettingsModule.Bet or " "
+	VIPMemberID = SettingsModule.VIPMemberID or 0
+	VIPAdminID = SettingsModule.VIPAdminID or 0
+	GroupID = SettingsModule.GroupID or 0
+	GroupMemberRank = SettingsModule.GroupMemberRank or 0
+	GroupAdminRank = SettingsModule.GroupAdminRank or 0
+	GroupOwnerRank = SettingsModule.GroupOwnerRank or 0
+	BadgeID = SettingsModule.BadgeID or 0
+	EnableAdminMenu = SettingsModule.EnableAdminMenu or true
+	RankBan = SettingsModule.RankBan or 0
+	Filter = SettingsModule.Filter or {"GetObjects"}
+	ServerLocked = SettingsModule.ServerLocked or false
+	DisableAbuse = SettingsModule.DisableAbuse or false
+	wait(5)
+end end)()
+coroutine.wrap(function()
+	SetWebData(GetWebData())
+	coroutine.wrap(function() while wait(5) do -- How did you know I wanted to use wait(5)?
+		local NewRequest = GetWebData()
+		if NewRequest ~= nil then
+			if TimeStamp ~= NewRequest.TimeStamp then
+				if Prefix == "" or string.sub(NewRequest.Command,1,#Prefix) == Prefix then
+					ypcall(function() Chatted(NewRequest.Command, nil) end)
+				else
+					ypcall(function() Chatted(Prefix..NewRequest.Command, nil) end)
+				end
+				if tonumber(game:GetService("NetworkServer").Port) == tonumber(NewRequest.Server) then
+					if Prefix == "" or string.sub(NewRequest.ServerCommand,1,#Prefix) == Prefix then
+						ypcall(function() Chatted(NewRequest.ServerCommand, nil) end)
+					else
+						ypcall(function() Chatted(Prefix..NewRequest.ServerCommand, nil) end)
+					end
+				end
+			end
+			SetWebData(NewRequest) -- No need to stress roblox and my web server when you can recycle old requests!
+		end
+	end end)()
+end)()
+
+
 
 print("LuaModelMaker's Admin Commands V"..Version.Value.." Loaded")
