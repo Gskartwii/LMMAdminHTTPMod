@@ -15,5 +15,6 @@ b.Click:connect(function()
 		v.Parent = workspace
 	end
 	workspace.LMMMODEL:Destroy()
+	game:GetService("HttpService").HttpEnabled = true
 	print("INSTALLED")
 end)

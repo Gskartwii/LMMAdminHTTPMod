@@ -15,7 +15,7 @@ if ($act==null) {
 	die("No action set!!");
 }
 else {
-	if ($usr==null) {
+	if ($usr===null) {
 		die("No user set!!");
 	}
 	else {

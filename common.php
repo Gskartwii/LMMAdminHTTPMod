@@ -219,4 +219,14 @@
 		}
 		return $ret;
 	}
+	function getPlaceNameByPid($pid) {
+		$r = mysql_query("SELECT table_name FROM information_schema.tables WHERE table_name LIKE 'roblox_placeids_%'");
+		if (!$r) die("Database error: " . mysql_error());
+		while ($row = mysql_fetch_assoc($r)) {
+			$tn = $row['table_name'];
+			$r2 = mysql_query("SELECT * FROM $tn WHERE placeid='$pid' AND verified='1'");
+			if (!$r2) die("Database error: " . mysql_error());
+			if ($row2 = mysql_fetch_assoc($r2)) return $row2['placename'];
+		}
+	}
 ?>
