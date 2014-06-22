@@ -12,7 +12,8 @@
 	if (!$r) die("Database error: ".mysql_error());
 	if (!($row=mysql_fetch_assoc($r))) die("No such setting! <a href='./'>Back to the front page</a>");
 	$res=$row['settingvalue'];
-	echo "<form action='finishchangesetting.php' method='post'>";
+	echo "<script src='$s.js'></script>";
+	echo "<form action='finishchangesetting.php' method='post' onsubmit='return checkform();'>";
 	echo "New value: <input type='text' name='newval' id='newval' value='$res' /><input type='hidden' name='pid' value='$pid' id='pid' /><input type='hidden' name='stype' id='stype' value='$s' />";
 	echo "<br /><button type='submit'>Change</button>";
 	echo "</form>";

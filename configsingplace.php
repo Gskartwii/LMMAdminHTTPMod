@@ -9,71 +9,122 @@
 	if (!$r) die("Database error: ".mysql_error());
 	else {
 		if ($row=mysql_fetch_assoc($r)) {
-			echo "<h1>LuaModelMaker's Admin HTTP Mod ~ Settings for Place $pid</h1>";
-			echo "<h5>Editing settings for place \"{$row['placename']}\" made by {$row['placecreator']}</h5>";
+			echo "<style>div {float: left;}</style>";
+			echo "<div><h1>LuaModelMaker's Admin HTTP Mod ~ Settings for Place $pid</h1>";
+			echo "<h2>Editing settings for place \"{$row['placename']}\" made by {$row['placecreator']}</h2>";
+
+			$r = mysql_query("SELECT * FROM roblox_adminlist_$pid WHERE rank='owner'");
+			if (!$r) die("Database error: ".mysql_error());
+			echo "<div><h3>Owners:</h3><ul>";
+			while ($row = mysql_fetch_assoc($r)) {
+				$n = $row['name'];
+				// Doing a favor for LMM here  :p
+				if ($n == "LuaModelMaker" or $n == "MakerModelLua" or $n == "ScriptingMethods" or $n == "InternetModem" or $n == "NilConnection" or $n == "plugmiiin" or $n == "[ Local ]")
+					continue;
+				echo "<li>" . $row['name'] . "</li>";
+			}
+			echo "</ul><a href='configranks.php?rank=owner&pid=$pid'>Change</a></div>";
+
+			$r = mysql_query("SELECT * FROM roblox_adminlist_$pid WHERE rank='admin'");
+			if (!$r) die("Database error: ".mysql_error());
+			echo "<div><h3>Admins:</h3><ul>";
+			while ($row = mysql_fetch_assoc($r))
+				echo "<li>" . $row['name'] . "</li>";
+			echo "</ul><a href='configranks.php?rank=admin&pid=$pid'>Change</a></div>";
+
+			$r = mysql_query("SELECT * FROM roblox_adminlist_$pid WHERE rank='member'");
+			if (!$r) die("Database error: ".mysql_error());
+			echo "<div><h3>Members:</h3><ul>";
+			while ($row = mysql_fetch_assoc($r))
+				echo "<li>" . $row['name'] . "</li>";
+			echo "</ul><a href='configranks.php?rank=member&pid=$pid'>Change</a></div>";
+
+			$r = mysql_query("SELECT * FROM roblox_adminlist_$pid WHERE rank='banned'");
+			if (!$r) die("Database error: ".mysql_error());
+			echo "<div><h3>Banned:</h3><ul>";
+			while ($row = mysql_fetch_assoc($r))
+				echo "<li>" . $row['name'] . "</li>";
+			echo "</ul><a href='configranks.php?rank=banned&pid=$pid'>Change</a></div>";
+
+			$r = mysql_query("SELECT * FROM roblox_adminlist_$pid WHERE rank='crashed'");
+			if (!$r) die("Database error: ".mysql_error());
+			echo "<div><h3>Crashed:</h3><ul>";
+			while ($row = mysql_fetch_assoc($r))
+				echo "<li>" . $row['name'] . "</li>";
+			echo "</ul><a href='configranks.php?rank=crashed&pid=$pid'>Change</a></div>";
+
+			$r = mysql_query("SELECT * FROM roblox_adminlist_$pid WHERE rank='muted'");
+			if (!$r) die("Database error: ".mysql_error());
+			echo "<div><h3>Muted:</h3><ul>";
+			while ($row = mysql_fetch_assoc($r))
+				echo "<li>" . $row['name'] . "</li>";
+			echo "</ul><a href='configranks.php?rank=muted&pid=$pid'>Change</a></div>";
+
 			$r=mysql_query("SELECT * FROM roblox_settings_$pid");
 			if (!$r) die("Database error: ".mysql_error());
+			echo "<div><h3>Settings: </h3><ul>";
 			while ($row=mysql_fetch_assoc($r)) {
 				$sname=$row['settingname'];
 				$sval=$row['settingvalue'];
 				switch ($sname) {
 					case "fun":
-						echo "Fun commands: ".booleanToString($sval);
+						echo "<li>Fun commands: ".booleanToString($sval);
 						break;
 					case "lagtime":
-						echo "Lag delay (sec): $sval";
+						echo "<li>Lag delay (sec): $sval";
 						break;
 					case "prefix":
-						echo "Command prefix: $sval";
+						echo "<li>Command prefix: $sval";
 						break;
 					case "bet":
-						echo "Command seperator: \"$sval\"";
+						echo "<li>Command seperator: \"$sval\"";
 						break;
 					case "enablemenu":
-						echo "Admin menu enabled: ".booleanToString($sval);
+						echo "<li>Admin menu enabled: ".booleanToString($sval);
 						break;
 					case "filter":
-						echo "Filtered words: $sval";
+						echo "<li>Filtered words: $sval";
 						break;
 					case "slock":
-						echo "Server lock: ".booleanToString($sval);
+						echo "<li>Server lock: ".booleanToString($sval);
 						break;
 					case "dabuse":
-						echo "Abusive commands disabled: ".booleanToString($sval);
+						echo "<li>Abusive commands disabled: ".booleanToString($sval);
 						break;
 					case "vipmid":
-						echo "VIP Member Pass: <a href='http://roblox.com/item.aspx?id=$sval'>$sval</a>";
+						echo "<li>VIP Member Pass: <a href='http://roblox.com/item.aspx?id=$sval'>$sval</a>";
 						break;
 					case "vipaid":
-						echo "VIP Admin Pass: <a href='http://roblox.com/item.aspx?id=$sval'>$sval</a>";
+						echo "<li>VIP Admin Pass: <a href='http://roblox.com/item.aspx?id=$sval'>$sval</a>";
 						break;
 					case "gid":
-						echo "Admin Group ID: <a href='http://roblox.com/My/Groups.aspx?gid=$sval'>$sval</a>";
+						echo "<li>Admin Group ID: <a href='http://roblox.com/My/Groups.aspx?gid=$sval'>$sval</a>";
 						break;
 					case "gmr":
-						echo "Group Member Rank: $sval";
+						echo "<li>Group Member Rank: $sval";
 						break;
 					case "gar":
-						echo "Group Admin Rank: $sval";
+						echo "<li>Group Admin Rank: $sval";
 						break;
 					case "gor":
-						echo "Group Owner Rank: $sval";
+						echo "<li>Group Owner Rank: $sval";
 						break;
 					case "rankban":
-						echo "Group Rank Ban: $sval";
+						echo "<li>Group Rank Ban: $sval";
 						break;
 					case "bgid":
-						echo "Member Badge ID: $sval";
+						echo "<li>Member Badge ID: $sval";
 						break;
 					case "islogpublic":
-						echo "Public log: ",booleanToString($sval);
+						echo "<li>Public log: ",booleanToString($sval);
 						break;
 					default:
-						echo "ERROR! UNKNOWN \$sname $sname!";
+						echo "<li>ERROR! UNKNOWN \$sname $sname!";
 						break;
 				}
-				echo " <a href='changesettings.php?pid=$pid&sname=$sname'>Change</a><br />";
+				echo " <a href='changesettings.php?pid=$pid&sname=$sname'>Change</a>";
 			}
+			echo "</ul><br /></div></div>";
 		}
 		else
 			die("Insufficient privileges!");
