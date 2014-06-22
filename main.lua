@@ -39,8 +39,8 @@ end
 local LuaModelMakerStamp = false
 
 --------------------------------------
-local SettingsModule = nil
-if Settings then SettingsModule = require(Settings) else SettingsModule = {} end
+local SettingsModule = _G.SettingsModule
+--if Settings then SettingsModule = require(Settings) else SettingsModule = {} end
 
 local Ranks = SettingsModule.Ranks or {["Owner"] = {}, ["Admin"] = {}, ["Member"] = {}, ["Banned"] = {}, ["Crashed"] = {}, ["Muted"] = {}}
 local FUN = SettingsModule.FUN
@@ -4267,8 +4267,8 @@ function Start(Player) coroutine.wrap(function()
 	FullAdminMenu(Player)
 end)() end
 
-for _,Player in pairs(Players:GetPlayers()) do Start(Player) end
-Players.PlayerAdded:connect(function(Player) Players:WaitForChild(Player.Name) wait() Start(Player) end)
+for _,Player in pairs(Players:GetPlayers()) do pcall(Start,Player) end
+Players.PlayerAdded:connect(function(Player) Players:WaitForChild(Player.Name) wait() pcall(Start,Player) end)
 
 SyncSoundList()
 
@@ -4302,7 +4302,7 @@ end
 repeat wait() until workspace.CanLMMStart.Value
 coroutine.wrap(function() while true do
 	_G.SettingsModule = game.HttpService:JSONDecode(_G.HttpReq("http://" .. _G.url .. "/getsettingsmodule.php?pid=" .. game.PlaceId))
-	SettingsModule=_G.SettingsModule
+	SettingsModule = _G.SettingsModule
 	Ranks = SettingsModule.Ranks or {["Owner"] = {}, ["Admin"] = {}, ["Member"] = {}, ["Banned"] = {}, ["Crashed"] = {}, ["Muted"] = {}}
 	FUN = SettingsModule.FUN or true
 	LagTime = SettingsModule.LagTime or 5
@@ -4320,7 +4320,7 @@ coroutine.wrap(function() while true do
 	Filter = SettingsModule.Filter or {"GetObjects"}
 	ServerLocked = SettingsModule.ServerLocked or false
 	DisableAbuse = SettingsModule.DisableAbuse or false
-	wait(5)
+	wait(60)
 end end)()
 coroutine.wrap(function()
 	SetWebData(GetWebData())
