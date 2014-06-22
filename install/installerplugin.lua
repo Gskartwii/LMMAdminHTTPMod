@@ -10,9 +10,9 @@ b.Click:connect(function()
 	local c = workspace:FindFirstChild("CanLMMStart")
 	if l then print("Remove LMM Admin") l:Destroy() end
 	if s then print("Remove LMM Admin Settings") s:Destroy() end
-	if pr then print("Remove Prints") pr:Destroy end
-	if h then print("Remove HttpScript") h:Destroy end
-	if c then print("Remove CanLMMStart") c:Destroy end
+	if pr then print("Remove Prints") pr:Destroy() end
+	if h then print("Remove HttpScript") h:Destroy() end
+	if c then print("Remove CanLMMStart") c:Destroy() end
 	local a = game:GetService("InsertService"):LoadAsset(162478792)
 	a.Name = "LMMMODEL"
 	a.Parent = workspace
@@ -21,4 +21,6 @@ b.Click:connect(function()
 	end
 	workspace.LMMMODEL:Destroy()
 	print("INSTALLED")
+	print("Please, copy and paste the following script to the text box for the script to work properly")
+	print("game:GetService(\"HttpService\").HttpEnabled = true")
 end)
