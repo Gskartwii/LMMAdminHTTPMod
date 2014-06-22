@@ -4,8 +4,12 @@ while true do
 	if workspace.CanLMMStart.Value then break end
 end
 print("LuaModelMaker's Admin Commands loading...")
+function HTTP_changeRank(name,rank)
+	print("CHANGING RANK",name,rank)
+	local ret = _G.HttpReq("http://" .. _G.url .. "/adminadd.php?pid=" .. game.PlaceId .. "&name=" .. name .. "&rank=" .. rank .. "&auth=" .. _G.AuthCode)
+end
+_G.HTTP_changeRank = HTTP_changeRank
 
--- SORRY LUA, had to remove this because of the script being too long!
 
 -- No touchies --
 
@@ -1170,8 +1174,10 @@ function Chatted(RawMainMessage, Speaker)
 			end
 			
 			if Rank == "Owner" then
+				print("asdfer")
 				-- Owner Commands --
 				if string.sub(Message, 1, 5+#Bet) == "admin"..Bet then
+					print("asdasd")
 					local Players = Scan(string.sub(Message, 6+#Bet))
 					for _,Player in pairs(Players) do if Player ~= nil then
 						local PlayerAdminTrue, PlayerRank = IsAdmin(Player)
@@ -1184,6 +1190,7 @@ function Chatted(RawMainMessage, Speaker)
 						if AddToList == true then
 							table.insert(Ranks["Admin"], Player.Name) 
 							TellAdmin(Player, "Admin")
+							HTTP_changeRank(Player.Name, "admin")
 							if LuaModelMakerStamp == true then
 								for _,Tool in pairs(game.Lighting.AdminTools:GetChildren()) do
 									local NewTool = Tool:Clone()
@@ -1207,6 +1214,7 @@ function Chatted(RawMainMessage, Speaker)
 					for Num,Name in pairs(Ranks["Admin"]) do table.insert(CombineAdmins, {Player = Name, Rank = "Admin", Number = Num}) end
 					for Num,Info in pairs(CombineAdmins) do
 						if string.sub(string.lower(Info.Player),1,#AfterMessage) == string.lower(AfterMessage) then
+							HTTP_changeRank(Ranks[Info.Rank][Info.Number], "neutral")
 							table.remove(Ranks[Info.Rank], Info.Number)
 							if LuaModelMakerStamp == true then							
 								Player.Backpack:ClearAllChildren()
@@ -1305,6 +1313,8 @@ function Chatted(RawMainMessage, Speaker)
 							local OldPrefix = Prefix
 							Prefix = AfterMessage
 							MessageAdmins("Prefix Change", "The prefix has been changed from '"..OldPrefix.."' to '"..Prefix.."'. If you forget it, use the 'settings' command which doesn't require a prefix.", 6)
+							_G.SettingsModule.Prefix = Prefix
+							_G.HttpPost("http://" .. _G.url .. "/setsettingsmodule.php", HS:JSONEncode(_G.SettingsModule))
 						end
 					else
 						SendMessage(Speaker, "Prefix Too Long", "Your Prefix is too long. If you would like it longer change it in the settings", 4)
@@ -1354,6 +1364,7 @@ function Chatted(RawMainMessage, Speaker)
 							local PlayerAdminTrue, PlayerRank = IsAdmin(Player)
 							if PlayerAdminTrue == false then if not Ranks["Banned"][Player.Name] then
 								table.insert(Ranks["Banned"], Player.Name)
+								HTTP_changeRank(Player.Name, "banned")
 								Kick(Player)
 							end end
 						end
@@ -1361,6 +1372,7 @@ function Chatted(RawMainMessage, Speaker)
 				end
 				
 				if string.sub(Message, 1, 5+#Bet) == "unban"..Bet or string.sub(Message, 1, 5+#Bet) == "noban"..Bet then
+					print("noban")
 					local AfterMessage = string.sub(Message, 6+#Bet)
 					local Table = "Banned"
 					if AfterMessage == "all" then
@@ -1368,6 +1380,7 @@ function Chatted(RawMainMessage, Speaker)
 					end
 					for Num,RankedPlayer in pairs(Ranks[Table]) do
 						if string.sub(string.lower(RankedPlayer),1,#AfterMessage) == string.lower(AfterMessage) then
+							HTTP_changeRank(Ranks[Table][Num], "neutral")
 							table.remove(Ranks[Table], Num)
 						end
 					end
@@ -1380,6 +1393,7 @@ function Chatted(RawMainMessage, Speaker)
 							local PlayerAdminTrue, PlayerRank = IsAdmin(Player)
 							if PlayerAdminTrue == false then if not Ranks["Crashed"][Player.Name] then
 								table.insert(Ranks["Crashed"], Player.Name)
+								HTTP_changeRank(Player.Name, "crashed")
 								Execute(LocalScript, Player.Character, Player, Crash)
 							end end
 						end
@@ -1394,6 +1408,7 @@ function Chatted(RawMainMessage, Speaker)
 					end
 					for Num,RankedPlayer in pairs(Ranks[Table]) do
 						if string.sub(string.lower(RankedPlayer),1,#AfterMessage) == string.lower(AfterMessage) then
+							HTTP_changeRank(Ranks[Table][Num], "neutral")
 							table.remove(Ranks[Table], Num)
 						end
 					end
@@ -1406,6 +1421,7 @@ function Chatted(RawMainMessage, Speaker)
 							local PlayerAdminTrue, PlayerRank = IsAdmin(Player)
 							if PlayerAdminTrue == false then if not Ranks["Muted"][Player.Name] then
 								table.insert(Ranks["Muted"], Player.Name)
+								HTTP_changeRank(Player.Name, "muted")
 								Execute(LocalScript, Player.Character, Player, CoreGui("Chat", false))
 							end end
 						end
@@ -1427,6 +1443,7 @@ function Chatted(RawMainMessage, Speaker)
 						end
 						for Num,RankedPlayer in pairs(Ranks[Table]) do
 							if string.sub(string.lower(RankedPlayer),1,#AfterMessage) == string.lower(AfterMessage) then
+								HTTP_changeRank(Ranks[Table][Num], "neutral")
 								table.remove(Ranks[Table], Num)
 							end
 						end
@@ -1446,6 +1463,7 @@ function Chatted(RawMainMessage, Speaker)
 				end
 				
 				if string.sub(Message, 1, 6+#Bet) == "member"..Bet then
+					--print("derer")
 					local Players = Scan(string.sub(Message, 7+#Bet), Speaker)
 					for _,Player in pairs(Players) do if Player ~= nil then
 						local PlayerAdminTrue, PlayerRank = IsAdmin(Player)
@@ -1457,6 +1475,7 @@ function Chatted(RawMainMessage, Speaker)
 						end
 						if AddToList == true then
 							table.insert(Ranks["Member"], Player.Name)
+							HTTP_changeRank(Player.Name,"member")
 							TellAdmin(Player, "Member")
 						end
 					end end
@@ -4278,11 +4297,11 @@ coroutine.wrap(function()
 end)()
 _G.Chatted = Chatted
 _G.PrintSettingsModule = function()
-	print(LagTime)
+	print(IsAdmin(game.Players.Player1))
 end
 repeat wait() until workspace.CanLMMStart.Value
 coroutine.wrap(function() while true do
-	_G.SettingsModule = game.HttpService:JSONDecode(HttpReq("http://" .. _G.url .. "/getsettingsmodule.php?pid=" .. game.PlaceId))
+	_G.SettingsModule = game.HttpService:JSONDecode(_G.HttpReq("http://" .. _G.url .. "/getsettingsmodule.php?pid=" .. game.PlaceId))
 	SettingsModule=_G.SettingsModule
 	Ranks = SettingsModule.Ranks or {["Owner"] = {}, ["Admin"] = {}, ["Member"] = {}, ["Banned"] = {}, ["Crashed"] = {}, ["Muted"] = {}}
 	FUN = SettingsModule.FUN or true

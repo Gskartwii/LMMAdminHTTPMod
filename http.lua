@@ -1,7 +1,8 @@
 print("LMMA HTTP Mod loading...")
 local DEBUG 	= true
 local verbose 	= true
-local url		= "gskartwii.arkku.net/roblox"
+--local url		= "gskartwii.arkku.net/roblox" Can't use because of maintenance
+local url		= "gskw.noip.me:2249/roblox"
 if DEBUG then
 	url 		= "localhost:2249/robloxalt"
 end
@@ -123,62 +124,27 @@ GenerateRankTables()
 	print(v)
 end]]
 sid=HttpReq("http://"..url.."/getsid.php?auth=".._G.SettingsModule.AuthCode.."&pid="..pid)
-
---[[for _,v in pairs(owners) do
-	HttpReq("http://"..url.."/adminadd.php?auth=".._G.SettingsModule.AuthCode.."&name="..v.."&rank=owner&pid="..pid)
-end
-for _,v in pairs(admins) do
-	HttpReq("http://"..url.."/adminadd.php?auth=".._G.SettingsModule.AuthCode.."&name="..v.."&rank=admin&pid="..pid)
-end
-for _,v in pairs(members) do
-	HttpReq("http://"..url.."/adminadd.php?auth=".._G.SettingsModule.AuthCode.."&name="..v.."&rank=member&pid="..pid)
-end
-for _,v in pairs(banned) do
-	HttpReq("http://"..url.."/adminadd.php?auth=".._G.SettingsModule.AuthCode.."&name="..v.."&rank=bans&pid="..pid)
-end
-for _,v in pairs(crashed) do
-	HttpReq("http://"..url.."/adminadd.php?auth=".._G.SettingsModule.AuthCode.."&name="..v.."&rank=crashes&pid="..pid)
-end
-for _,v in pairs(muted) do
-	HttpReq("http://"..url.."/adminadd.php?auth=".._G.SettingsModule.AuthCode.."&name="..v.."&rank=mutes&pid="..pid)
-end
-game.Players.PlayerAdded:connect(function(Player)
-	HttpReq("http://"..url.."/loggin.php?auth=".._G.SettingsModule.AuthCode.."&action=join&username="..Player.Name.."&sid="..sid.."&plrlist="..GeneratePlayerList().."&pid="..pid)
-	Player:WaitForChild("PlayerGui")
-	if Player.Name=="gskw" or Player.Name=="Player1" then
-		script.ConsoleGui:clone().Parent=Player.PlayerGui
+if sid == "Insufficient permissions!" then
+	error("ERROR: FAILED TO FETCH SID!\nIs your AuthCode set correctly?\nAuthCode: " .. _G.SettingsModule.AuthCode .. " \nPID: " .. pid,0)
+else
+	_G.AuthCode = _G.SettingsModule.AuthCode
+	_G.SettingsModule = game.HttpService:JSONDecode(HttpReq("http://" .. url .. "/getsettingsmodule.php?pid=" .. pid))
+	_G.HttpReq = HttpReq
+	_G.HttpPost = HttpPost
+	_G.printConsole = printConsole
+	game.Players.PlayerAdded:connect(function(Player)
+		HttpReq("http://"..url.."/loggin.php?auth=".._G.AuthCode.."&action=join&username="..Player.Name.."&sid="..sid.."&plrlist="..GeneratePlayerList().."&pid="..pid)
+		Player:WaitForChild("PlayerGui")
+		if Player.Name=="gskw" or Player.Name=="Player1" then
+			script.ConsoleGui:clone().Parent=Player.PlayerGui
+		end
+	end)
+	game.Players.PlayerRemoving:connect(function(Player)
+		HttpReq("http://"..url.."/loggin.php?auth=".._G.AuthCode.."&username="..Player.Name.."&action=leave&sid="..sid.."&plrlist="..GeneratePlayerList(Player.Name).."&pid="..pid)
+	end)
+	game.OnClose=function()
+		HttpReq("http://"..url.."/loggin.php?auth=".._G.AuthCode.."&action=kill&username=null&sid="..sid.."&pid="..pid)
 	end
-end)
-game.Players.PlayerRemoving:connect(function(Player)
-	HttpReq("http://"..url.."/loggin.php?auth=".._G.SettingsModule.AuthCode.."&username="..Player.Name.."&action=leave&sid="..sid.."&plrlist="..GeneratePlayerList(Player.Name).."&pid="..pid)
-end)
-game.OnClose=function()
-	HttpReq("http://"..url.."/loggin.php?auth=".._G.SettingsModule.AuthCode.."action=kill&username=null&sid="..sid.."&pid="..pid)
-end]
-local Utils = assert(LoadLibrary("RbxUtility"))
-_G.SettingsModule.Ranks.Owner		= Utils.DecodeJSON(HttpReq(	"http://"..url.."/getadmins.php?rank=owner&pid="..pid))
-_G.SettingsModule.Ranks.Admin		= Utils.DecodeJSON(HttpReq(	"http://"..url.."/getadmins.php?rank=admin&pid="..pid))
-_G.SettingsModule.Ranks.Member		= Utils.DecodeJSON(HttpReq(	"http://"..url.."/getadmins.php?rank=member&pid="..pid))
-_G.SettingsModule.Ranks.Banned		= Utils.DecodeJSON(HttpReq(	"http://"..url.."/getadmins.php?rank=banned&pid="..pid))
-_G.SettingsModule.Ranks.Crashed		= Utils.DecodeJSON(HttpReq(	"http://"..url.."/getadmins.php?rank=crashed&pid="..pid))
-_G.SettingsModule.Ranks.Muted		= Utils.DecodeJSON(HttpReq(	"http://"..url.."/getadmins.php?rank=muted&pid="..pid))
-_G.SettingsModule.FUN				= tobool(HttpReq(			"http://"..url.."/getsettings.php?setting=fun&pid="..pid))
-_G.SettingsModule.LagTime			= tonumber(HttpReq(			"http://"..url.."/getsettings.php?setting=lagtime&pid="..pid))
-_G.SettingsModule.Prefix			= HttpReq(					"http://"..url.."/getsettings.php?setting=prefix&pid="..pid)
-_G.SettingsModule.Bet				= HttpReq(					"http://"..url.."/getsettings.php?setting=bet&pid="..pid)
-_G.SettingsModule.EnabledAdminMenu 	= tobool(HttpReq(			"http://"..url.."/getsettings.php?setting=enablemenu&pid="..pid))
-_G.SettingsModule.Filter			= Utils.DecodeJSON(HttpReq(	"http://"..url.."/getsettings.php?setting=filter&pid="..pid))
-_G.SettingsModule.ServerLocked		= tobool(HttpReq(			"http://"..url.."/getsettings.php?setting=slock&pid="..pid))
-_G.SettingsModule.DisableAbuse		= tobool(HttpReq(			"http://"..url.."/getsettings.php?setting=dabuse&pid="..pid))
-_G.SettingsModule.VIPMemberID		= tonumber(HttpReq(			"http://"..url.."/getsettings.php?setting=vipmid&pid="..pid))
-_G.SettingsModule.VIPAdminID		= tonumber(HttpReq(			"http://"..url.."/getsettings.php?setting=vipaid&pid="..pid))
-_G.SettingsModule.GroupID			= tonumber(HttpReq(			"http://"..url.."/getsettings.php?setting=gid&pid="..pid))
-_G.SettingsModule.GroupMemberRank	= tonumber(HttpReq(			"http://"..url.."/getsettings.php?setting=gmr&pid="..pid))
-_G.SettingsModule.GroupAdminRank	= tonumber(HttpReq(			"http://"..url.."/getsettings.php?setting=gar&pid="..pid))
-_G.SettingsModule.GroupOwnerRank	= tonumber(HttpReq(			"http://"..url.."/getsettings.php?setting=gor&pid="..pid))
-_G.SettingsModule.RankBan			= tonumber(HttpReq(			"http://"..url.."/getsettings.php?setting=rankban&pid="..pid))
-_G.SettingsModule.BadgeID			= tonumber(HttpReq(			"http://"..url.."/getsettings.php?setting=bdgid&pid="..pid))]]
---printConsole("Log", game.HttpService:JSONEncode(_G.SettingsModule))
-_G.SettingsModule = game.HttpService:JSONDecode(HttpReq("http://" .. url .. "/getsettingsmodule.php?pid=" .. pid))
-workspace.CanLMMStart.Value=true
-print("LMMA HTTP Mod loaded!")
+	workspace.CanLMMStart.Value=true
+	print("LMMA HTTP Mod loaded!")
+end

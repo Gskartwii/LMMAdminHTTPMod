@@ -3,7 +3,7 @@ Here, you adjust settings. Do not touch semicolons(;) unless it's the Prefix ins
 --]]
 
 local Elements = {
-	AuthCode = "999";
+	AuthCode = "LMMA-?",
 	-----------[[ ADMINS ]]-----------------
 	Ranks = {
 		["Owner"] = {"ROBLOX", "Player1"}; -- All commands, full power, stops admin, and other ownery things
@@ -20,12 +20,10 @@ local Elements = {
 	LagTime = 5; -- The crash command disconnects the player. then the time set here will count down until lag
 	Prefix = ";"; -- What you say before a command. The ";" in [ ;kill me ]
 	Bet = " "; -- Separates arguments(Cannot be slash or dash or it will become space)
-	EnableAdminMenu = true; -- Set true or false if you want to enable the admin menu [Donations give you 10% commition of all money and gives you player points.]
+	EnableAdminMenu = true; -- Set true or false if you want to enable the admin menu
 	Filter = {"GetObjects"}; -- Used for Anti-Exploits. If someone says anything on this list they will be kicked.
 	ServerLocked = false; -- Used to kick non-admins when they join
 	DisableAbuse = false; -- Disables abusive command like kill,fling,loopfling,ect... (FOR MEMBER RANK ONLY)
-	GivePlayerPointsFromPurchases = true; -- If a player buys somthing in your game, they get a little player points and you get a lot of player points! :D
-	LinkedAccount = "Admin"; -- This is the account you can make at http://luammodelmmaker.com/Login to control admin remotely(caps sensitive)
 	--------------------------------------
 
 	-----------[[ VIPS ]]-----------------
