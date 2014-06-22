@@ -8,7 +8,7 @@
 	echo mysql_error();
 	if (mysql_fetch_assoc($r)) {
 		$_SESSION['un']=$un;
-		echo "Successful login! Go to the <a href='index.php'>home page</a> now.";
+		echo "Successful login, $un! Go to the <a href='index.php'>home page</a> now.";
 	}
 	else
 		header("Location: login.php?al=Username or password incorrect!");

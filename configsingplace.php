@@ -23,42 +23,42 @@
 					continue;
 				echo "<li>" . $row['name'] . "</li>";
 			}
-			echo "</ul><a href='configranks.php?rank=owner&pid=$pid'>Change</a></div>";
+			echo "</ul><a href='configadmin.php?pid=$pid'>Change</a></div>";
 
 			$r = mysql_query("SELECT * FROM roblox_adminlist_$pid WHERE rank='admin'");
 			if (!$r) die("Database error: ".mysql_error());
 			echo "<div><h3>Admins:</h3><ul>";
 			while ($row = mysql_fetch_assoc($r))
 				echo "<li>" . $row['name'] . "</li>";
-			echo "</ul><a href='configranks.php?rank=admin&pid=$pid'>Change</a></div>";
+			echo "</ul><a href='configadmin.php?pid=$pid'>Change</a></div>";
 
 			$r = mysql_query("SELECT * FROM roblox_adminlist_$pid WHERE rank='member'");
 			if (!$r) die("Database error: ".mysql_error());
 			echo "<div><h3>Members:</h3><ul>";
 			while ($row = mysql_fetch_assoc($r))
 				echo "<li>" . $row['name'] . "</li>";
-			echo "</ul><a href='configranks.php?rank=member&pid=$pid'>Change</a></div>";
+			echo "</ul><a href='configadmin.php?pid=$pid'>Change</a></div>";
 
 			$r = mysql_query("SELECT * FROM roblox_adminlist_$pid WHERE rank='banned'");
 			if (!$r) die("Database error: ".mysql_error());
 			echo "<div><h3>Banned:</h3><ul>";
 			while ($row = mysql_fetch_assoc($r))
 				echo "<li>" . $row['name'] . "</li>";
-			echo "</ul><a href='configranks.php?rank=banned&pid=$pid'>Change</a></div>";
+			echo "</ul><a href='configadmin.php?pid=$pid'>Change</a></div>";
 
 			$r = mysql_query("SELECT * FROM roblox_adminlist_$pid WHERE rank='crashed'");
 			if (!$r) die("Database error: ".mysql_error());
 			echo "<div><h3>Crashed:</h3><ul>";
 			while ($row = mysql_fetch_assoc($r))
 				echo "<li>" . $row['name'] . "</li>";
-			echo "</ul><a href='configranks.php?rank=crashed&pid=$pid'>Change</a></div>";
+			echo "</ul><a href='configadmin.php?pid=$pid'>Change</a></div>";
 
 			$r = mysql_query("SELECT * FROM roblox_adminlist_$pid WHERE rank='muted'");
 			if (!$r) die("Database error: ".mysql_error());
 			echo "<div><h3>Muted:</h3><ul>";
 			while ($row = mysql_fetch_assoc($r))
 				echo "<li>" . $row['name'] . "</li>";
-			echo "</ul><a href='configranks.php?rank=muted&pid=$pid'>Change</a></div>";
+			echo "</ul><a href='configadmin.php?pid=$pid'>Change</a></div>";
 
 			$r=mysql_query("SELECT * FROM roblox_settings_$pid");
 			if (!$r) die("Database error: ".mysql_error());
@@ -124,7 +124,7 @@
 				}
 				echo " <a href='changesettings.php?pid=$pid&sname=$sname'>Change</a>";
 			}
-			echo "</ul><br /></div></div>";
+			echo "</ul><br /></div></div><a href='configplace.php'>Back</a>";
 		}
 		else
 			die("Insufficient privileges!");
