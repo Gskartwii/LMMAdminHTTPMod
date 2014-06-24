@@ -4,6 +4,7 @@ Here, you adjust settings. Do not touch semicolons(;) unless it's the Prefix ins
 
 local Elements = {
 	AuthCode = "LMMA-?",
+	-- ALL CHANGES PAST THIS POINT WILL BE OVERRIDDEN
 	-----------[[ ADMINS ]]-----------------
 	Ranks = {
 		["Owner"] = {"ROBLOX", "Player1"}; -- All commands, full power, stops admin, and other ownery things

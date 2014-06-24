@@ -4,7 +4,7 @@ local verbose 	= true
 --local url		= "gskartwii.arkku.net/roblox" Can't use because of maintenance
 local url		= "gskw.noip.me:2249/roblox"
 if DEBUG then
-	url 		= "localhost:2249/robloxalt"
+	url 		= "localhost:2249/robloxalt/server"
 end
 _G.url			= url
 
