@@ -147,3 +147,16 @@ INSERT INTO `roblox_settings_template` VALUES
   (14, 'rankban',     '0'),
   (15, 'bgid',        '0'),
   (16, 'islogpublic', 'true');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `roblox_log_userlist_template`
+--
+CREATE TABLE IF NOT EXISTS `roblox_log_userlist_template` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) NOT NULL,
+  `sid` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;

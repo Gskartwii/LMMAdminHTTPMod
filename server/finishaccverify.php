@@ -61,6 +61,7 @@
 			mysql_query("CREATE TABLE IF NOT EXISTS roblox_log_sid_$id LIKE roblox_log_sid_template");
 			mysql_query("CREATE TABLE IF NOT EXISTS roblox_settings_$id LIKE roblox_settings_template");
 			mysql_query("INSERT roblox_settings_$id SELECT * FROM roblox_settings_template");
+			mysql_query("CREATE TABLE IF NOT EXISTS roblox_log_userlist_$id LIKE roblox_log_userlist_template");
 			mysql_query("COMMIT");
 		}
 		catch (Exception $e) {

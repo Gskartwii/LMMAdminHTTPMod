@@ -144,7 +144,7 @@
 	function getsettings($pid) {
 		return [
 			"Bet" 				=> getsetting($pid, "bet"),
-			"LagTime" 			=> getsetting($pid, "lagtime"),
+			"LagTime" 			=> (int) getsetting($pid, "lagtime"),
 			"Prefix" 			=> getsetting($pid, "prefix"),
 			"FUN" 				=> getsetting($pid, "fun"),
 			"EnableAdminMenu" 	=> stringToBoolean(getsetting($pid, "enablemenu")),

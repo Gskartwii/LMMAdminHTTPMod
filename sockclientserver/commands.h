@@ -1,0 +1,5 @@
+#define CMD_SEPERATE   '\x01'
+#define CMD_END		   '\x02'
+#define CMD_GETNEWLOG  '\x03'
+#define CMD_GETSERVERS '\x04'
+#define CMD_GETUSERS   '\x05'

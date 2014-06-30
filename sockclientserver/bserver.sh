@@ -1,0 +1,1 @@
+g++ -g server.cpp -o server `mysql_config --cflags --libs`

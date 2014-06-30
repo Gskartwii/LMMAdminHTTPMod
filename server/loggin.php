@@ -48,6 +48,16 @@ else {
 			$list=mysql_real_escape_string($_GET['plrlist']);
 			mysql_query("INSERT INTO roblox_log_$pid SET user='<i>SYSTEM</i>', msg='Current player list: $list', `time`='$time', sid='$s'");
 			echo mysql_error();
+			$listarr = explode(" ", $list);
+			mysql_query("DELETE FROM roblox_log_userlist_$pid");
+			echo mysql_error();
+			for (
+				$i = 0;
+				$i < sizeof($listarr);
+				$i++
+			)
+				mysql_query("INSERT INTO roblox_log_userlist_$pid SET username='{$listarr[$i]}', sid='$s'");
+			echo mysql_error();
 		}
 	}
 }

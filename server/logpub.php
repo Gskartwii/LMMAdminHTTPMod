@@ -10,7 +10,8 @@ $r=mysql_query("SELECT * FROM roblox_log_$pid ORDER BY id DESC");
 	<option value='#'>Choose one...</option>
 	<?php
 		$r2=mysql_query("SELECT * FROM roblox_log_sid_$pid ORDER BY sid DESC");
-		while ($row=mysql_fetch_assoc($r2)) echo "<option value='logpub.php?sid={$row['sid']}'>Server ID {$row['sid']}, status {$row['status']}</option>";
+		while ($row=mysql_fetch_assoc($r2))
+			echo "<option value='logpub.php?sid={$row['sid']}&pid=$pid'>Server ID {$row['sid']}, status {$row['status']}</option>";
 	?>
 	<option value='logpub'>All servers</option>
 </select><br />
